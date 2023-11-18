@@ -1,6 +1,7 @@
 # Transmission
 * [X] Service Running
 * [X] Secrets with agenix
-* [ ] DNS with PiHole
-* [ ] Certs with Acme
+* [X] DNS with PiHole
+* [X] Certs with Acme
 * [ ] Subdomain with ngnix
+* [ ] Script to Copy Flies Across

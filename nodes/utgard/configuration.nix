@@ -8,7 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../services/transmission.nix
+     ../../services/acme.nix
+     ../../services/nginx.nix
+     ../../services/transmission.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
