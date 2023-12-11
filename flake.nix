@@ -7,7 +7,7 @@
   inputs = {
     agenix.url = "github:ryantm/agenix";
     deploy-rs.url = "github:serokell/deploy-rs";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs";
   };
   outputs = { self, agenix, deploy-rs, nixpkgs, ... } @ inputs:
   {

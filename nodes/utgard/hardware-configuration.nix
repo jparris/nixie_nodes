@@ -26,16 +26,19 @@
   fileSystems."/dunwich" =
     { device = "dunwich";
       fsType = "zfs";
+      options = ["nofail"];
     };
 
   fileSystems."/home/parrisj" =
     { device = "dunwich/parrisj";
       fsType = "zfs";
+      options = ["nofail"];
     };
 
   fileSystems."/appdata" =
     { device = "dunwich/appdata";
       fsType = "zfs";
+      options = ["nofail"];
     };
 
   swapDevices = [ ];
