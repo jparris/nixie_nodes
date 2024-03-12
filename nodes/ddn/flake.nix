@@ -17,8 +17,16 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages = [
         pkgs.alejandra
+        pkgs.colima
+        pkgs.git
+        pkgs.git-lfs
+        pkgs.openssl.dev
+        pkgs.pkg-config
+        pkgs.protobuf
+        pkgs.postgresql
         pkgs.starship
         pkgs.neovim
+        pkgs.zig
       ];
 
       # Auto upgrade nix package and the daemon service.
