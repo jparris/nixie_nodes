@@ -62,7 +62,7 @@
         text = ''
           if [ ! -d "/var/lib/postgresql/" ]; then
             echo "creating PostgreSQL data directory..."
-            sudo mkdir -m 750 -p /var/lib/postgresql/
+            sudo mkdir -m 750 -p /var/lib/postgresql/15
             sudo chown -R jparris:DATADIRECT\\Domain\ Users /var/lib/postgresql/
           fi
         '';
@@ -74,9 +74,14 @@
         package = pkgs.postgresql;
         authentication = pkgs.lib.mkOverride 10 ''
           #type database  DBuser  auth-method
-          local all       postgres  trust
-          local all       emf trust
+          local all      all trust
         '';
+        #initialScript = pkgs.writeText "backend-initScript" ''
+        #  CREATE ROLE postgres WITH LOGIN PASSWORD 'emf' SUPERUSER;
+        #  CREATE ROLE emf WITH LOGIN PASSWORD 'emf' CREATEDB;
+        #  CREATE DATABASE emf;
+        #  GRANT ALL PRIVILEGES ON DATABASE emf TO emf;
+        #'';
       };
 
       launchd.user.agents.postgresql.serviceConfig = {
