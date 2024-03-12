@@ -70,7 +70,7 @@
 
       services.postgresql = {
         enable = true;
-        initdbArgs = ["-U jparris" "--pgdata=/var/lib/postgresql/" "--auth=trust" "--no-locale" "--encoding=UTF8"];
+        initdbArgs = ["-U jparris" "--pgdata=/var/lib/postgresql/15" "--auth=trust" "--no-locale" "--encoding=UTF8"];
         package = pkgs.postgresql;
         authentication = pkgs.lib.mkOverride 10 ''
           #type database  DBuser  auth-method
