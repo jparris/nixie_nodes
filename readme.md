@@ -7,30 +7,39 @@
 
 Like Nixie Tubes except it's NixOs Configurations
 
-# System Initialization
-* [Install Nixos](https://nixos.wiki/wiki/NixOS_Installation_Guide)
-    * Enable flakes `nix.settings.experimental-features = [ "nix-command" "flakes" ];`
-    * Install `deploy-rs`
-    * `deploy .#node`
+# Bootstrapping
 
+## Macos / Nix-Darwin
+* [Determinate Systems Installer](https://github.com/DeterminateSystems/nix-installer).
+* [Install Homebrew](https://brew.sh/) for "Apps".
+* Install nix-darwin `nix run nix-darwin -- switch --flake <path/to/mac_config>`.
+* Switch to `darwin-rebuild switch --flake ~/.config/nix-darwin`.
+
+## NixOS Installs
+* [Install Nixos](https://nixos.wiki/wiki/NixOS_Installation_Guide).
+* Enable flakes `nix.settings.experimental-features = [ "nix-command" "flakes" ];`.
+* `sudo nixos-rebuild switch --flake .#node`.
+
+# Nodes 
 ## Naming Scheme
 I've been using [Norse Mythology](https://namingschemes.com/Norse_Mythology) as my naming scheme. I was inspired after reading `American Gods` by Neil Gaiman more decades ago than I'd like to admit.
 
-## Nodes 
-* [utgard]() - Home of the Jötunn a.k.a. Frost Giants
-  - My first custom PC build.
-  - Case: StreamCom DA2 V2 
-  - Mobo
-    - ASRock B550 Phantom Gaming-ITX
-    - AMD Ryzen 5 5600x
-    - 2 x 32GB DDR4 ECC Unbuffered UDIMM
-    - Nvidia Quadro K2200
-    - Corsair SF450
-  - Fans
-    - 2 x Noctua NF-P14 140mm
-    - Noctual NH-L9a-AM5 CPU Cooler
-  - Storage
-    - 512 GB Team Group SSD Boot Drive
-    - 2 x 14TB Western Digital HC530
-    - 2 x Sabrent 1TB SSD for Cache
-    
+## DDN12278M (Work laptop which I didn't get to name)
+* 2023 14in MacBook Pro 
+* Apple M2 Pro
+* 16 GB & 1 TB
+
+## [utgard]() - Home of the Jötunn a.k.a. Frost Giants
+* My first custom PC build.
+* Parts:
+  - StreamCom DA2 V2 Case
+  - ASRock B550 Phantom Gaming-ITX
+  - AMD Ryzen 5 5600x
+  - 2 x 32GB DDR4 ECC Unbuffered UDIMM
+  - Nvidia Quadro K2200
+  - Corsair SF450
+  - 2 x Noctua NF-P14 140mm
+  - Noctual NH-L9a-AM5 CPU Cooler
+  - 512 GB Team Group SSD Boot Drive
+  - 2 x 14TB Western Digital HC530
+  - 2 x Sabrent 1TB SSD for Cache
