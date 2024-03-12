@@ -3,14 +3,21 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
     self,
     nix-darwin,
     nixpkgs,
+    home-manager,
   }: let
     configuration = {pkgs, ...}: {
       # List packages installed in system profile. To search by name, run:
@@ -20,7 +27,9 @@
         pkgs.colima
         pkgs.git
         pkgs.git-lfs
+        pkgs.fzf
         pkgs.openssl.dev
+        pkgs.nmap
         pkgs.pkg-config
         pkgs.protobuf
         pkgs.postgresql
@@ -47,22 +56,77 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 4;
 
+      # Postgres
+      system.activationScripts.preActivation = {
+        enable = true;
+        text = ''
+          if [ ! -d "/var/lib/postgresql/" ]; then
+            echo "creating PostgreSQL data directory..."
+            sudo mkdir -m 750 -p /var/lib/postgresql/
+            chown -R jparris:DATADIRECT\\Domain\ Users /var/lib/postgresql/
+          fi
+        '';
+      };
+
+      services.postgresql = {
+        enable = true;
+        initdbArgs = ["-U jparris" "--pgdata=/var/lib/postgresql/" "--auth=trust" "--no-locale" "--encoding=UTF8"];
+        package = pkgs.postgresql;
+        #authentication = pkgs.lib.mkOverride 10 ''
+        ##type database  DBuser  auth-method
+        #local all       postgres  trust
+        #local all       emf trust
+        #'';
+      };
+
+      launchd.user.agents.postgresql.serviceConfig = {
+        StandardErrorPath = "/tmp/postgres.error.log";
+        StandardOutPath = "/tmp/postgres.log";
+      };
+
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
       homebrew = {
         enable = true;
         # onActivation.cleanup = "uninstall";
-
         taps = [];
         brews = [];
         casks = ["neovide"];
       };
     };
+    homeconfig = {pkgs, ...}: {
+      # this is internal compatibility configuration
+      # for home-manager, don't change this!
+      home.stateVersion = "23.05";
+      # Let home-manager install and manage itself.
+      programs.home-manager.enable = true;
+
+      home.packages = with pkgs; [];
+
+      home.sessionVariables = {
+        EDITOR = "nvim";
+        PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+      };
+    };
   in {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#DDN12287M
+    users.users.jparris = {
+      name = "jparris";
+      home = "/Users/jparris";
+    };
+    home-manager.users.jparris = homeconfig;
     darwinConfigurations."DDN12287M" = nix-darwin.lib.darwinSystem {
-      modules = [configuration];
+      modules = [
+        configuration
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.verbose = true;
+        }
+      ];
     };
 
     # Expose the package set, including overlays, for convenience.
