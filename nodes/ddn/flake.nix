@@ -28,6 +28,7 @@
         pkgs.cargo-watch
         pkgs.cargo-zigbuild
         pkgs.colima
+        pkgs.entr
         pkgs.git
         pkgs.git-lfs
         pkgs.openssl.dev
