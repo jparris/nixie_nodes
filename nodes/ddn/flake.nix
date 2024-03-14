@@ -22,10 +22,12 @@
     configuration = {pkgs, ...}: {
       environment.systemPackages = [
         pkgs.alejandra
+        pkgs.fzf
+        pkgs.cargo-zigbuild
+        pkgs.cargo-watch
         pkgs.colima
         pkgs.git
         pkgs.git-lfs
-        pkgs.fzf
         pkgs.openssl.dev
         pkgs.nmap
         pkgs.pkg-config
