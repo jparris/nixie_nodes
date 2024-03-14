@@ -23,8 +23,10 @@
       environment.systemPackages = [
         pkgs.alejandra
         pkgs.fzf
-        pkgs.cargo-zigbuild
+        pkgs.cargo-machete
+        pkgs.cargo-insta
         pkgs.cargo-watch
+        pkgs.cargo-zigbuild
         pkgs.colima
         pkgs.git
         pkgs.git-lfs
