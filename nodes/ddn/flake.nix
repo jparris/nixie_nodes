@@ -1,5 +1,5 @@
 {
-  description = "Example Darwin system flake";
+  description = "DDN Work Laptop flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -20,8 +20,6 @@
     home-manager,
   }: let
     configuration = {pkgs, ...}: {
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
       environment.systemPackages = [
         pkgs.alejandra
         pkgs.colima
@@ -45,6 +43,9 @@
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
+      # The platform the configuration will be used on.
+      nixpkgs.hostPlatform = "aarch64-darwin";
+
       # Create /etc/zshrc that loads the nix-darwin environment.
       programs.zsh.enable = true; # default shell on catalina
       # programs.fish.enable = true;
@@ -56,7 +57,28 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 4;
 
-      # Postgres
+      #  _   _                      ____
+      # | | | | ___  _ __ ___   ___| __ ) _ __ _____      __
+      # | |_| |/ _ \| '_ ` _ \ / _ \  _ \| '__/ _ \ \ /\ / /
+      # |  _  | (_) | | | | | |  __/ |_) | | |  __/\ V  V /
+      # |_| |_|\___/|_| |_| |_|\___|____/|_|  \___| \_/\_/
+      #
+      homebrew = {
+        enable = true;
+        # onActivation.cleanup = "uninstall";
+        taps = [];
+        brews = [];
+        casks = ["neovide"];
+      };
+
+      #                  _
+      #  _ __   ___  ___| |_ __ _ _ __ ___  ___
+      # | '_ \ / _ \/ __| __/ _` | '__/ _ \/ __|
+      # | |_) | (_) \__ \ || (_| | | |  __/\__ \
+      # | .__/ \___/|___/\__\__, |_|  \___||___/
+      # |_|                 |___/
+      #
+      # This is section is so complicated due to limitations with nix-darwin
       system.activationScripts.preActivation = {
         enable = true;
         text = ''
@@ -80,6 +102,7 @@
           # ipv6
           host all       all     ::1/128        trust
         '';
+        # Would be nice but nix-darwin doesn't support it.s
         #initialScript = pkgs.writeText "backend-initScript" ''
         #  CREATE ROLE postgres WITH LOGIN PASSWORD 'emf' SUPERUSER;
         #  CREATE ROLE emf WITH LOGIN PASSWORD 'emf' CREATEDB;
@@ -91,17 +114,6 @@
       launchd.user.agents.postgresql.serviceConfig = {
         StandardErrorPath = "/tmp/postgres.error.log";
         StandardOutPath = "/tmp/postgres.log";
-      };
-
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
-
-      homebrew = {
-        enable = true;
-        # onActivation.cleanup = "uninstall";
-        taps = [];
-        brews = [];
-        casks = ["neovide"];
       };
     };
     homeconfig = {pkgs, ...}: {
