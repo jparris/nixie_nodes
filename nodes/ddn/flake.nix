@@ -31,6 +31,7 @@
         pkgs.entr
         pkgs.git
         pkgs.git-lfs
+        pkgs.git-machete
         pkgs.openssl.dev
         pkgs.nmap
         pkgs.pkg-config
