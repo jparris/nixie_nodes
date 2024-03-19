@@ -37,6 +37,7 @@
         pkgs.nmap
         pkgs.pkg-config
         pkgs.protobuf
+        pkgs.protoc-gen-go
         pkgs.postgresql
         pkgs.starship
         pkgs.neovim
