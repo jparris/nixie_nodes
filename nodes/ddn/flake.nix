@@ -35,6 +35,7 @@
         pkgs.protobuf
         pkgs.starship
         pkgs.neovim
+        pkgs.zoxide
         # ISP Packages
         pkgs.go
         pkgs.go-protobuf
