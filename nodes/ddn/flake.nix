@@ -29,6 +29,7 @@
         pkgs.git
         pkgs.git-lfs
         pkgs.git-machete
+        pkgs.jq
         pkgs.openssl.dev
         pkgs.pkg-config
         pkgs.protobuf
