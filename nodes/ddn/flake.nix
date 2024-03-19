@@ -21,27 +21,29 @@
   }: let
     configuration = {pkgs, ...}: {
       environment.systemPackages = [
+        # Base Packages
         pkgs.alejandra
-        pkgs.cargo-machete
-        pkgs.cargo-insta
         pkgs.cargo-watch
-        pkgs.cargo-zigbuild
-        pkgs.colima
         pkgs.entr
         pkgs.fzf
-        pkgs.go
         pkgs.git
         pkgs.git-lfs
         pkgs.git-machete
         pkgs.openssl.dev
-        pkgs.nmap
         pkgs.pkg-config
         pkgs.protobuf
-        pkgs.go-protobuf
-        #        pkgs.protoc-gen-go-grpc
-        pkgs.postgresql
         pkgs.starship
         pkgs.neovim
+        # ISP Packages
+        pkgs.go
+        pkgs.go-protobuf
+        # EMF
+        pkgs.cargo-machete
+        pkgs.cargo-insta
+        pkgs.cargo-zigbuild
+        pkgs.colima
+        pkgs.nmap
+        pkgs.postgresql
         pkgs.zig
       ];
 
