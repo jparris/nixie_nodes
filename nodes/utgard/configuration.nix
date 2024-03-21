@@ -1,18 +1,20 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-     ../../services/acme.nix
-     ../../services/fava.nix
-     ../../services/nginx.nix
-     ../../services/transmission.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../services/acme.nix
+    ../../services/fava.nix
+    ../../services/nginx.nix
+    ../../services/transmission.nix
+    ../../services/unifi.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -30,7 +32,8 @@
 
   security.sudo.wheelNeedsPassword = false;
   nix.settings.trusted-users = ["root" "parrisj"];
- 
+
+  nixpkgs.config.allowUnfree = true;
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -41,7 +44,7 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-  
+
   services.transmission.enable = true;
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -58,22 +61,39 @@
   # services.xserver.libinput.enable = true;
 
   users.users.parrisj = {
-     isNormalUser = true;
-     extraGroups = [ "transmission" "wheel" ];
-     packages = with pkgs; [
-       tree
-     ];
-   };
+    isNormalUser = true;
+    extraGroups = ["transmission" "wheel"];
+    packages = with pkgs; [
+      tree
+    ];
+  };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-  	git
-	neovim
-   ];
-	# agenix.packages.${system}.default
+    alejandra # Nix Code Formater
+    calibre
+    deploy-rs
+    ffmpeg
+    figlet
+    git
+    htop
+    jq
+    ncdu
+    neovim
+    nmap
+    p7zip
+    phockup
+    python3
+    smartmontools
+    starship
+    tmux
+    unrar-wrapper
+    unzip
+    wget
+    zoxide
+  ];
+  # agenix.packages.${system}.default
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -87,9 +107,9 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-  	enable = true;
-	settings.Macs = ["hmac-sha2-512-etm@openssh.com" "hmac-sha2-256-etm@openssh.com" "umac-128-etm@openssh.com" "hmac-sha2-512" ];
-};
+    enable = true;
+    settings.Macs = ["hmac-sha2-512-etm@openssh.com" "hmac-sha2-256-etm@openssh.com" "umac-128-etm@openssh.com" "hmac-sha2-512"];
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -103,4 +123,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 }
-

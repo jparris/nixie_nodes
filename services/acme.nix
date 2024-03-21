@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   age.secrets.acme.file = ../secrets/acme.age;
   security.acme.acceptTerms = true;
   security.acme.certs."int.securityishard.club" = {

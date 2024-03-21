@@ -1,8 +1,9 @@
-
-{ config, pkgs, ... }:
-
 {
-  networking.firewall.allowedTCPPorts = [ 5000 ];
+  config,
+  pkgs,
+  ...
+}: {
+  networking.firewall.allowedTCPPorts = [5000];
   systemd.user.services.fava = {
     description = "Fava";
     enable = true;
@@ -12,6 +13,6 @@
       ExecStop = "${pkgs.busybox}/bin/pkill fava";
       Restart = "always";
     };
-    wantedBy = [ "default.target" ];
+    wantedBy = ["default.target"];
   };
 }
