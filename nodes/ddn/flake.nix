@@ -24,6 +24,7 @@
         # Base Packages
         pkgs.alejandra
         pkgs.cargo-watch
+        pkgs.codespell
         pkgs.entr
         pkgs.fzf
         pkgs.git
