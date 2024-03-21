@@ -23,6 +23,7 @@
   boot.zfs.forceImportRoot = false;
   services.zfs.autoScrub.enable = true;
 
+  networking.enableIPv6 = false;
   networking.hostId = "DEADFA10";
   networking.hostName = "utgard";
   networking.networkmanager.enable = true;
