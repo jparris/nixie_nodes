@@ -5,7 +5,7 @@
 (_)\_)(____)(_/\_)(____)(____)  (_)\_)(_____)(____/(____)(___/
 ```
 
-Like Nixie Tubes except it's NixOs Configurations
+Like Nixie Tubes except it's Nix Configurations
 
 # Bootstrapping
 

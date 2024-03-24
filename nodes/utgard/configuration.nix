@@ -5,13 +5,11 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ../../containers/home-assistant.nix
+    ../../nixos/acme.nix
     ../../selfhosted/audiobookshelf.nix
-    ../../selfhosted/acme.nix
     ../../selfhosted/esphome.nix
     ../../selfhosted/fava.nix
-    ../../selfhosted/home-assistant.nix
-    #    ../../services/nextcloud.nix
-    #../../services/nginx.nix
     ../../selfhosted/plex.nix
     ../../selfhosted/syncthing.nix
     ../../selfhosted/transmission.nix
