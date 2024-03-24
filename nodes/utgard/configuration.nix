@@ -5,16 +5,17 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../services/audiobookshelf.nix
-    ../../services/acme.nix
-    ../../services/esphome.nix
-    ../../services/fava.nix
-    ../../services/home-assistant.nix
-#    ../../services/nextcloud.nix
-    ../../services/nginx.nix
-    ../../services/plex.nix
-    ../../services/transmission.nix
-    ../../services/unifi.nix
+    ../../selfhosted/audiobookshelf.nix
+    ../../selfhosted/acme.nix
+    ../../selfhosted/esphome.nix
+    ../../selfhosted/fava.nix
+    ../../selfhosted/home-assistant.nix
+    #    ../../services/nextcloud.nix
+    #../../services/nginx.nix
+    ../../selfhosted/plex.nix
+    ../../selfhosted/syncthing.nix
+    ../../selfhosted/transmission.nix
+    ../../selfhosted/unifi.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
