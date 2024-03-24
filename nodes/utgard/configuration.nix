@@ -1,17 +1,18 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running `nixos-help`).
 {
   config,
   pkgs,
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../services/audiobookshelf.nix
     ../../services/acme.nix
+    ../../services/esphome.nix
     ../../services/fava.nix
+    ../../services/home-assistant.nix
+#    ../../services/nextcloud.nix
     ../../services/nginx.nix
+    ../../services/plex.nix
     ../../services/transmission.nix
     ../../services/unifi.nix
   ];
@@ -28,7 +29,6 @@
   networking.hostName = "utgard";
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "America/Denver";
 
   security.sudo.wheelNeedsPassword = false;
@@ -47,19 +47,9 @@
   # services.xserver.enable = true;
 
   services.transmission.enable = true;
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
   # Enable sound.
   # sound.enable = true;
   # hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   users.users.parrisj = {
     isNormalUser = true;
@@ -105,8 +95,8 @@
   # };
 
   # List services that you want to enable:
+  services.avahi.enable = true;
 
-  # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     settings.Macs = ["hmac-sha2-512-etm@openssh.com" "hmac-sha2-256-etm@openssh.com" "umac-128-etm@openssh.com" "hmac-sha2-512"];

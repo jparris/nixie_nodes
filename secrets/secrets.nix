@@ -4,5 +4,6 @@ let
   utgard = [utgard-host utgard-parrisj];
 in {
   "acme.age".publicKeys = utgard;
+  "nextcloud.age".publicKeys = utgard;
   "transmission.age".publicKeys = utgard;
 }
