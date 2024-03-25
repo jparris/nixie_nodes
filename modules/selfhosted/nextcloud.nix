@@ -4,7 +4,7 @@
   ...
 }: {
   age.secrets.nextcloud = {
-    file = ../secrets/nextcloud.age;
+    file = ../../secrets/nextcloud.age;
     mode = "700";
     owner = "nextcloud";
     group = "nextcloud";

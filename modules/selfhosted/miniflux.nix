@@ -5,7 +5,7 @@
 # repo: https://github.com/miniflux/v2
 # docs: https://miniflux.app/docs/index.html
 {
-  age.secrets.miniflux.file = ../secrets/miniflux.age;
+  age.secrets.miniflux.file = ../../secrets/miniflux.age;
 
   networking.firewall.allowedTCPPorts = [7076];
   services.postgresql = {

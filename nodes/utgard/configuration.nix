@@ -5,16 +5,23 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../containers/home-assistant.nix
-    ../../nixos/acme.nix
-    ../../selfhosted/audiobookshelf.nix
-    ../../selfhosted/esphome.nix
-    ../../selfhosted/fava.nix
-    ../../selfhosted/plex.nix
-    ../../selfhosted/syncthing.nix
-    ../../selfhosted/transmission.nix
-    ../../selfhosted/unifi.nix
+    ../../modules/containers/home-assistant.nix
+    ../../modules/nixos/acme.nix
+    ../../modules/selfhosted/audiobookshelf.nix
+    ../../modules/selfhosted/esphome.nix
+    ../../modules/selfhosted/fava.nix
+    ../../modules/selfhosted/plex.nix
+    ../../modules/selfhosted/syncthing.nix
+    ../../modules/selfhosted/transmission.nix
+    ../../modules/selfhosted/unifi.nix
   ];
+
+  services.fava = {
+    enable = true;
+    openFirewall = true;
+    port = 5000;
+    journal = "/appdata/ledger/index.beancount";
+  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
