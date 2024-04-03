@@ -84,6 +84,7 @@
         brews = ["m1ddc"];
         casks = [
           "neovide"
+          "sol"
         ];
       };
 
