@@ -30,6 +30,7 @@
         pkgs.git
         pkgs.git-lfs
         pkgs.git-machete
+        pkgs.gnused
         pkgs.jq
         pkgs.openssl.dev
         pkgs.pkg-config
@@ -84,7 +85,6 @@
         brews = ["m1ddc"];
         casks = [
           "neovide"
-          "sol"
         ];
       };
 
