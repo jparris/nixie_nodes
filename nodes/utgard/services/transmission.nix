@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  age.secrets.transmission.file = ../../secrets/transmission.age;
+  age.secrets.transmission.file = ../../../secrets/transmission.age;
   networking.firewall.allowedTCPPorts = [9091];
   services.transmission = {
     enable = true;

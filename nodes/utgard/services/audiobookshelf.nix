@@ -3,6 +3,13 @@
   pkgs,
   ...
 }: {
+  #services.audiobookshelf = {
+  #enable = true;
+  #host = "0.0.0.0";
+  #port = 12345;
+  #openFirewall = true;
+  #dataDir = "/appdata/audiobookshelf";
+  #};
   networking.firewall.allowedTCPPorts = [12345];
   systemd.services.audiobookshelf = {
     description = "audiobookshelf";
@@ -15,5 +22,5 @@
     wantedBy = ["default.target"];
   };
 
-  systemd.services.esphome.enable = true;
+  systemd.services.audiobookshelf.enable = true;
 }

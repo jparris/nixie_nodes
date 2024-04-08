@@ -5,23 +5,25 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/containers/home-assistant.nix
-    ../../modules/nixos/acme.nix
-    ../../modules/selfhosted/audiobookshelf.nix
-    ../../modules/selfhosted/esphome.nix
-    ../../modules/selfhosted/fava.nix
-    ../../modules/selfhosted/plex.nix
-    ../../modules/selfhosted/syncthing.nix
-    ../../modules/selfhosted/transmission.nix
-    ../../modules/selfhosted/unifi.nix
-  ];
 
-  services.fava = {
-    enable = true;
-    openFirewall = true;
-    port = 5000;
-    journal = "/appdata/ledger/index.beancount";
-  };
+    # Self Hosted Services
+    ## Etc
+    ../../modules/nixos/acme.nix
+    ./services/fava.nix
+    ./services/syncthing.nix
+    ./services/unifi.nix
+
+    ## Media Services
+    ./services/audiobookshelf.nix
+    ./services/calibre-web.nix
+    ./services/plex.nix
+    ./services/transmission.nix
+
+    ## Smart Home
+    ../../modules/containers/home-assistant.nix
+    ./services/esphome.nix
+    ./services/zigbee2mqtt.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -107,10 +109,6 @@
     enable = true;
     settings.Macs = ["hmac-sha2-512-etm@openssh.com" "hmac-sha2-256-etm@openssh.com" "umac-128-etm@openssh.com" "hmac-sha2-512"];
   };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
