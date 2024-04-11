@@ -23,6 +23,7 @@
       environment.systemPackages = [
         # Base Packages
         pkgs.alejandra
+        pkgs.buf
         pkgs.cargo-watch
         pkgs.codespell
         pkgs.entr
