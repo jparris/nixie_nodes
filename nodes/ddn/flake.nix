@@ -36,8 +36,10 @@
         pkgs.openssl.dev
         pkgs.pkg-config
         pkgs.protobuf
+        pkgs.skhd
         pkgs.starship
         pkgs.neovim
+        pkgs.yabai
         pkgs.zoxide
         # ISP Packages
         pkgs.go
