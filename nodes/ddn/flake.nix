@@ -26,6 +26,7 @@
         pkgs.buf
         pkgs.cargo-watch
         pkgs.codespell
+        pkgs.docker
         pkgs.entr
         pkgs.fzf
         pkgs.git
