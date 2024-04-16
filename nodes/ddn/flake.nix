@@ -86,7 +86,7 @@
         enable = true;
         # onActivation.cleanup = "uninstall";
         taps = [];
-        brews = ["m1ddc"];
+        brews = ["m1ddc" "rpm"];
         casks = [
           "neovide"
         ];
