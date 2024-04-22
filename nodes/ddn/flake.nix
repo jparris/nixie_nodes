@@ -27,6 +27,7 @@
         pkgs.cargo-watch
         pkgs.codespell
         pkgs.docker
+        pkgs.docker-credential-helpers
         pkgs.entr
         pkgs.fzf
         pkgs.git
