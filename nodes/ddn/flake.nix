@@ -29,6 +29,7 @@
         pkgs.docker
         pkgs.docker-credential-helpers
         pkgs.entr
+        pkgs.exiftool
         pkgs.fzf
         pkgs.git
         pkgs.git-lfs
