@@ -39,7 +39,7 @@
         pkgs.openssl.dev
         pkgs.pkg-config
         pkgs.protobuf
-        pkgs.SDL2
+        pkgs.SDL2.dev
         pkgs.skhd
         pkgs.starship
         pkgs.neovim
