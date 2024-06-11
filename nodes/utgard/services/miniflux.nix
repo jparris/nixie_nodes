@@ -5,7 +5,7 @@
 # repo: https://github.com/miniflux/v2
 # docs: https://miniflux.app/docs/index.html
 {
-  age.secrets.miniflux.file = ../../secrets/miniflux.age;
+  age.secrets.miniflux.file = ../../../secrets/miniflux.age;
 
   networking.firewall.allowedTCPPorts = [7076];
   services.postgresql = {
@@ -17,6 +17,7 @@
 
   services.miniflux = {
     enable = true;
+    # Generate hash with `htpasswd -bnBC 10 "" <password> | tr -d ':\n'`
     adminCredentialsFile = config.age.secrets.miniflux.path;
     config = {
       LISTEN_ADDR = "0.0.0.0:7076";

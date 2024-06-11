@@ -16,6 +16,7 @@
     ## Media Services
     ./services/audiobookshelf.nix
     ./services/calibre-web.nix
+    ./services/miniflux.nix
     ./services/plex.nix
     ./services/transmission.nix
 
@@ -104,6 +105,8 @@
 
   # List services that you want to enable:
   services.avahi.enable = true;
+
+  networking.firewall.allowedTCPPorts = [3000];
 
   services.openssh = {
     enable = true;
