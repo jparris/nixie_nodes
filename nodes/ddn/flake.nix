@@ -148,8 +148,11 @@
       # Let home-manager install and manage itself.
       programs.home-manager.enable = true;
 
-      home.packages = with pkgs; [];
+      home.file = {
+        ".config/starship.toml".source = ./home/starship.toml;
+      };
 
+      home.packages = with pkgs; [];
       home.sessionVariables = {
         EDITOR = "nvim";
         PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
