@@ -32,6 +32,7 @@
         pkgs.entr
         pkgs.exiftool
         pkgs.fzf
+        pkgs.gh
         pkgs.git
         pkgs.git-lfs
         pkgs.git-machete
