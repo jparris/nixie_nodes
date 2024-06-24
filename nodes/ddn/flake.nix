@@ -45,6 +45,7 @@
         pkgs.skhd
         pkgs.starship
         pkgs.neovim
+        pkgs.vhs
         pkgs.yabai
         pkgs.zoxide
         # ISP Packages
