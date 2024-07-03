@@ -45,6 +45,7 @@
         pkgs.skhd
         pkgs.starship
         pkgs.neovim
+        pkgs.wget
         pkgs.vhs
         pkgs.yabai
         pkgs.zoxide
