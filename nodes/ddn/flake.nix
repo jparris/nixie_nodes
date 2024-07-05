@@ -41,6 +41,7 @@
         pkgs.openssl.dev
         pkgs.pkg-config
         pkgs.protobuf
+        pkgs.python3
         pkgs.SDL2.dev
         pkgs.skhd
         pkgs.starship
