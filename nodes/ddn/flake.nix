@@ -42,6 +42,7 @@
         pkgs.pkg-config
         pkgs.protobuf
         pkgs.python3
+        pkgs.python311Packages.pypdf
         pkgs.SDL2.dev
         pkgs.skhd
         pkgs.starship
