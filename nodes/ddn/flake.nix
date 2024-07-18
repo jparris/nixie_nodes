@@ -166,20 +166,20 @@
   in {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#DDN12287M
-    users.users.jparris = {
-      name = "jparris";
-      home = "/Users/jparris";
-    };
-    home-manager.users.jparris = homeconfig;
+    #users.users.jparris = {
+    #  name = "jparris";
+    #  home = "/Users/jparris";
+    #};
+    #home-manager.users.jparris = homeconfig;
     darwinConfigurations."DDN12287M" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.verbose = true;
-        }
+        #   home-manager.darwinModules.home-manager
+        #   {
+        #     home-manager.useGlobalPkgs = true;
+        #     home-manager.useUserPackages = true;
+        #     home-manager.verbose = true;
+        #   }
       ];
     };
 
