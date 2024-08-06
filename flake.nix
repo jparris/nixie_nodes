@@ -7,6 +7,10 @@
   inputs = {
     agenix.url = "github:ryantm/agenix";
     deploy-rs.url = "github:serokell/deploy-rs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "nixpkgs/nixos-unstable";
   };
   outputs = {
@@ -14,8 +18,28 @@
     agenix,
     deploy-rs,
     nixpkgs,
+    home-manager,
     ...
   } @ inputs: {
+    nixosConfigurations.idun = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./nodes/idun/configuration.nix
+        # make home-manager as a module of nixos
+        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          home-manager.users.parrisj = import ./home.nix;
+        }
+        agenix.nixosModules.default
+        {
+          environment.systemPackages = [agenix.packages.x86_64-linux.default];
+        }
+      ];
+    };
     nixosConfigurations.utgard = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [

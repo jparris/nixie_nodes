@@ -92,7 +92,6 @@
     zoxide
   ];
   # agenix.packages.${system}.default
-
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Some programs need SUID wrappers, can be configured further or are
