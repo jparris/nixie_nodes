@@ -60,7 +60,43 @@
     #      "Timery" = 1425368544;
     #    };
   };
+  # This is section is so complicated due to limitations with nix-darwin
+  system.activationScripts.preActivation = {
+    enable = true;
+    text = ''
+      if [ ! -d "/var/lib/postgresql/" ]; then
+        echo "creating PostgreSQL data directory..."
+        sudo mkdir -m 750 -p /var/lib/postgresql/15
+        sudo chown -R jparris:DATADIRECT\\Domain\ Users /var/lib/postgresql/
+      fi
+    '';
+  };
 
+  services.postgresql = {
+    enable = true;
+    initdbArgs = ["-U jparris" "--pgdata=/var/lib/postgresql/15" "--auth=trust" "--no-locale" "--encoding=UTF8"];
+    package = pkgs.postgresql;
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all      all trust
+      # ipv4
+      host  all      all     127.0.0.1/32   trust
+      # ipv6
+      host all       all     ::1/128        trust
+    '';
+    # Would be nice but nix-darwin doesn't support it.s
+    #initialScript = pkgs.writeText "backend-initScript" ''
+    #  CREATE ROLE postgres WITH LOGIN PASSWORD 'emf' SUPERUSER;
+    #  CREATE ROLE emf WITH LOGIN PASSWORD 'emf' CREATEDB;
+    #  CREATE DATABASE emf;
+    #  GRANT ALL PRIVILEGES ON DATABASE emf TO emf;
+    #'';
+  };
+
+  launchd.user.agents.postgresql.serviceConfig = {
+    StandardErrorPath = "/tmp/postgres.error.log";
+    StandardOutPath = "/tmp/postgres.log";
+  };
   #  system.defaults = {
   #    dock = {
   #      autohide = true;
