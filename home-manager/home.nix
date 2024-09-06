@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home = {
     stateVersion = "24.05"; # Please read the comment before changing.
 
@@ -10,58 +13,58 @@
       pkgs.nixd
       pkgs.ripgrep
       # Base Packages
-        pkgs.alejandra
-        pkgs.black
-        pkgs.buf
-        pkgs.cargo-watch
-        pkgs.codespell
-        pkgs.docker
-        pkgs.docker-credential-helpers
-        pkgs.entr
-        pkgs.exiftool
-        pkgs.fzf
-        pkgs.gh
-        pkgs.git
-        pkgs.git-lfs
-        pkgs.git-machete
-        pkgs.gnused
-        pkgs.jq
-        pkgs.openssl.dev
-        pkgs.pkg-config
-        pkgs.protobuf
-        pkgs.python3
-        pkgs.python311Packages.pypdf
-        pkgs.SDL2.dev
- #       pkgs.skhd
-        pkgs.starship
-        pkgs.neovim
-        pkgs.wget
-        pkgs.vhs
-        pkgs.yabai
-        pkgs.zoxide
-        # ISP Packages
-        pkgs.go
-        pkgs.go-protobuf
-        # EMF
-        pkgs.cargo-machete
-        pkgs.cargo-insta
-        pkgs.cargo-zigbuild
-        pkgs.colima
-        pkgs.nmap
-        pkgs.postgresql
-        pkgs.zig
+      pkgs.alejandra
+      pkgs.black
+      pkgs.buf
+      pkgs.cargo-watch
+      pkgs.codespell
+      pkgs.docker
+      pkgs.docker-credential-helpers
+      pkgs.entr
+      pkgs.exiftool
+      pkgs.fzf
+      pkgs.gh
+      pkgs.git
+      pkgs.git-lfs
+      pkgs.git-machete
+      pkgs.gnused
+      pkgs.jq
+      pkgs.openssl.dev
+      pkgs.pkg-config
+      pkgs.protobuf
+      pkgs.python3
+      pkgs.python311Packages.pypdf
+      pkgs.SDL2.dev
+      #       pkgs.skhd
+      pkgs.starship
+      pkgs.neovim
+      pkgs.wget
+      pkgs.vhs
+      pkgs.yabai
+      pkgs.zoxide
+      # ISP Packages
+      pkgs.go
+      pkgs.go-protobuf
+      # EMF
+      pkgs.cargo-machete
+      pkgs.cargo-insta
+      pkgs.cargo-zigbuild
+      pkgs.colima
+      pkgs.nmap
+      pkgs.postgresql
+      pkgs.zig
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.
     #file = {
-      # git
+    # git
     #  ".cvsignore".source = ../git/.cvsignore;
     #  ".gitconfig".source = ../git/.gitconfig;
-      # vim
+    # vim
     #  ".config/nvim/.vimrc".source = ../nvim/.config/nvim/.vimrc;
-      # wezterm
-     # ".config/wezterm/wezterm.lua".source = ../wezterm/.wezterm.lua;
+    # wezterm
+    # ".config/wezterm/wezterm.lua".source = ../wezterm/.wezterm.lua;
     #};
 
     #activation.mkdirNvimFolders = lib.hm.dag.entryAfter ["writeBoundary"] ''
