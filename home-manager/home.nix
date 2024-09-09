@@ -53,6 +53,7 @@
       pkgs.nmap
       pkgs.postgresql
       pkgs.zig
+      (pkgs.nerdfonts.override { fonts = [ "FiraCode"]; })
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

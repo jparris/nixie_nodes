@@ -29,11 +29,6 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
-  #fonts.fontDir.enable = true;
-  #fonts.fonts = [
-  #    pkgs.monaspace
-  #];
-
   #  _   _                      ____
   # | | | | ___  _ __ ___   ___| __ ) _ __ _____      __
   # | |_| |/ _ \| '_ ` _ \ / _ \  _ \| '__/ _ \ \ /\ / /
