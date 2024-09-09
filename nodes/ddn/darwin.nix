@@ -3,8 +3,6 @@
   pkgs,
   ...
 }: {
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
   environment.systemPackages = [
     pkgs.home-manager
   ];
@@ -36,30 +34,34 @@
   #    pkgs.monaspace
   #];
 
+  #  _   _                      ____
+  # | | | | ___  _ __ ___   ___| __ ) _ __ _____      __
+  # | |_| |/ _ \| '_ ` _ \ / _ \  _ \| '__/ _ \ \ /\ / /
+  # |  _  | (_) | | | | | |  __/ |_) | | |  __/\ V  V /
+  # |_| |_|\___/|_| |_| |_|\___|____/|_|  \___| \_/\_/
+  #
   homebrew = {
     enable = true;
-
+    brews = ["m1ddc"];
     casks = [
-      #      "1password"
-      #      "bartender"
-      #      "brave-browser"
-      #      "fantastical"
-      #      "firefox"
-      #      "hammerspoon"
-      #      "karabiner-elements"
-      #      "obsidian"
-      #      "raycast"
-      #      "soundsource"
+      # "karabiner-elements"
+      # "brave-browser"
+      # "logseq"
+      # "obsidian"
+      # "raycast"
+      "firefox"
+      "neovide"
       "wezterm"
     ];
-
-    #    masApps = {
-    #      "Drafts" = 1435957248;
-    #      "Reeder" = 1529448980;
-    #      "Things" = 904280696;
-    #      "Timery" = 1425368544;
-    #    };
   };
+
+  #                  _
+  #  _ __   ___  ___| |_ __ _ _ __ ___  ___
+  # | '_ \ / _ \/ __| __/ _` | '__/ _ \/ __|
+  # | |_) | (_) \__ \ || (_| | | |  __/\__ \
+  # | .__/ \___/|___/\__\__, |_|  \___||___/
+  # |_|                 |___/
+  #
   # This is section is so complicated due to limitations with nix-darwin
   system.activationScripts.preActivation = {
     enable = true;
@@ -99,21 +101,16 @@
   };
 
   system.defaults = {
-    #    dock = {
-    #      autohide = true;
-    #      orientation = "left";
-    #      show-process-indicators = false;
-    #      show-recents = false;
-    #      static-only = true;
-    #    };
+    dock = {
+      autohide = true;
+      show-process-indicators = false;
+      show-recents = false;
+      static-only = true;
+    };
     finder = {
       AppleShowAllExtensions = true;
       ShowPathbar = true;
       FXEnableExtensionChangeWarning = false;
     };
-    #    NSGlobalDomain = {
-    #      AppleKeyboardUIMode = 3;
-    #      "com.apple.keyboard.fnState" = true;
-    #    };
   };
 }
