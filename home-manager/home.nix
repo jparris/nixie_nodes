@@ -81,8 +81,7 @@
 
     #sessionVariables = {
     #};
-  };
-
+    };
   programs = {
     direnv = {
       enable = true;
@@ -98,5 +97,16 @@
     jujutsu = {
       enable = true;
     };
-  };
+    starship = {
+        enable = true;
+        settings = {
+            format = "$hostname$directory$git_branch";
+            directory = {
+                truncation_length = 2;
+                truncation_symbol = "…/";
+            };
+            hostname.style = "[$ssh_symbol$hostname]($style):";
+        };
+    };
+};
 }
