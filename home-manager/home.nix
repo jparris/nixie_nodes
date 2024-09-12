@@ -102,8 +102,14 @@
 
     git = {
       enable = true;
-
       lfs.enable = true;
+      userName = "Jon Parris";
+      userEmail = "jparris@ddn.com";
+      ignores = [ ".DS_Store" ];
+      extraConfig = {
+        init.defaultBranch = "main";
+        push.autoSetupRemote = true;
+      };
     };
 
     jujutsu = {
