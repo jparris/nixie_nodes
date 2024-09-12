@@ -57,6 +57,11 @@
     ];
 
     file = {
+        ".inputrc" = {
+            source = ./inputrc;
+            target = ".inputrc";
+        };
+        # I don't like app's creating a bunch of random dirs in my home dir
         ".user-dirs.dirs" = {
             source = ./user-dirs.dirs;
             target = ".config/user-dirs.dirs";

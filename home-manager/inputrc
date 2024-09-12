@@ -1,0 +1,14 @@
+# Misc
+#Space:magic-space                   # Space will expand all ! history searches -- this broke gdb for me
+
+# Search history with up/down keys
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
+
+# Tab Completion
+set completion-ignore-case on       # Perform file completion in a case insensitive fashion
+set completion-map-case on          # Treat hyphens and underscores as equivalent
+set mark-symlinked-directories on   # Immediately add a trailing slash when autocompleting symlinks to directories
+set show-all-if-ambiguous on        # Display matches for ambiguous patterns at first tab press
