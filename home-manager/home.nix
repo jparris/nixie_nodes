@@ -56,6 +56,13 @@
       (pkgs.nerdfonts.override { fonts = [ "FiraCode"]; })
     ];
 
+    file = {
+        ".user-dirs.dirs" = {
+            source = ./user-dirs.dirs;
+            target = ".config/user-dirs.dirs";
+        };
+    };
+    
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.
     #file = {

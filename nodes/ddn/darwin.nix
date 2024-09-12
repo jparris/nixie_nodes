@@ -44,6 +44,7 @@
       # "logseq"
       # "obsidian"
       # "raycast"
+      "altair-graphql-client"
       "firefox"
       "neovide"
       "wezterm"
