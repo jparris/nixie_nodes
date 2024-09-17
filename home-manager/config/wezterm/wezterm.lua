@@ -7,11 +7,11 @@ local appearance = require 'appearance'
 local act = wezterm.action
 local config = wezterm.config_builder()
 
--- if appearance.is_dark() then
+if appearance.is_dark() then
  config.color_scheme = 'Dracula'
--- else
---  config.color_scheme = 'Tokyo Night Day'
--- end
+else
+  config.color_scheme = 'Tokyo Night Day'
+end
 
 config.font = wezterm.font 'FiraCode Nerd Font Mono'
 config.font_size = 14.0
@@ -28,7 +28,7 @@ config.window_frame = {
 
 local function segments_for_right_status(window)
   return {
-    window:active_workspace(),
+--    window:active_workspace(),
     wezterm.hostname(),
     wezterm.strftime('%a %b %-d %H:%M'),
   }
@@ -130,13 +130,6 @@ config.keys = {
 }
 
 -- smart_splits.apply_to_config(config)
-
--- add a local_config module for machine specific configuration that
--- shouldn't be committed to the repo.
-local has_local_config, local_config = pcall(require, "local_config")
-if has_local_config then
-  local_config.apply_to_config(config)
-end
 
 return config
 
