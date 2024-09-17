@@ -10,10 +10,10 @@ local config = wezterm.config_builder()
 if appearance.is_dark() then
  config.color_scheme = 'Catppuccin Macchiato'
 else
-  config.color_scheme = 
+  config.color_scheme = 'Catppuccin Latte'
 end
 
-config.font = wezterm.font 'Catppuccin Latte'
+config.font = wezterm.font 
 config.font_size = 14.0
 
 
