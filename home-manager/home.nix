@@ -66,7 +66,12 @@
             source = ./user-dirs.dirs;
             target = ".config/user-dirs.dirs";
         };
-    };
+        "wezterm" = {
+            recursive = true;
+            source = ./config/wezterm;
+            target = ".config/wezterm";
+        };
+};
     
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.

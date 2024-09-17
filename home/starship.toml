@@ -1,8 +1,0 @@
-format = "$hostname$directory$git_branch"
-
-[directory]
-truncation_length = 2
-truncation_symbol = '…/'
-
-[hostname]
-format = "[$ssh_symbol$hostname]($style):"
