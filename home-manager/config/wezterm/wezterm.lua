@@ -8,12 +8,12 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 if appearance.is_dark() then
- config.color_scheme = 'Nord (Gogh)'
+ config.color_scheme = 'Catppuccin Macchiato'
 else
-  config.color_scheme = 'nord-light'
+  config.color_scheme = 
 end
 
-config.font = wezterm.font 'FiraCode Nerd Font Mono'
+config.font = wezterm.font 'Catppuccin Latte'
 config.font_size = 14.0
 
 
