@@ -13,7 +13,7 @@ else
   config.color_scheme = 'Catppuccin Latte'
 end
 
-config.font = wezterm.font 
+config.font = wezterm.font 'FiraCode Nerd Font Mono'
 config.font_size = 14.0
 
 
