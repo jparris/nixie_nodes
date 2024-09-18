@@ -1,0 +1,3 @@
+#/usr/bin/env bash
+calibredb add --with-library /wunderkammer/print/books/ "$1"
+

@@ -58,6 +58,11 @@
     ];
 
     file = {
+        ".bin" = {
+            recursive = true;
+            source = ./scripts;
+            target = ".bin";
+        };
         ".inputrc" = {
             source = ./inputrc;
             target = ".inputrc";
