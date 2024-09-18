@@ -96,6 +96,7 @@
     StandardOutPath = "/tmp/postgres.log";
   };
 
+  security.pam.enableSudoTouchIdAuth = true;
   system.defaults = {
     dock = {
       autohide = true;
