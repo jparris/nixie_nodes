@@ -54,31 +54,31 @@
       pkgs.nmap
       pkgs.postgresql
       pkgs.zig
-      (pkgs.nerdfonts.override { fonts = [ "FiraCode"]; })
+      (pkgs.nerdfonts.override {fonts = ["FiraCode"];})
     ];
 
     file = {
-        ".bin" = {
-            recursive = true;
-            source = ./scripts;
-            target = ".bin";
-        };
-        ".inputrc" = {
-            source = ./inputrc;
-            target = ".inputrc";
-        };
-        # I don't like app's creating a bunch of random dirs in my home dir
-        ".user-dirs.dirs" = {
-            source = ./user-dirs.dirs;
-            target = ".config/user-dirs.dirs";
-        };
-        "wezterm" = {
-            recursive = true;
-            source = ./config/wezterm;
-            target = ".config/wezterm";
-        };
-};
-    
+      ".bin" = {
+        recursive = true;
+        source = ./scripts;
+        target = ".bin";
+      };
+      ".inputrc" = {
+        source = ./inputrc;
+        target = ".inputrc";
+      };
+      # I don't like app's creating a bunch of random dirs in my home dir
+      ".user-dirs.dirs" = {
+        source = ./user-dirs.dirs;
+        target = ".config/user-dirs.dirs";
+      };
+      "wezterm" = {
+        recursive = true;
+        source = ./config/wezterm;
+        target = ".config/wezterm";
+      };
+    };
+
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.
     #file = {
@@ -104,7 +104,7 @@
 
     #sessionVariables = {
     #};
-    };
+  };
   programs = {
     direnv = {
       enable = true;
@@ -116,7 +116,7 @@
       lfs.enable = true;
       userName = "Jon Parris";
       userEmail = "jparris@ddn.com";
-      ignores = [ ".DS_Store" ];
+      ignores = [".DS_Store"];
       extraConfig = {
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
@@ -127,15 +127,23 @@
       enable = true;
     };
     starship = {
-        enable = true;
-        settings = {
-            format = "$hostname$directory$git_branch";
-            directory = {
-                truncation_length = 2;
-                truncation_symbol = "…/";
-            };
-            hostname.style = "[$ssh_symbol$hostname]($style):";
+      enable = true;
+      settings = {
+        format = "$hostname$directory$git_branch";
+        directory = {
+          truncation_length = 2;
+          truncation_symbol = "…/";
         };
+        hostname.style = "[$ssh_symbol$hostname]($style):";
+      };
     };
-};
+    zoxide = {
+        enable = true;
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+    };
+    zsh = {
+        enable = true;
+    };
+  };
 }

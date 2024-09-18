@@ -28,6 +28,7 @@
           {
             home-manager = {
               users.jparris = import ../../home-manager/home.nix;
+              backupFileExtension = "bak";
             };
             users.users.jparris.home = "/Users/jparris";
           }
