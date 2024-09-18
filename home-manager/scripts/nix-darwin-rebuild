@@ -20,6 +20,9 @@ fi
 # Autoformat your nix files
 alejandra . >/dev/null
 
+# Autoformat lua config files
+find . -name *.lua -exec lua-format --in-place {} \;
+
 # Shows your changes
 git diff -U0 *.nix
 
