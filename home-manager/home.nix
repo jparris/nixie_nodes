@@ -30,6 +30,7 @@
       pkgs.gnused
       pkgs.jq
       pkgs.openssl.dev
+      pkgs.luaformatter
       pkgs.pkg-config
       pkgs.protobuf
       pkgs.python3
