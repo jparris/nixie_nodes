@@ -109,5 +109,6 @@
       ShowPathbar = true;
       FXEnableExtensionChangeWarning = false;
     };
+    NSGlobalDomain.NSWindowShouldDragOnGesture = true;
   };
 }
