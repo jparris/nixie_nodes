@@ -44,6 +44,7 @@
       # "logseq"
       # "obsidian"
       # "raycast"
+      "nikitabobko/tap/aerospace"
       "altair-graphql-client"
       "firefox"
       "neovide"
@@ -109,6 +110,7 @@
       ShowPathbar = true;
       FXEnableExtensionChangeWarning = false;
     };
+    # Control + Command + Click = Move window by clicking anywhere
     NSGlobalDomain.NSWindowShouldDragOnGesture = true;
   };
 }

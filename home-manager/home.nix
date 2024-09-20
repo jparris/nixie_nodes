@@ -43,6 +43,7 @@
       pkgs.wget
       pkgs.vhs
       #pkgs.yabai
+      #pkgs.jankyborders
       pkgs.zoxide
       # ISP Packages
       pkgs.go
