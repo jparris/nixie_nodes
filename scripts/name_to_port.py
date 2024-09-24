@@ -8,11 +8,16 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 port = ""
-for c in sys.argv[1].lower():
-    num = ord(c) - ord('a') + 1
+letters = []
+for c in sys.argv[1]:
+    l_c = c.lower()
+    num = ord(l_c) - ord('a') + 1
     next_port = port + str(num)
     if int(next_port) > 65535:
         break
     port = next_port
+    letters.append("{} = {}".format(c, num))
 
 print(port)
+print(", ".join(letters))
+

@@ -31,14 +31,14 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-
-          home-manager.users.parrisj = import ./home.nix;
+          home-manager.users.parrisj = import ./home-manager/home.nix;
         }
         agenix.nixosModules.default
         {
           environment.systemPackages = [agenix.packages.x86_64-linux.default];
         }
       ];
+      specialArgs = {inherit inputs;};
     };
     nixosConfigurations.utgard = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";

@@ -12,7 +12,8 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  boot.initrd.kernelModules = ["amdgpu"];
+  boot.supportedFilesystems = ["ntfs"];
   hardware.pulseaudio = {
     enable = true;
   };
@@ -28,6 +29,7 @@
 
   services.xserver = {
     enable = true;
+    videoDrivers = ["amdgpu"];
     desktopManager.xterm.enable = false;
     displayManager.defaultSession = "none+i3";
     windowManager.i3 = {
@@ -49,6 +51,7 @@
     git
     gitAndTools.git-annex
     gitAndTools.gitRemoteGcrypt
+    wezterm
     htop
     man-pages
     mr
@@ -56,6 +59,7 @@
     posix_man_pages
     vim
     pavucontrol
+    orca-slicer
   ];
 
   programs.firefox = {

@@ -9,6 +9,7 @@
 
     # The home.packages option allows you to install Nix packages into your
     # environment.
+    # packages = with pkgs; [
     packages = [
       pkgs.nixd
       pkgs.ripgrep
@@ -41,7 +42,7 @@
       pkgs.neovim
       pkgs.wget
       pkgs.vhs
-      pkgs.yabai
+      #pkgs.yabai
       pkgs.zoxide
       # ISP Packages
       pkgs.go
@@ -138,31 +139,34 @@
       };
     };
     zoxide = {
-        enable = true;
-        enableBashIntegration = true;
-        enableFishIntegration = true;
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
     };
     zsh = {
+      enable = true;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+      shellAliases = {
+        ll = "ls -l";
+        grab_screen = "m1ddc set input 27";
+        vim = "nvim";
+        #update = "sudo nixos-rebuild switch";
+      };
+      history = {
+        size = 10000;
+        #path = "${config.xdg.dataHome}/zsh/history";
+      };
+      zplug = {
         enable = true;
-        enableCompletion = true;
-        autosuggestion.enable = true;
-        syntaxHighlighting.enable = true;
-        shellAliases = {
-            ll = "ls -l";
-            grab_screen="m1ddc set input 27";
-            vim = "nvim";
-            #update = "sudo nixos-rebuild switch";
-        };
-        history = {
-            size = 10000;
-            #path = "${config.xdg.dataHome}/zsh/history";
-        };
-        zplug = {
-            enable = true;
-            plugins = [
-                { name = "plugins/vscode"; tags = [ from:oh-my-zsh ]; }
-            ];
-        };
+        plugins = [
+          {
+            name = "plugins/vscode";
+            tags = [from:oh-my-zsh];
+          }
+        ];
+      };
     };
   };
 }
