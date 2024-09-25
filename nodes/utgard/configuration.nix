@@ -11,7 +11,6 @@
     ../../modules/nixos/acme.nix
     ./services/fava.nix
     ./services/syncthing.nix
-    ./services/unifi.nix
 
     ## Media Services
     ./services/audiobookshelf.nix
@@ -23,13 +22,13 @@
     ## Smart Home
     ../../modules/containers/home-assistant.nix
     ./services/esphome.nix
-    ./services/zigbee2mqtt.nix
+    #./services/zigbee2mqtt.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = ["hfsplus" "zfs"];
   boot.zfs.forceImportRoot = false;
   services.zfs.autoScrub.enable = true;
 
