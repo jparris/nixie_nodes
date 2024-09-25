@@ -69,9 +69,14 @@
         source = ./inputrc;
         target = ".inputrc";
       };
+      "nvim" = {
+        recursive = true;
+        source = ./config/nvim;
+        target = ".config/nvim";
+      };
       # I don't like app's creating a bunch of random dirs in my home dir
       ".user-dirs.dirs" = {
-        source = ./user-dirs.dirs;
+        source = ./config/user-dirs.dirs;
         target = ".config/user-dirs.dirs";
       };
       "wezterm" = {
