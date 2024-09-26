@@ -134,6 +134,14 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      initExtra = ''
+        if [ -f /opt/homebrew/bin/brew ] ; then
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        fi
+        if [ -f "$HOME/.cargo/env" ] ; then
+        . "$HOME/.cargo/env"
+        fi
+      '';
       shellAliases = {
         ll = "ls -l";
         grab_screen = "m1ddc set input 27";
@@ -146,7 +154,7 @@
       };
       sessionVariables = {
         EDITOR = "nvim";
-        PATH = "$PATH:$HOME/.bin/:$HOME/.local/bin:$HOME/.cargo/bin/";
+        PATH = "$PATH:$HOME/.bin/:$HOME/.local/bin";
         NIXPKGS_ALLOW_UNFREE = 1;
       };
 
