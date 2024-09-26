@@ -4,7 +4,22 @@
   ...
 }: {
   environment.systemPackages = [
+    pkgs.cargo-zigbuild
+    pkgs.colima
+    pkgs.docker
+    pkgs.docker-credential-helpers
     pkgs.home-manager
+    pkgs.nixd
+    pkgs.postgresql
+    pkgs.protobuf
+    pkgs.zig
+    # ISP Packages
+    pkgs.go
+    pkgs.go-protobuf
+    (pkgs.nerdfonts.override {fonts = ["FiraCode"];})
+    #pkgs.jankyborders
+    #pkgs.skhd
+    #pkgs.yabai
   ];
 
   # Use a custom configuration.nix location.

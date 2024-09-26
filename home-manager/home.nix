@@ -11,16 +11,13 @@
     # environment.
     # packages = with pkgs; [
     packages = [
-      pkgs.nixd
-      pkgs.ripgrep
-      # Base Packages
       pkgs.alejandra
       pkgs.black
       pkgs.buf
+      pkgs.cargo-insta
+      pkgs.cargo-machete
       pkgs.cargo-watch
       pkgs.codespell
-      pkgs.docker
-      pkgs.docker-credential-helpers
       pkgs.entr
       pkgs.exiftool
       pkgs.fzf
@@ -30,33 +27,17 @@
       pkgs.git-machete
       pkgs.gnused
       pkgs.jq
-      pkgs.openssl.dev
       pkgs.luaformatter
-      pkgs.pkg-config
-      pkgs.protobuf
-      pkgs.python3
-      pkgs.python311Packages.pypdf
-      pkgs.SDL2.dev
-      #       pkgs.skhd
-      pkgs.starship
       pkgs.neovim
-      pkgs.wget
-      pkgs.vhs
-      #pkgs.yabai
-      #pkgs.jankyborders
-      pkgs.zoxide
-      # ISP Packages
-      pkgs.go
-      pkgs.go-protobuf
-      # EMF
-      pkgs.cargo-machete
-      pkgs.cargo-insta
-      pkgs.cargo-zigbuild
-      pkgs.colima
       pkgs.nmap
-      pkgs.postgresql
-      pkgs.zig
-      (pkgs.nerdfonts.override {fonts = ["FiraCode"];})
+      pkgs.openssl.dev
+      pkgs.pkg-config
+      pkgs.python3
+      pkgs.ripgrep
+      pkgs.starship
+      pkgs.vhs
+      pkgs.wget
+      pkgs.zoxide
     ];
 
     file = {
