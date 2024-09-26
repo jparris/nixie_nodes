@@ -158,33 +158,17 @@
         size = 10000;
         #path = "${config.xdg.dataHome}/zsh/history";
       };
-      zplug = {
-        enable = true;
-        enableCompletion = true;
-        autosuggestion.enable = true;
-        syntaxHighlighting.enable = true;
-        shellAliases = {
-            ll = "ls -l";
-            grab_screen="m1ddc set input 27";
-            vim = "nvim";
-            #update = "sudo nixos-rebuild switch";
-        };
-        history = {
-            size = 10000;
-            #path = "${config.xdg.dataHome}/zsh/history";
-        };
-        sessionVariables = {
-            EDITOR = "nvim";
-            PATH = "$PATH:$HOME/.bin/:$HOME/.local/bin:$HOME/.cargo/bin/";
-            NIXPKGS_ALLOW_UNFREE = 1;
-        };
+      sessionVariables = {
+        EDITOR = "nvim";
+        PATH = "$PATH:$HOME/.bin/:$HOME/.local/bin:$HOME/.cargo/bin/";
+        NIXPKGS_ALLOW_UNFREE = 1;
+      };
 
-#        zplug = {
-#            enable = true;
-#            plugins = [
-#                { name = "plugins/vscode"; tags = [ from:oh-my-zsh ]; }
-#            ];
-#        };
+      #        zplug = {
+      #            enable = true;
+      #            plugins = [
+      #                { name = "plugins/vscode"; tags = [ from:oh-my-zsh ]; }
+      #            ];
     };
   };
 }
