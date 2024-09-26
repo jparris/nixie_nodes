@@ -143,6 +143,7 @@
         fi
       '';
       shellAliases = {
+        cd = "z";
         ll = "ls -l";
         grab_screen = "m1ddc set input 27";
         vim = "nvim";
