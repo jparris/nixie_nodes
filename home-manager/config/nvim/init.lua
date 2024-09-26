@@ -16,46 +16,41 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require("lazy").setup({
-    {
+    { -- catppuccin theme
         "catppuccin/nvim",
         name = "catppuccin",
         lazy = false,
         config = function() vim.cmd.colorscheme 'catppuccin-frappe' end
-    }, {"airblade/vim-gitgutter", name = "gitgutter"}, {
+    }, -- gitgutter
+    {"airblade/vim-gitgutter", name = "gitgutter"}, {
         "akinsho/bufferline.nvim",
         dependencies = {'nvim-tree/nvim-web-devicons'},
         config = function() require("bufferline").setup() end
-    }, {
+    }, -- lualine
+    {
         'nvim-lualine/lualine.nvim',
         opts = {options = {icons_enabled = true, theme = 'catppuccin-frappe'}}
-    }, -- j-k escape 
+    }, -- beter-escap used for j-k escape 
     {
         "max397574/better-escape.nvim",
         config = function() require("better_escape").setup() end
-    }, {'junegunn/fzf.vim', dependencies = {'junegunn/fzf'}}, {
-        'vimwiki/vimwiki',
-        init = function()
-            vim.g.vimwiki_list = {
-                {
-                    path = '$HOME/notes',
-                    syntax = 'markdown',
-                    ext = '.md',
-                    auto_diary_index = 1
-                }
-            }
-            vim.g.vimwiki_markdown_link_ext = 1
+    }, -- fzf
+    {'junegunn/fzf.vim', dependencies = {'junegunn/fzf'}}, -- telekasten
+    {
+        'renerocksai/telekasten.nvim',
+        dependencies = {'nvim-telescope/telescope.nvim'},
+        config = function()
+            require("telekasten").setup({home = vim.fn.expand("~/notes")})
         end
-    }
+    },
+    {'nvim-telescope/telescope.nvim', dependencies = {'nvim-lua/plenary.nvim'}},
+    {'mrjones2014/smart-splits.nvim'}
 })
+
 --[[
 {
 'nvim-treesitter/nvim-treesitter',
 build = ':TSUpdate',
-},
-
-{
-'nvim-telescope/telescope.nvim',
-dependencies = { 'nvim-lua/plenary.nvim' }
 },
 
 -- Tree-sitter configuration
@@ -69,10 +64,6 @@ additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter do
 ensure_installed = {'org'}, -- Or run :TSUpdate org
 }
 
-require('orgmode').setup({
-org_agenda_files = {'~/org/*'},
-org_default_notes_file = '~/org/refile.org',
-})
 --]]
 
 -- Enable mouse mode

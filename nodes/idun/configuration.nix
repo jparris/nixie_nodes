@@ -15,7 +15,7 @@
   boot.initrd.kernelModules = ["amdgpu"];
   boot.supportedFilesystems = ["ntfs"];
   hardware.pulseaudio = {
-    enable = true;
+    enable = false;
   };
 
   networking.hostName = "idun"; # Norse goddess of eternal youth - because this is a framework laptop.
