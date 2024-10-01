@@ -19,6 +19,7 @@
       pkgs.cargo-watch
       pkgs.codespell
       pkgs.coreutils-full
+      pkgs.eclint
       pkgs.entr
       pkgs.exiftool
       pkgs.fzf
