@@ -18,6 +18,7 @@
       pkgs.cargo-machete
       pkgs.cargo-watch
       pkgs.codespell
+      pkgs.coreutils-full
       pkgs.entr
       pkgs.exiftool
       pkgs.fzf
