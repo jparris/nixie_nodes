@@ -34,7 +34,7 @@ end
 local function segments_for_right_status(window)
     return {
         --    window:active_workspace(),
-        battery(), wezterm.hostname(), wezterm.strftime('%a %b %-d %H:%M')
+        mybattery(), wezterm.hostname(), wezterm.strftime('%a %b %-d %H:%M')
     }
 end
 
