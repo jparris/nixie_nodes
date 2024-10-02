@@ -63,6 +63,7 @@
       # "raycast"
       "nikitabobko/tap/aerospace"
       "altair-graphql-client"
+      "hiddenbar"
       "firefox"
       "neovide"
       "wezterm"
