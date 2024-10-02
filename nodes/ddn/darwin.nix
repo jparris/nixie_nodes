@@ -16,6 +16,8 @@
     # ISP Packages
     pkgs.go
     pkgs.go-protobuf
+    pkgs.noto-fonts
+    pkgs.noto-fonts-color-emoji
     (pkgs.nerdfonts.override {fonts = ["FiraCode"];})
     #pkgs.jankyborders
     #pkgs.skhd

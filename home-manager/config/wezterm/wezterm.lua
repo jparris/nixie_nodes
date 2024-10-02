@@ -23,8 +23,12 @@ config.window_frame = {
     font_size = 14
 }
 
-local function battery() 
-    return wezterm.battery().state_of_charge
+local function mybattery() 
+    local bat = '' 
+    for _, b in ipairs(wezterm.battery_info()) do
+        bat = '🔋 ' .. string.format('%.0f%%', b.state_of_charge * 100)
+    end
+    return bat
 end
 
 local function segments_for_right_status(window)
