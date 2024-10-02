@@ -29,7 +29,8 @@ require("lazy").setup({
     }, -- lualine
     {
         'nvim-lualine/lualine.nvim',
-        opts = {options = {icons_enabled = true, theme = 'catppuccin-macchiato'}}
+        opts = {options = { component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''}, icons_enabled = true, theme = 'catppuccin-macchiato'}}
     }, -- beter-escap used for j-k escape 
     {
         "max397574/better-escape.nvim",
