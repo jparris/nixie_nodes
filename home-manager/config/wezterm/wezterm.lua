@@ -26,15 +26,62 @@ config.window_frame = {
 local function mybattery() 
     local bat = '' 
     for _, b in ipairs(wezterm.battery_info()) do
-        bat = '󰁺' .. string.format('%.0f%%', b.state_of_charge * 100)
+        if b.state == "Charging" then
+            if b.state_of_charge < 0.1 then
+                bat = '󰢟'
+            elseif b.state_of_charge < 0.2 then
+                bat = '󰢜'
+            elseif b.state_of_charge < 0.3 then
+                bat = '󰂆'
+            elseif b.state_of_charge < 0.4 then
+                bat = '󰂇'
+            elseif b.state_of_charge < 0.5 then
+                bat = '󰂈'
+            elseif b.state_of_charge < 0.6 then
+                bat = '󰢝'
+            elseif b.state_of_charge < 0.7 then
+                bat = '󰂉'
+            elseif b.state_of_charge < 0.8 then
+                bat = '󰢞'
+            elseif b.state_of_charge < 0.9 then
+                bat = '󰂊'
+            elseif b.state_of_charge < 1.0 then
+                bat = '󰂋'
+            else 
+                bat = '󰂅'
+            end
+        else 
+            if b.state_of_charge < 0.1 then
+                bat = '󰂎'
+            elseif b.state_of_charge < 0.2 then
+                bat = '󰁺'
+            elseif b.state_of_charge < 0.3 then
+                bat = '󰁻'
+            elseif b.state_of_charge < 0.4 then
+                bat = '󰁼'
+            elseif b.state_of_charge < 0.5 then
+                bat = '󰁽'
+            elseif b.state_of_charge < 0.6 then
+                bat = '󰁾'
+            elseif b.state_of_charge < 0.7 then
+                bat = '󰁿'
+            elseif b.state_of_charge < 0.8 then
+                bat = '󰂀'
+            elseif b.state_of_charge < 0.9 then
+                bat = '󰂁'
+            elseif b.state_of_charge < 1.0 then
+                bat = '󰂂'
+            else 
+                bat = '󰁹'
+            end
+        end
     end
     return bat
 end
 
 local function segments_for_right_status(window)
     return {
-        --    window:active_workspace(),
-        mybattery(), wezterm.hostname(), wezterm.strftime('%a %b %-d %H:%M')
+        wezterm.hostname(), wezterm.strftime('%a %b %-d %H:%M'), mybattery()
     }
 end
 
