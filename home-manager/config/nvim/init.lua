@@ -20,7 +20,7 @@ require("lazy").setup({
         "catppuccin/nvim",
         name = "catppuccin",
         lazy = false,
-        config = function() vim.cmd.colorscheme 'catppuccin-frappe' end
+        config = function() vim.cmd.colorscheme 'catppuccin-macchiato' end
     }, -- gitgutter
     {"airblade/vim-gitgutter", name = "gitgutter"}, {
         "akinsho/bufferline.nvim",
@@ -29,7 +29,7 @@ require("lazy").setup({
     }, -- lualine
     {
         'nvim-lualine/lualine.nvim',
-        opts = {options = {icons_enabled = true, theme = 'catppuccin-frappe'}}
+        opts = {options = {icons_enabled = true, theme = 'catppuccin-macchiato'}}
     }, -- beter-escap used for j-k escape 
     {
         "max397574/better-escape.nvim",
