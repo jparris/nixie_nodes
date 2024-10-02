@@ -81,7 +81,7 @@ end
 
 local function segments_for_right_status(window)
     return {
-        wezterm.hostname(), wezterm.strftime('%a %b %-d %I:%M%p'), mybattery()
+        wezterm.hostname(), wezterm.strftime('%a %b %-d %l:%M%p'), mybattery()
     }
 end
 
