@@ -23,10 +23,14 @@ config.window_frame = {
     font_size = 14
 }
 
+local function battery() 
+    return wezterm.battery().state_of_charge
+end
+
 local function segments_for_right_status(window)
     return {
         --    window:active_workspace(),
-        wezterm.hostname(), wezterm.strftime('%a %b %-d %H:%M')
+        battery(), wezterm.hostname(), wezterm.strftime('%a %b %-d %H:%M')
     }
 end
 
