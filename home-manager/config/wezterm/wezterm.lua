@@ -126,7 +126,7 @@ wezterm.on('update-status', function(window, _)
             table.insert(elements, {Background = {Color = 'none'}})
         end
         table.insert(elements, {Foreground = {Color = gradient[i]}})
-        table.insert(elements, {Text = SOLID_LEFT_ARROW})
+        table.insert(elements, {Text = '|')
 
         table.insert(elements, {Foreground = {Color = fg}})
         table.insert(elements, {Background = {Color = gradient[i]}})
