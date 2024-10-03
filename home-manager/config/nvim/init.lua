@@ -91,8 +91,8 @@ vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
 
 -- Move Past
 -- ---------
-vim.opt.scrolloff = 1
-vim.opt.sidescrolloff = 1
+vim.o.scrolloff = 1
+vim.o.sidescrolloff = 1
 
 -- Shifting Text
 -- -------------
