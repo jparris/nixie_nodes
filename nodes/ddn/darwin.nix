@@ -20,8 +20,8 @@
     pkgs.noto-fonts-color-emoji
     (pkgs.nerdfonts.override {fonts = ["FiraCode"];})
     #pkgs.jankyborders
-    #pkgs.skhd
-    #pkgs.yabai
+    pkgs.skhd
+    pkgs.yabai
   ];
 
   # Use a custom configuration.nix location.
