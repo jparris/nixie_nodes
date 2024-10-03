@@ -7,8 +7,8 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 -- https://github.com/wez/wezterm/discussions/4728
-local is_darwin <const> = wezterm.target_triple:find("darwin") ~= nil
-local is_linux <const> = wezterm.target_triple:find("linux") ~= nil
+local is_darwin<const> = wezterm.target_triple:find("darwin") ~= nil
+local is_linux<const> = wezterm.target_triple:find("linux") ~= nil
 
 if appearance.is_dark() then
     config.color_scheme = 'Catppuccin Macchiato'
@@ -19,9 +19,7 @@ end
 config.font = wezterm.font 'FiraCode Nerd Font Mono'
 config.font_size = 14.0
 
-if is_linux then
-    config.front_end = "WebGpu"
-end
+if is_linux then config.front_end = "WebGpu" end
 
 config.window_background_opacity = 0.95
 config.macos_window_background_blur = 30
@@ -31,8 +29,8 @@ config.window_frame = {
     font_size = 14
 }
 
-local function mybattery() 
-    local bat = '' 
+local function mybattery()
+    local bat = ''
     for _, b in ipairs(wezterm.battery_info()) do
         if b.state == "Charging" then
             if b.state_of_charge < 0.1 then
@@ -55,10 +53,10 @@ local function mybattery()
                 bat = '󰂊'
             elseif b.state_of_charge < 1.0 then
                 bat = '󰂋'
-            else 
+            else
                 bat = '󰂅'
             end
-        else 
+        else
             if b.state_of_charge < 0.1 then
                 bat = '󰂎'
             elseif b.state_of_charge < 0.2 then
@@ -79,7 +77,7 @@ local function mybattery()
                 bat = '󰂁'
             elseif b.state_of_charge < 1.0 then
                 bat = '󰂂'
-            else 
+            else
                 bat = '󰁹'
             end
         end

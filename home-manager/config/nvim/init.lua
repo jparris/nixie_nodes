@@ -29,17 +29,23 @@ require("lazy").setup({
     }, -- lualine
     {
         'nvim-lualine/lualine.nvim',
-        opts = {options = { component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''}, icons_enabled = true, theme = 'catppuccin-macchiato'}}
+        opts = {
+            options = {
+                component_separators = {left = '', right = ''},
+                section_separators = {left = '', right = ''},
+                icons_enabled = true,
+                theme = 'catppuccin-macchiato'
+            }
+        }
     }, -- beter-escap used for j-k escape 
     {
         "max397574/better-escape.nvim",
         config = function() require("better_escape").setup() end
-    }, -- fzf
-    {'junegunn/fzf.vim', dependencies = {'junegunn/fzf'}}, -- telekasten
-    {
+    }, { -- telekasten
         'renerocksai/telekasten.nvim',
-        dependencies = {'nvim-telekasten/calendar-vim', 'nvim-telescope/telescope.nvim'},
+        dependencies = {
+            'nvim-telekasten/calendar-vim', 'nvim-telescope/telescope.nvim'
+        },
         config = function()
             require("telekasten").setup({home = vim.fn.expand("~/notes")})
         end
