@@ -89,10 +89,9 @@ vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim
 vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
 
--- Move Past
+-- Cursor
 -- ---------
-vim.o.scrolloff = 1
-vim.o.sidescrolloff = 1
+vim.opt.virtualedit = "onemore" -- Allows the cursor to move past the end of line by one space
 
 -- Shifting Text
 -- -------------
