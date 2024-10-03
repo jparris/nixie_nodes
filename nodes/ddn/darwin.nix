@@ -56,16 +56,15 @@
     enable = true;
     brews = ["m1ddc"];
     casks = [
-      # "brave-browser"
-      # "logseq"
       # "obsidian"
       # "raycast"
-      # "slack"
-      # "nikitabobko/tap/aerospace"
       "altair-graphql-client"
+      "brave-browser"
       "hiddenbar"
+      "logseq"
       "firefox"
       "neovide"
+      "slack"
       "wezterm"
     ];
   };
