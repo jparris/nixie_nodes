@@ -89,6 +89,11 @@ vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim
 vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
 
+-- Move Past
+-- ---------
+vim.opt.scrolloff = 1
+vim.opt.sidescrolloff = 1
+
 -- Shifting Text
 -- -------------
 vim.opt.shiftwidth = 4 -- Number of spaces text is shifted with > or <
