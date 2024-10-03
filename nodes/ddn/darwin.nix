@@ -56,12 +56,12 @@
     enable = true;
     brews = ["m1ddc"];
     casks = [
-      # "karabiner-elements"
       # "brave-browser"
       # "logseq"
       # "obsidian"
       # "raycast"
-      "nikitabobko/tap/aerospace"
+      # "slack"
+      # "nikitabobko/tap/aerospace"
       "altair-graphql-client"
       "hiddenbar"
       "firefox"
@@ -116,19 +116,45 @@
   };
 
   security.pam.enableSudoTouchIdAuth = true;
+
+  #                         ___  ____        _       __             _ _
+  #  _ __ ___   __ _  ___ / _ \/ ___|    __| | ___ / _| __ _ _   _| | |_ ___
+  # | '_ ` _ \ / _` |/ __| | | \___ \   / _` |/ _ \ |_ / _` | | | | | __/ __|
+  # | | | | | | (_| | (__| |_| |___) | | (_| |  __/  _| (_| | |_| | | |_\__ \
+  # |_| |_| |_|\__,_|\___|\___/|____/   \__,_|\___|_|  \__,_|\__,_|_|\__|___/
+  #
+  # https://macos-defaults.com documents the behaviour of these settings
+  # Also https://gist.github.com/brandonb927/3195465/ and
+  # https://github.com/mathiasbynens/dotfiles/blob/main/.macos
+  # https://emmer.dev/blog/automate-your-macos-defaults/
   system.defaults = {
     dock = {
+      # Hide the dock
       autohide = true;
+      # No dots for running Apps
       show-process-indicators = false;
+      # No recent Apps section
       show-recents = false;
+      # Only running Apps
       static-only = true;
     };
     finder = {
+      # Shows file extensions
       AppleShowAllExtensions = true;
+      # Show path bar in the bottom of the Finder windows
       ShowPathbar = true;
+      # Suppresses warning when changing a file extension.
       FXEnableExtensionChangeWarning = false;
+      # Set the default view to column
+      FXPreferredViewStyle = "clmv";
     };
-    # Control + Command + Click = Move window by clicking anywhere
-    NSGlobalDomain.NSWindowShouldDragOnGesture = true;
+    # Not sure if this will work out of the bat
+    #screencapture = "~/screenshots";
+    NSGlobalDomain = {
+      # Save new files to the local disk
+      NSDocumentSaveNewDocumentsToCloud = false;
+      # Control + Command + Click = Move window by clicking anywhere
+      NSWindowShouldDragOnGesture = true;
+    };
   };
 }
