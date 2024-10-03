@@ -43,12 +43,12 @@
     ];
 
     file = {
-      ".bin" = {
+      "bin" = {
         recursive = true;
         source = ./scripts;
         target = ".bin";
       };
-      ".inputrc" = {
+      "inputrc" = {
         source = ./inputrc;
         target = ".inputrc";
       };
@@ -57,8 +57,13 @@
         source = ./config/nvim;
         target = ".config/nvim";
       };
+      "skhd" = {
+        recursive = true;
+        source = ./config/skhd;
+        target = ".config/skhd";
+      };
       # I don't like app's creating a bunch of random dirs in my home dir
-      ".user-dirs.dirs" = {
+      "user-dirs.dirs" = {
         source = ./config/user-dirs.dirs;
         target = ".config/user-dirs.dirs";
       };
@@ -67,32 +72,12 @@
         source = ./config/wezterm;
         target = ".config/wezterm";
       };
+      "yabai" = {
+        recursive = true;
+        source = ./config/yabai;
+        target = ".config/yabai";
+      };
     };
-    # Home Manager is pretty good at managing dotfiles. The primary way to manage
-    # plain files is through 'home.file'.
-    #file = {
-    # git
-    #  ".cvsignore".source = ../git/.cvsignore;
-    #  ".gitconfig".source = ../git/.gitconfig;
-    # vim
-    #  ".config/nvim/.vimrc".source = ../nvim/.config/nvim/.vimrc;
-    # wezterm
-    # ".config/wezterm/wezterm.lua".source = ../wezterm/.wezterm.lua;
-    #};
-
-    #activation.mkdirNvimFolders = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    #  mkdir -p $HOME/.config/nvim/backups $HOME/.config/nvim/swaps $HOME/.config/nvim/undo
-    #'';
-
-    #activation.installWeztermProfile = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    #  tempfile=$(mktemp) \
-    #  && ${pkgs.curl}/bin/curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo \
-    #  && tic -x -o ~/.terminfo $tempfile \
-    #  && rm $tempfile
-    #'';
-
-    #sessionVariables = {
-    #};
   };
   programs = {
     direnv = {
