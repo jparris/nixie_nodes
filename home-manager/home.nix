@@ -128,8 +128,7 @@
     };
     zoxide = {
       enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
+      enableZshIntegration = true;
     };
     zsh = {
       enable = true;

@@ -46,7 +46,6 @@
   programs.browserpass.enable = true;
   environment.systemPackages = with pkgs; [
     # Shell
-    bash
     gnupg
     git
     gitAndTools.git-annex
@@ -61,7 +60,6 @@
     pavucontrol
     orca-slicer
   ];
-
   programs.firefox = {
     enable = true;
   };
@@ -122,6 +120,8 @@
     #     firefox
     #     tree
     #   ];
+    shell = pkgs.zsh;
+    ignoreShellProgramCheck = true;
   };
   nix.settings.experimental-features = ["nix-command" "flakes"];
   # List packages installed in system profile. To search, run:

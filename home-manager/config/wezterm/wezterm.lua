@@ -6,6 +6,10 @@ local appearance = require 'appearance'
 local act = wezterm.action
 local config = wezterm.config_builder()
 
+-- https://github.com/wez/wezterm/discussions/4728
+local is_darwin <const> = wezterm.target_triple:find("darwin") ~= nil
+local is_linux <const> = wezterm.target_triple:find("linux") ~= nil
+
 if appearance.is_dark() then
     config.color_scheme = 'Catppuccin Macchiato'
 else
@@ -14,6 +18,10 @@ end
 
 config.font = wezterm.font 'FiraCode Nerd Font Mono'
 config.font_size = 14.0
+
+if is_linux then
+    config.front_end = "WebGpu"
+end
 
 config.window_background_opacity = 0.95
 config.macos_window_background_blur = 30
