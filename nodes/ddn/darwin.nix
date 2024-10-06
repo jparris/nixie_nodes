@@ -4,10 +4,12 @@
   ...
 }: {
   environment.systemPackages = [
+    pkgs.black
     pkgs.cargo-zigbuild
     pkgs.colima
     pkgs.docker
     pkgs.docker-credential-helpers
+    pkgs.gh
     pkgs.home-manager
     pkgs.nixd
     pkgs.postgresql

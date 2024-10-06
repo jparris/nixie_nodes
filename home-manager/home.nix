@@ -12,11 +12,12 @@
     # packages = with pkgs; [
     packages = [
       pkgs.alejandra
-      pkgs.black
+      pkgs.bat
       pkgs.buf
       pkgs.cargo-insta
       pkgs.cargo-machete
       pkgs.cargo-watch
+      pkgs.clang
       # neovim Telescope Media Files
       pkgs.chafa
       pkgs.epub-thumbnailer
@@ -31,7 +32,6 @@
       pkgs.eclint
       pkgs.entr
       pkgs.exiftool
-      pkgs.gh
       pkgs.git
       pkgs.git-lfs
       pkgs.git-machete
