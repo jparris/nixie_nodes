@@ -146,9 +146,10 @@
       FXEnableExtensionChangeWarning = false;
       # Set the default view to column
       FXPreferredViewStyle = "clmv";
+      # Show full path in title
+      _FXShowPosixPathInTitle = true;
     };
-    # Not sure if this will work out of the bat
-    #screencapture = "~/screenshots";
+    screencapture.location = "~/screenshots";
     NSGlobalDomain = {
       # Save new files to the local disk
       NSDocumentSaveNewDocumentsToCloud = false;

@@ -17,12 +17,20 @@
       pkgs.cargo-insta
       pkgs.cargo-machete
       pkgs.cargo-watch
+      # neovim Telescope Media Files
+      pkgs.chafa
+      pkgs.epub-thumbnailer
       pkgs.codespell
+      pkgs.ffmpegthumbnailer
+      #pkgs.fontpreview -- not avalible on macOs
+      pkgs.ripgrep
+      pkgs.imagemagick
+      pkgs.poppler_utils
+
       pkgs.coreutils-full
       pkgs.eclint
       pkgs.entr
       pkgs.exiftool
-      pkgs.fzf
       pkgs.gh
       pkgs.git
       pkgs.git-lfs
@@ -35,7 +43,6 @@
       pkgs.openssl.dev
       pkgs.pkg-config
       pkgs.python3
-      pkgs.ripgrep
       pkgs.starship
       pkgs.vhs
       pkgs.wget

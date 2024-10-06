@@ -3,6 +3,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
+require("parrisj")
+
 -- Bootstrap Lazy.NVIM Package Manger
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -49,80 +51,28 @@ require("lazy").setup({
         config = function()
             require("telekasten").setup({home = vim.fn.expand("~/notes")})
         end
-    },
-    {'nvim-telescope/telescope.nvim', dependencies = {'nvim-lua/plenary.nvim'}},
-    {'mrjones2014/smart-splits.nvim'}
+    }, {
+        'nvim-telescope/telescope.nvim',
+        dependencies = {
+            'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope-media-files.nvim'
+        },
+        config = function()
+            require("telescope").load_extension('media_files')
+        end
+    }, -- Treesitter
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function()
+            local configs = require("nvim-treesitter.configs")
+
+            configs.setup({
+                ensure_installed = {"c", "lua", "vim", "vimdoc", "rust"},
+                async_install = false,
+                highlight = {enable = true},
+                indent = {enable = true}
+            })
+        end
+    }, {'mrjones2014/smart-splits.nvim'}
 })
-
---[[
-{
-'nvim-treesitter/nvim-treesitter',
-build = ':TSUpdate',
-},
-
--- Tree-sitter configuration
-require'nvim-treesitter.configs'.setup {
--- If TS highlights are not enabled at all, or disabled via ``disable`` prop, highlighting will fallback to default Vim syntax highlighting
-highlight = {
-enable = true,
-disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
-additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
-},
-ensure_installed = {'org'}, -- Or run :TSUpdate org
-}
-
---]]
-
--- Launch panel if nothing is typed after <leader>z
-vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<CR>")
-
--- Most used functions
-vim.keymap.set("n", "<leader>zf", "<cmd>Telekasten find_notes<CR>")
-vim.keymap.set("n", "<leader>zg", "<cmd>Telekasten search_notes<CR>")
-vim.keymap.set("n", "<leader>zd", "<cmd>Telekasten goto_today<CR>")
-vim.keymap.set("n", "<leader>zz", "<cmd>Telekasten follow_link<CR>")
-vim.keymap.set("n", "<leader>zn", "<cmd>Telekasten new_note<CR>")
-vim.keymap.set("n", "<leader>zc", "<cmd>Telekasten show_calendar<CR>")
-vim.keymap.set("n", "<leader>zb", "<cmd>Telekasten show_backlinks<CR>")
-vim.keymap.set("n", "<leader>zI", "<cmd>Telekasten insert_img_link<CR>")
-
--- Call insert link automatically when we start typing a link
-vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Sync clipboard between OS and Neovim
-vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
-
--- Cursor
--- ---------
-vim.opt.virtualedit = "onemore" -- Allows the cursor to move past the end of line by one space
-
--- Shifting Text
--- -------------
-vim.opt.shiftwidth = 4 -- Number of spaces text is shifted with > or <
-vim.opt.shiftround = true -- When shifting text with > or < round to the nearest multiple of shiftwidth
-
--- Tabs
--- ----
-vim.opt.expandtab = true -- Inserts spaces instead of tabs.
-vim.opt.softtabstop = 4 -- Number spaces tab is equal to while in insert mode.
-vim.opt.smarttab = true -- Always use topstop or softtabstop when inserting text.
-vim.opt.tabstop = 4 -- Number spaces a tab is equal to.
-
--- Visual Cues
--- ===========
--- Make line numbers default
-vim.wo.number = true -- Show Line Numbers
-vim.wo.cursorline = true -- Underline the line the cursor's on
-vim.opt.list = true -- Highlights blank space - may lead to madness
--- vim.opt.listchars=tab:▸,eol:¬,extends:❯,precedes:❮,trail:·
--- set nostartofline               " Cursor keeps it's position
-vim.opt.ruler = true -- Show Cursor position
--- vim.opt.showbreak=↪         -- For line wraps
--- set showcmd               " Show info about the current command - e.g., shows the number of lines selected in visual mode
-vim.opt.showmatch = true -- Show matching braces
--- " Highlight lines longer than 130 characters long
--- highlight ColorColumn ctermbg=magenta
--- call matchadd('ColorColumn', '\%131v', 100)
