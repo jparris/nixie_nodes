@@ -24,9 +24,17 @@
       pkgs.codespell
       pkgs.ffmpegthumbnailer
       #pkgs.fontpreview -- not avalible on macOs
+      pkgs.fd
       pkgs.ripgrep
       pkgs.imagemagick
       pkgs.poppler_utils
+
+      # LSP
+      pkgs.nixd
+      pkgs.marksman
+      pkgs.rust-analyzer
+      pkgs.lua-language-server
+      pkgs.tree-sitter
 
       pkgs.coreutils-full
       pkgs.eclint
