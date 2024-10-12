@@ -12,6 +12,7 @@
     pkgs.gh
     pkgs.home-manager
     pkgs.nixd
+    pkgs.nodePackages.npm
     pkgs.postgresql
     pkgs.protobuf
     pkgs.zig
@@ -65,7 +66,6 @@
       "hiddenbar"
       "logseq"
       "firefox"
-      "neovide"
       "slack"
       "wezterm"
     ];

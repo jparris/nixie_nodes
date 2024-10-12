@@ -10,6 +10,61 @@ local config = wezterm.config_builder()
 local is_darwin<const> = wezterm.target_triple:find("darwin") ~= nil
 local is_linux<const> = wezterm.target_triple:find("linux") ~= nil
 
+local function is_vim(pane)
+    local process_info = pane:get_foreground_process_info()
+    local process_name = process_info and process_info.name
+
+    return process_name == "nvim" or process_name == "vim"
+end
+
+local direction_keys = {
+    Left = "h",
+    Down = "j",
+    Up = "k",
+    Right = "l",
+    -- reverse lookup
+    h = "Left",
+    j = "Down",
+    k = "Up",
+    l = "Right"
+}
+
+local function split_nav(resize_or_move, key)
+    return {
+        key = key,
+        mods = resize_or_move == "resize" and "META" or "CTRL",
+        action = wezterm.action_callback(function(win, pane)
+            if is_vim(pane) then
+                -- pass the keys through to vim/nvim
+                win:perform_action({
+                    SendKey = {
+                        key = key,
+                        mods = resize_or_move == "resize" and "META" or "CTRL"
+                    }
+                }, pane)
+            else
+                if resize_or_move == "resize" then
+                    win:perform_action({
+                        AdjustPaneSize = {direction_keys[key], 3}
+                    }, pane)
+                else
+                    win:perform_action({
+                        ActivatePaneDirection = direction_keys[key]
+                    }, pane)
+                end
+            end
+        end)
+    }
+end
+
+local nav_keys = {
+    -- move between split panes
+    split_nav("move", "h"), split_nav("move", "j"), split_nav("move", "k"),
+    split_nav("move", "l"), -- resize panes
+    split_nav("resize", "h"), split_nav("resize", "j"),
+    split_nav("resize", "k"), split_nav("resize", "l")
+}
+
 if appearance.is_dark() then
     config.color_scheme = 'Catppuccin Macchiato'
 else
@@ -142,32 +197,32 @@ wezterm.on('update-status', function(window, _)
 end)
 
 config.leader = {key = 'a', mods = 'CTRL', timeout_milliseconds = 1000}
-config.keys = {
-    {key = 'LeftArrow', mods = 'OPT', action = act.SendString '\x1bb'},
-    {key = 'RightArrow', mods = 'OPT', action = act.SendString '\x1bf'}, {
-        key = ',',
-        mods = 'SUPER',
-        action = act.SpawnCommandInNewTab {
-            cwd = wezterm.home_dir,
-            args = {'nvim', wezterm.config_file}
-        }
-    }, {
-        key = 'a',
-        mods = 'LEADER|CTRL',
-        action = act.SendKey {key = 'a', mods = 'CTRL'}
-    }, {
-        key = 'p',
-        mods = 'LEADER',
-        action = act.ShowLauncherArgs {flags = 'FUZZY|WORKSPACES'}
-    }, -- {
-    --   key = 'f',
-    --   mods = 'LEADER',
-    --   action = projects.choose_project(),
-    -- },
-    {key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState}
-}
+config.keys = nav_keys
 
--- smart_splits.apply_to_config(config)
+-- config.keys = {
+--    {key = 'LeftArrow', mods = 'OPT', action = act.SendString '\x1bb'},
+--    {key = 'RightArrow', mods = 'OPT', action = act.SendString '\x1bf'}, {
+--        key = ',',
+--        mods = 'SUPER',
+--        action = act.SpawnCommandInNewTab {
+--            cwd = wezterm.home_dir,
+--            args = {'nvim', wezterm.config_file}
+--        }
+--    }, {
+--        key = 'a',
+--        mods = 'LEADER|CTRL',
+--        action = act.SendKey {key = 'a', mods = 'CTRL'}
+--    }, {
+--        key = 'p',
+--        mods = 'LEADER',
+--        action = act.ShowLauncherArgs {flags = 'FUZZY|WORKSPACES'}
+--    }, -- {
+--   key = 'f',
+--   mods = 'LEADER',
+--   action = projects.choose_project(),
+-- },
+--    {key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState}
+-- }
 
 return config
 

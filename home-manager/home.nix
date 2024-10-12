@@ -17,7 +17,8 @@
       pkgs.cargo-insta
       pkgs.cargo-machete
       pkgs.cargo-watch
-      pkgs.clang
+      pkgs.libiconv
+      pkgs.fzf
       # neovim Telescope Media Files
       pkgs.chafa
       pkgs.epub-thumbnailer
@@ -48,6 +49,7 @@
       pkgs.luaformatter
       pkgs.neovim
       pkgs.nmap
+      pkgs.sqlite.dev
       pkgs.openssl.dev
       pkgs.pkg-config
       pkgs.python3
@@ -132,9 +134,20 @@
     };
     zsh = {
       enable = true;
-      enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+
+      #history.append = true;
+      #history = {
+      #append = true;
+      #  ignoreAllDupes = true;
+      #ignoreDupes = true;
+      #ignoreSpace = true;
+      #share = true;
+      #size = 10000;
+      #path = "${config.xdg.dataHome}/zsh/history";
+      #};
+
       initExtra = ''
         if [ -f /opt/homebrew/bin/brew ] ; then
             eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -145,26 +158,26 @@
       '';
       shellAliases = {
         cd = "z";
+        gg = "git grep";
         ll = "ls -l";
         grab_screen = "m1ddc set input 27";
         vim = "nvim";
-        #update = "sudo nixos-rebuild switch";
-      };
-      history = {
-        size = 10000;
-        #path = "${config.xdg.dataHome}/zsh/history";
       };
       sessionVariables = {
         EDITOR = "nvim";
         PATH = "$PATH:$HOME/.bin/:$HOME/.local/bin";
+        PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
         NIXPKGS_ALLOW_UNFREE = 1;
       };
 
-      #        zplug = {
-      #            enable = true;
-      #            plugins = [
-      #                { name = "plugins/vscode"; tags = [ from:oh-my-zsh ]; }
-      #            ];
+      antidote = {
+        enable = true;
+        plugins = [
+          "zsh-users/zsh-completions"
+          "zsh-users/zsh-autosuggestions"
+          "Aloxaf/fzf-tab"
+        ];
+      };
     };
   };
 }
