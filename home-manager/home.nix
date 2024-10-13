@@ -69,10 +69,25 @@
         source = ./inputrc;
         target = ".inputrc";
       };
+      "i3" = {
+        recursive = true;
+        source = ./config/i3;
+        target = ".config/i3";
+      };
       "nvim" = {
         recursive = true;
         source = ./config/nvim;
         target = ".config/nvim";
+      };
+      "rofi" = {
+        recursive = true;
+        source = ./config/rofi;
+        target = ".config/rofi";
+      };
+      "rofi-themes" = {
+        recursive = true;
+        source = ./local/share/rofi ;
+        target = ".local/share/rofi";
       };
       "skhd" = {
         recursive = true;
