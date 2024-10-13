@@ -72,6 +72,13 @@
   #  ];
   #};
 
+  services.xremap.config.modmap = [
+    {
+      name = "Global";
+      remap = {"CapsLock" = "Alt_L";}; # globally remap CapsLock to Alt
+    }
+  ];
+
   programs.gnupg.agent = {
     enable = true;
     #   enableSSHSupport = true;

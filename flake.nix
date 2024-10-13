@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    xremap-flake.url = "github:xremap/nix-flake";
   };
   outputs = {
     self,
@@ -37,6 +38,7 @@
         {
           environment.systemPackages = [agenix.packages.x86_64-linux.default];
         }
+        inputs.xremap-flake.nixosModules.default
       ];
       specialArgs = {inherit inputs;};
     };
