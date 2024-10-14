@@ -19,6 +19,7 @@
       pkgs.cargo-watch
       pkgs.libiconv
       pkgs.fzf
+      pkgs.pipx
       # neovim Telescope Media Files
       pkgs.chafa
       pkgs.epub-thumbnailer
@@ -86,7 +87,7 @@
       };
       "rofi-themes" = {
         recursive = true;
-        source = ./local/share/rofi ;
+        source = ./local/share/rofi;
         target = ".local/share/rofi";
       };
       "skhd" = {
@@ -167,9 +168,22 @@
         if [ -f /opt/homebrew/bin/brew ] ; then
             eval "$(/opt/homebrew/bin/brew shellenv)"
         fi
+
         if [ -f "$HOME/.cargo/env" ] ; then
         . "$HOME/.cargo/env"
         fi
+
+        up(){
+            case $# in
+                0 )
+                DEEP=1 ;;
+                1 )
+                DEEP=$1 ;;
+            esac
+            for i in $(seq 1 $DEEP); do
+                cd ../;
+            done;
+        }
       '';
       shellAliases = {
         cd = "z";
@@ -181,7 +195,7 @@
       sessionVariables = {
         EDITOR = "nvim";
         PATH = "$PATH:$HOME/.bin/:$HOME/.local/bin";
-        PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+        PKG_CONFIG_PATH_aarch64-apple-darwin = "${pkgs.openssl.dev}/lib/pkgconfig";
         NIXPKGS_ALLOW_UNFREE = 1;
       };
 

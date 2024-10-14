@@ -30,6 +30,7 @@
   # Use a custom configuration.nix location.
   environment.darwinConfig = "$HOME/src/nixie_nodes/nodes/ddn";
 
+  services.karabiner-elements.enable = true;
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   nix = {
