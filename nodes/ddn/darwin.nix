@@ -13,6 +13,7 @@
     pkgs.home-manager
     pkgs.nixd
     pkgs.nodePackages.npm
+    pkgs.nodejs-slim
     pkgs.postgresql
     pkgs.protobuf
     pkgs.zig

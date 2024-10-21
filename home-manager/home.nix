@@ -47,7 +47,6 @@
       pkgs.git-machete
       pkgs.gnused
       pkgs.jq
-      pkgs.luaformatter
       pkgs.neovim
       pkgs.nmap
       pkgs.sqlite.dev
@@ -55,6 +54,7 @@
       pkgs.pkg-config
       pkgs.python3
       pkgs.starship
+      pkgs.stylua
       pkgs.vhs
       pkgs.wget
       pkgs.zoxide

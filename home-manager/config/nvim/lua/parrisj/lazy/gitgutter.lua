@@ -1,1 +1,1 @@
-return {"airblade/vim-gitgutter", name = "gitgutter"}
+return { "airblade/vim-gitgutter", name = "gitgutter" }

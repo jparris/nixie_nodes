@@ -6,12 +6,19 @@ return {
 
         configs.setup({
             ensure_installed = {
-                "bash", "c", "lua", "nix", "python", "vim", "vimdoc", "rust"
+                "bash",
+                "c",
+                "lua",
+                "nix",
+                "python",
+                "vim",
+                "vimdoc",
+                "rust",
             },
             sync_install = false,
             auto_install = true,
-            highlight = {enable = true},
-            indent = {enable = true}
+            highlight = { enable = true },
+            indent = { enable = true },
         })
-    end
+    end,
 }

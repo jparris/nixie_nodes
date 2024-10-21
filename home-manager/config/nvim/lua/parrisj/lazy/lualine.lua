@@ -1,11 +1,11 @@
 return {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     opts = {
         options = {
-            component_separators = {left = '', right = ''},
-            section_separators = {left = '', right = ''},
+            component_separators = { left = "", right = "" },
+            section_separators = { left = "", right = "" },
             icons_enabled = true,
-            theme = 'catppuccin-macchiato'
-        }
-    }
+            theme = "catppuccin-macchiato",
+        },
+    },
 }

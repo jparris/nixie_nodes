@@ -21,7 +21,7 @@ fi
 alejandra . >/dev/null
 
 # Autoformat lua config files
-find . -name *.lua -exec lua-format --in-place {} \;
+stylua .
 
 # Shows your changes
 git diff -U0 *.nix

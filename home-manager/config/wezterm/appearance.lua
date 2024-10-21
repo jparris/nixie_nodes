@@ -1,5 +1,5 @@
 -- vim: tabstop=2 shiftwidth=2 expandtab
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 local module = {}
 
 function module.is_dark()

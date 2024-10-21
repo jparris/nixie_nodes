@@ -1,14 +1,14 @@
 -- https://alexplescan.com/posts/2024/08/10/wezterm/
-local wezterm = require 'wezterm'
-local appearance = require 'appearance'
+local wezterm = require("wezterm")
+local appearance = require("appearance")
 -- local projects = require 'projects'
 -- local smart_splits = require 'smart_splits'
 local act = wezterm.action
 local config = wezterm.config_builder()
 
 -- https://github.com/wez/wezterm/discussions/4728
-local is_darwin<const> = wezterm.target_triple:find("darwin") ~= nil
-local is_linux<const> = wezterm.target_triple:find("linux") ~= nil
+local is_darwin <const> = wezterm.target_triple:find("darwin") ~= nil
+local is_linux <const> = wezterm.target_triple:find("linux") ~= nil
 
 local function is_vim(pane)
     local process_info = pane:get_foreground_process_info()
@@ -26,7 +26,7 @@ local direction_keys = {
     h = "Left",
     j = "Down",
     k = "Up",
-    l = "Right"
+    l = "Right",
 }
 
 local function split_nav(resize_or_move, key)
@@ -39,101 +39,107 @@ local function split_nav(resize_or_move, key)
                 win:perform_action({
                     SendKey = {
                         key = key,
-                        mods = resize_or_move == "resize" and "META" or "CTRL"
-                    }
+                        mods = resize_or_move == "resize" and "META" or "CTRL",
+                    },
                 }, pane)
             else
                 if resize_or_move == "resize" then
                     win:perform_action({
-                        AdjustPaneSize = {direction_keys[key], 3}
+                        AdjustPaneSize = { direction_keys[key], 3 },
                     }, pane)
                 else
                     win:perform_action({
-                        ActivatePaneDirection = direction_keys[key]
+                        ActivatePaneDirection = direction_keys[key],
                     }, pane)
                 end
             end
-        end)
+        end),
     }
 end
 
 local nav_keys = {
     -- move between split panes
-    split_nav("move", "h"), split_nav("move", "j"), split_nav("move", "k"),
+    split_nav("move", "h"),
+    split_nav("move", "j"),
+    split_nav("move", "k"),
     split_nav("move", "l"), -- resize panes
-    split_nav("resize", "h"), split_nav("resize", "j"),
-    split_nav("resize", "k"), split_nav("resize", "l")
+    split_nav("resize", "h"),
+    split_nav("resize", "j"),
+    split_nav("resize", "k"),
+    split_nav("resize", "l"),
 }
 
 if appearance.is_dark() then
-    config.color_scheme = 'Catppuccin Macchiato'
+    config.color_scheme = "Catppuccin Macchiato"
 else
-    config.color_scheme = 'Catppuccin Latte'
+    config.color_scheme = "Catppuccin Latte"
 end
 
-config.font = wezterm.font 'FiraCode Nerd Font Mono'
+config.font = wezterm.font("FiraCode Nerd Font Mono")
 config.font_size = 14.0
 
-if is_linux then config.front_end = "WebGpu" end
+if is_linux then
+    config.front_end = "WebGpu"
+end
 
 config.window_background_opacity = 0.95
 config.macos_window_background_blur = 30
 config.window_decorations = "RESIZE"
 config.window_frame = {
-    font = wezterm.font({family = 'FiraCode Nerd Font Mono', weight = 'Bold'}),
-    font_size = 14
+    font = wezterm.font({ family = "FiraCode Nerd Font Mono", weight = "Bold" }),
+    font_size = 14,
 }
 
 local function mybattery()
-    local bat = ''
+    local bat = ""
     for _, b in ipairs(wezterm.battery_info()) do
         if b.state == "Charging" then
             if b.state_of_charge < 0.1 then
-                bat = '󰢟'
+                bat = "󰢟"
             elseif b.state_of_charge < 0.2 then
-                bat = '󰢜'
+                bat = "󰢜"
             elseif b.state_of_charge < 0.3 then
-                bat = '󰂆'
+                bat = "󰂆"
             elseif b.state_of_charge < 0.4 then
-                bat = '󰂇'
+                bat = "󰂇"
             elseif b.state_of_charge < 0.5 then
-                bat = '󰂈'
+                bat = "󰂈"
             elseif b.state_of_charge < 0.6 then
-                bat = '󰢝'
+                bat = "󰢝"
             elseif b.state_of_charge < 0.7 then
-                bat = '󰂉'
+                bat = "󰂉"
             elseif b.state_of_charge < 0.8 then
-                bat = '󰢞'
+                bat = "󰢞"
             elseif b.state_of_charge < 0.9 then
-                bat = '󰂊'
+                bat = "󰂊"
             elseif b.state_of_charge < 1.0 then
-                bat = '󰂋'
+                bat = "󰂋"
             else
-                bat = '󰂅'
+                bat = "󰂅"
             end
         else
             if b.state_of_charge < 0.1 then
-                bat = '󰂎'
+                bat = "󰂎"
             elseif b.state_of_charge < 0.2 then
-                bat = '󰁺'
+                bat = "󰁺"
             elseif b.state_of_charge < 0.3 then
-                bat = '󰁻'
+                bat = "󰁻"
             elseif b.state_of_charge < 0.4 then
-                bat = '󰁼'
+                bat = "󰁼"
             elseif b.state_of_charge < 0.5 then
-                bat = '󰁽'
+                bat = "󰁽"
             elseif b.state_of_charge < 0.6 then
-                bat = '󰁾'
+                bat = "󰁾"
             elseif b.state_of_charge < 0.7 then
-                bat = '󰁿'
+                bat = "󰁿"
             elseif b.state_of_charge < 0.8 then
-                bat = '󰂀'
+                bat = "󰂀"
             elseif b.state_of_charge < 0.9 then
-                bat = '󰂁'
+                bat = "󰂁"
             elseif b.state_of_charge < 1.0 then
-                bat = '󰂂'
+                bat = "󰂂"
             else
-                bat = '󰁹'
+                bat = "󰁹"
             end
         end
     end
@@ -142,11 +148,13 @@ end
 
 local function segments_for_right_status(window)
     return {
-        wezterm.hostname(), wezterm.strftime('%a %b %-d %l:%M%p'), mybattery()
+        wezterm.hostname(),
+        wezterm.strftime("%a %b %-d %l:%M%p"),
+        mybattery(),
     }
 end
 
-wezterm.on('update-status', function(window, _)
+wezterm.on("update-status", function(window, _)
     local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
     local segments = segments_for_right_status(window)
 
@@ -171,10 +179,12 @@ wezterm.on('update-status', function(window, _)
     -- they'd usually be used for setting high fidelity gradients on your terminal's
     -- background, we'll use them here to give us a sample of the powerline segment
     -- colours we need.
-    local gradient = wezterm.color.gradient({
-        orientation = 'Horizontal',
-        colors = {gradient_from, gradient_to}
-    }, #segments -- only gives us as many colours as we have segments.
+    local gradient = wezterm.color.gradient(
+        {
+            orientation = "Horizontal",
+            colors = { gradient_from, gradient_to },
+        },
+        #segments -- only gives us as many colours as we have segments.
     )
 
     -- We'll build up the elements to send to wezterm.format in this table.
@@ -184,19 +194,19 @@ wezterm.on('update-status', function(window, _)
         local is_first = i == 1
 
         if is_first then
-            table.insert(elements, {Background = {Color = 'none'}})
+            table.insert(elements, { Background = { Color = "none" } })
         end
-        table.insert(elements, {Foreground = {Color = gradient[i]}})
+        table.insert(elements, { Foreground = { Color = gradient[i] } })
 
-        table.insert(elements, {Foreground = {Color = fg}})
-        table.insert(elements, {Background = {Color = gradient[i]}})
-        table.insert(elements, {Text = ' ' .. seg .. ' '})
+        table.insert(elements, { Foreground = { Color = fg } })
+        table.insert(elements, { Background = { Color = gradient[i] } })
+        table.insert(elements, { Text = " " .. seg .. " " })
     end
 
     window:set_right_status(wezterm.format(elements))
 end)
 
-config.leader = {key = 'a', mods = 'CTRL', timeout_milliseconds = 1000}
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = nav_keys
 
 -- config.keys = {
@@ -225,4 +235,3 @@ config.keys = nav_keys
 -- }
 
 return config
-
