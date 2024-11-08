@@ -6,7 +6,6 @@
 }: {
   home = {
     stateVersion = "24.05"; # Please read the comment before changing.
-
     # The home.packages option allows you to install Nix packages into your
     # environment.
     # packages = with pkgs; [
@@ -30,7 +29,7 @@
       pkgs.ripgrep
       pkgs.imagemagick
       pkgs.poppler_utils
-
+      pkgs.home-manager
       # LSP
       pkgs.nixd
       pkgs.marksman

@@ -9,6 +9,15 @@ Like Nixie Tubes except it's Nix Configurations
 
 # Bootstrapping
 
+## Home Manager on Other Distros
+* [Install Nix](https://nixos.org/download/#nix-install-linux)
+* Enable Flakes
+* Boostrap Home Manager
+    * `nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager`
+    * `nix-channel --update`
+    * `nix-shell -p home-mananger`
+* `home-manager switch --flake .#jparris`
+
 ## Macos / Nix-Darwin
 * [Determinate Systems Installer](https://github.com/DeterminateSystems/nix-installer).
 * [Install Homebrew](https://brew.sh/) for "Apps".
