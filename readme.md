@@ -7,6 +7,8 @@
 
 Like Nixie Tubes except it's Nix Configurations
 
+My setup is heavily based on [Paul Grandperrin's](https://github.com/PaulGrandperrin/nix-systems)
+
 # Bootstrapping
 
 ## Home Manager on Other Distros
@@ -20,7 +22,6 @@ Like Nixie Tubes except it's Nix Configurations
 
 ## Macos / Nix-Darwin
 * [Determinate Systems Installer](https://github.com/DeterminateSystems/nix-installer).
-* [Install Homebrew](https://brew.sh/) for "Apps".
 * Install nix-darwin `nix run nix-darwin -- switch --flake <path/to/mac_config>`.
 * Switch to `darwin-rebuild switch --flake ~/.config/nix-darwin`.
 

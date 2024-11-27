@@ -1,13 +1,20 @@
 {
-  config,
   pkgs,
+  config,
+  lib,
+  home-manager-flake,
   ...
-}: {
+} @ inputs: {
+  imports = [
+    home-manager-flake.darwinModules.home-manager
+  ];
+
   environment.systemPackages = [
     pkgs.black
     pkgs.cargo-zigbuild
     pkgs.colima
     pkgs.docker
+    pkgs.docker-buildx
     pkgs.docker-credential-helpers
     pkgs.gh
     pkgs.home-manager
@@ -23,54 +30,78 @@
     pkgs.noto-fonts
     pkgs.noto-fonts-color-emoji
     (pkgs.nerdfonts.override {fonts = ["FiraCode"];})
+
     #pkgs.jankyborders
-    pkgs.skhd
-    pkgs.yabai
+    #pkgs.kanata
+    #pkgs.skhd
+    #pkgs.yabai
   ];
 
-  # Use a custom configuration.nix location.
-  environment.darwinConfig = "$HOME/src/nixie_nodes/nodes/ddn";
+  users.users.jparris = {
+    home = "/Users/jparris";
+    shell = "${pkgs.zsh}/bin/zsh";
+  };
 
-  services.karabiner-elements.enable = true;
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-  nix = {
-    package = pkgs.nix;
-    settings = {
-      "extra-experimental-features" = ["nix-command" "flakes"];
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = config._module.specialArgs;
+  home-manager.users.jparris = {
+    imports = [
+      ../../home-manager/home.nix
+    ];
+  };
+
+  # nix-darwin doesn't change the shells so we do it here
+  system.activationScripts.postActivation.text = ''
+    echo "setting up users' shells..." >&2
+
+    ${lib.concatMapStringsSep "\n" (user: ''
+      dscl . create /Users/${user.name} UserShell "${user.shell}"
+    '') (lib.attrValues config.users.users)}
+  '';
+
+  nix.settings.experimental-features = "nix-command flakes repl-flake";
+
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 2d";
+    interval = {
+      Hour = 5;
+      Minute = 0;
     };
   };
 
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  programs = {
-    gnupg.agent.enable = true;
-    zsh.enable = true; # default shell on catalina
-  };
+  services.nix-daemon.enable = true;
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
-  #  _   _                      ____
-  # | | | | ___  _ __ ___   ___| __ ) _ __ _____      __
-  # | |_| |/ _ \| '_ ` _ \ / _ \  _ \| '__/ _ \ \ /\ / /
-  # |  _  | (_) | | | | | |  __/ |_) | | |  __/\ V  V /
-  # |_| |_|\___/|_| |_| |_|\___|____/|_|  \___| \_/\_/
-  #
+  # This sets up /etc/zshrc to load nix-darwin
+  programs = {
+    zsh.enable = true;
+  };
+
+  environment.shells = [pkgs.zsh];
+
   homebrew = {
     enable = true;
+    #cleanup = "zap";
+    global = {
+      brewfile = true;
+    };
+    taps = ["homebrew/bundle"];
     brews = ["m1ddc"];
     casks = [
-      # "obsidian"
-      # "raycast"
       "altair-graphql-client"
       "brave-browser"
       "hiddenbar"
       "logseq"
+      "notion"
       "firefox"
       "slack"
       "wezterm"
+      "zed"
     ];
+    masApps = {};
   };
 
   #                  _
@@ -126,10 +157,6 @@
   # | | | | | | (_| | (__| |_| |___) | | (_| |  __/  _| (_| | |_| | | |_\__ \
   # |_| |_| |_|\__,_|\___|\___/|____/   \__,_|\___|_|  \__,_|\__,_|_|\__|___/
   #
-  # https://macos-defaults.com documents the behaviour of these settings
-  # Also https://gist.github.com/brandonb927/3195465/ and
-  # https://github.com/mathiasbynens/dotfiles/blob/main/.macos
-  # https://emmer.dev/blog/automate-your-macos-defaults/
   system.defaults = {
     dock = {
       # Hide the dock

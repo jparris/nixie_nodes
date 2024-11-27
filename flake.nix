@@ -1,74 +1,42 @@
 {
-  description = "Our house (lab) in the middle of the street";
+  description = "Jon Parris's Nix Configs";
 
-  # Usage
-  #  - Local 'nixos-rebuild --flake .#node'
-  #  - Deploy 'deploy .#node'
   inputs = {
+    # Packages
+    #nixos-stable-lib.url = "github:NixOS/nixpkgs/nixos-24.05?dir=lib"; # "github:nix-community/nixpkgs.lib" doesn't work
+    #nixos-unstable-lib.url = "github:NixOS/nixpkgs/nixos-unstable?dir=lib";
+
+    #nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    #nixos-stable.url           = "github:NixOS/nixpkgs/nixos-24.05";
+    #nixos-stable-small.url     = "github:NixOS/nixpkgs/nixos-24.05-small";
+    #nixos-unstable.url         = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # General Flakes
     agenix.url = "github:ryantm/agenix";
-    deploy-rs.url = "github:serokell/deploy-rs";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-24.05";
+      #inputs.nixpkgs.follows = "nixos-stable-lib"; # not needed by NixOS' module thanks to `home-manager.useGlobalPkgs = true` but needed by the unpriviledged module
     };
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    xremap-flake.url = "github:xremap/nix-flake";
+
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      #      inputs.nixpkgs.follows = "nixos-unstable-lib"; # not needed by NixOS' module thanks to `home-manager.useGlobalPkgs = true` but needed by the unpriviledged module
+    };
+
+    # Darwin Flakes & Urls
+    nix-darwin.url = "github:LnL7/nix-darwin/master";
+    darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    darwin-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable"; # darwin-unstable for now (https://github.com/NixOS/nixpkgs/issues/107466)
+
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
   };
-  outputs = {
-    self,
-    agenix,
-    deploy-rs,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: {
-    nixosConfigurations.idun = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./nodes/idun/configuration.nix
-        # make home-manager as a module of nixos
-        # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.parrisj = import ./home-manager/home.nix;
-        }
-        agenix.nixosModules.default
-        {
-          environment.systemPackages = [agenix.packages.x86_64-linux.default];
-        }
-        inputs.xremap-flake.nixosModules.default
-      ];
-      specialArgs = {inherit inputs;};
-    };
-    nixosConfigurations.utgard = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./nodes/utgard/configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.parrisj = import ./home-manager/home.nix;
-        }
-        agenix.nixosModules.default
-        {
-          environment.systemPackages = [agenix.packages.x86_64-linux.default];
-        }
-      ];
-      specialArgs = {inherit inputs;};
-    };
 
-    deploy.nodes.utgard = {
-      hostname = "192.168.1.235";
-      profiles.system = {
-        user = "root";
-        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.utgard;
-      };
-    };
-
-    # This is highly advised, and will prevent many possible mistakes
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+  outputs = inputs: {
+    darwinConfigurations = import ./nodes/darwin/mod.nix inputs;
   };
 }
