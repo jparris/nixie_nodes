@@ -37,6 +37,6 @@
   };
 
   outputs = inputs: {
-    darwinConfigurations = import ./nodes/darwin/mod.nix inputs;
+    darwinConfigurations = import ./darwin/mod.nix inputs;
   };
 }

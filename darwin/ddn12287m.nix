@@ -17,6 +17,7 @@
     pkgs.docker-buildx
     pkgs.docker-credential-helpers
     pkgs.gh
+    pkgs.google-cloud-sdk
     pkgs.home-manager
     pkgs.nixd
     pkgs.nodePackages.npm
@@ -47,7 +48,7 @@
   home-manager.extraSpecialArgs = config._module.specialArgs;
   home-manager.users.jparris = {
     imports = [
-      ../../home-manager/home.nix
+      ../home-manager/home.nix
     ];
   };
 

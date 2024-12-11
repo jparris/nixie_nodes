@@ -7,7 +7,7 @@ inputs: let
   in
     inputs.nix-darwin.lib.darwinSystem {
       system = arch;
-      pkgs = import inputs.darwin-stable {system = arch;};
+      pkgs = import darwin-pkgs {system = arch;};
       specialArgs = {inherit inputs home-manager-flake;}; # passes inputs and main flakes to modules
       modules = [module];
     };
