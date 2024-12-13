@@ -9,77 +9,39 @@
     home-manager-flake.darwinModules.home-manager
   ];
 
-  environment.systemPackages = [
-    pkgs.black
-    pkgs.cargo-zigbuild
-    pkgs.colima
-    pkgs.docker
-    pkgs.docker-buildx
-    pkgs.docker-credential-helpers
-    pkgs.gh
-    pkgs.google-cloud-sdk
-    pkgs.home-manager
-    pkgs.nixd
-    pkgs.nodePackages.npm
-    pkgs.nodejs-slim
-    pkgs.postgresql
-    pkgs.protobuf
-    pkgs.zig
-    # ISP Packages
-    pkgs.go
-    pkgs.go-protobuf
-    pkgs.noto-fonts
-    pkgs.noto-fonts-color-emoji
-    (pkgs.nerdfonts.override {fonts = ["FiraCode"];})
-
-    #pkgs.jankyborders
-    #pkgs.kanata
-    #pkgs.skhd
-    #pkgs.yabai
+  environment.systemPackages = with pkgs; [
+    # Emf Dependencies
+    black
+    cargo-zigbuild
+    colima
+    docker
+    docker-buildx
+    docker-credential-helpers
+    gh
+    google-cloud-sdk
+    nodePackages.npm
+    nodejs-slim
+    postgresql
+    protobuf
+    zig
+    # Fonts
+    noto-fonts
+    noto-fonts-color-emoji
+    nerd-fonts.fira-code
+    # ISP Dependencies
+    go
+    go-protobuf
+    # Misc
+    home-manager
+    nixd
+    cmake
+    SDL2.dev
+    # Tiling Window Manager
+    #jankyborders
+    #kanata
+    #skhd
+    #yabai
   ];
-
-  users.users.jparris = {
-    home = "/Users/jparris";
-    shell = "${pkgs.zsh}/bin/zsh";
-  };
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = config._module.specialArgs;
-  home-manager.users.jparris = {
-    imports = [
-      ../home-manager/home.nix
-    ];
-  };
-
-  # nix-darwin doesn't change the shells so we do it here
-  system.activationScripts.postActivation.text = ''
-    echo "setting up users' shells..." >&2
-
-    ${lib.concatMapStringsSep "\n" (user: ''
-      dscl . create /Users/${user.name} UserShell "${user.shell}"
-    '') (lib.attrValues config.users.users)}
-  '';
-
-  nix.settings.experimental-features = "nix-command flakes repl-flake";
-
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 2d";
-    interval = {
-      Hour = 5;
-      Minute = 0;
-    };
-  };
-
-  services.nix-daemon.enable = true;
-
-  system.stateVersion = 4;
-
-  # This sets up /etc/zshrc to load nix-darwin
-  programs = {
-    zsh.enable = true;
-  };
 
   environment.shells = [pkgs.zsh];
 
@@ -104,6 +66,46 @@
     ];
     masApps = {};
   };
+
+  home-manager = {
+    extraSpecialArgs = config._module.specialArgs;
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.jparris = {
+      imports = [
+        ../home-manager/home.nix
+      ];
+    };
+  };
+
+  system.stateVersion = 4;
+
+  # nix-darwin doesn't change the shells so we do it here
+  system.activationScripts.postActivation.text = ''
+    echo "setting up users' shells..." >&2
+
+    ${lib.concatMapStringsSep "\n" (user: ''
+      dscl . create /Users/${user.name} UserShell "${user.shell}"
+    '') (lib.attrValues config.users.users)}
+  '';
+
+  nix.settings.experimental-features = "nix-command flakes";
+
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 2d";
+    interval = {
+      Hour = 5;
+      Minute = 0;
+    };
+  };
+
+  # This sets up /etc/zshrc to load nix-darwin
+  programs = {
+    zsh.enable = true;
+  };
+
+  services.nix-daemon.enable = true;
 
   #                  _
   #  _ __   ___  ___| |_ __ _ _ __ ___  ___
@@ -188,5 +190,10 @@
       # Control + Command + Click = Move window by clicking anywhere
       NSWindowShouldDragOnGesture = true;
     };
+  };
+
+  users.users.jparris = {
+    home = "/Users/jparris";
+    shell = "${pkgs.zsh}/bin/zsh";
   };
 }
