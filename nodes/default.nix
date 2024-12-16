@@ -1,3 +1,0 @@
-{
-  idun = import ./idun;
-}

@@ -56,7 +56,7 @@
     man-pages
     mr
     pass
-    posix_man_pages
+        #posix_man_pages
     vim
     pavucontrol
     orca-slicer
@@ -73,12 +73,12 @@
   #  ];
   #};
 
-  services.xremap.config.modmap = [
-    {
-      name = "Global";
-      remap = {"CapsLock" = "Alt_L";}; # globally remap CapsLock to Alt
-    }
-  ];
+    #services.xremap.config.modmap = [
+    #{
+    #  name = "Global";
+    #  remap = {"CapsLock" = "Alt_L";}; # globally remap CapsLock to Alt
+    #}
+  #];
 
   programs.gnupg.agent = {
     enable = true;
@@ -87,9 +87,9 @@
 
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
-    (nerdfonts.override {fonts = ["FiraCode"];})
+    nerd-fonts.fira-code
   ];
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";

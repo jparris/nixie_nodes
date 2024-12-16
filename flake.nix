@@ -7,9 +7,11 @@
     #nixos-unstable-lib.url = "github:NixOS/nixpkgs/nixos-unstable?dir=lib";
 
     #nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
-    #nixos-stable.url           = "github:NixOS/nixpkgs/nixos-24.05";
     #nixos-stable-small.url     = "github:NixOS/nixpkgs/nixos-24.05-small";
-    #nixos-unstable.url         = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # NixOs Flakes
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # General Flakes
     agenix.url = "github:ryantm/agenix";
@@ -38,5 +40,6 @@
 
   outputs = inputs: {
     darwinConfigurations = import ./darwin/mod.nix inputs;
+    nixosConfigurations = import ./nixos/mod.nix inputs;
   };
 }
