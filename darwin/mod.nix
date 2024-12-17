@@ -2,7 +2,7 @@ inputs: let
   mkDarwinConf = arch: stability: module: let
     selectFlake = stable: unstable: {inherit stable unstable;}.${stability};
     darwin-pkgs = selectFlake inputs.darwin-stable inputs.darwin-unstable;
-    home-manager-flake = selectFlake inputs.home-manager-stable inputs.home-manager-unstable;
+    home-manager-flake = selectFlake inputs.darwin-home-manager-stable inputs.darwin-home-manager-unstable;
     nix-darwin.inputs.follows = selectFlake inputs.darwin-stable inputs.darwin-unstable;
   in
     inputs.nix-darwin.lib.darwinSystem {

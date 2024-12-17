@@ -9,32 +9,32 @@
     #nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
     #nixos-stable-small.url     = "github:NixOS/nixpkgs/nixos-24.05-small";
 
+    # General Flakes
+    agenix.url = "github:ryantm/agenix";
+
     # NixOs Flakes
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # General Flakes
-    agenix.url = "github:ryantm/agenix";
-
-    home-manager-stable = {
-      url = "github:nix-community/home-manager/release-24.05";
-      #inputs.nixpkgs.follows = "nixos-stable-lib"; # not needed by NixOS' module thanks to `home-manager.useGlobalPkgs = true` but needed by the unpriviledged module
-    };
-
-    home-manager-unstable = {
-      url = "github:nix-community/home-manager/master";
-      #      inputs.nixpkgs.follows = "nixos-unstable-lib"; # not needed by NixOS' module thanks to `home-manager.useGlobalPkgs = true` but needed by the unpriviledged module
-    };
-
     # Darwin Flakes & Urls
     nix-darwin.url = "github:LnL7/nix-darwin/master";
-    darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
     darwin-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable"; # darwin-unstable for now (https://github.com/NixOS/nixpkgs/issues/107466)
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-bundle = {
       url = "github:homebrew/homebrew-bundle";
       flake = false;
+    };
+
+    darwin-home-manager-stable = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "darwin-stable";
+    };
+
+    darwin-home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "darwin-unstable";
     };
   };
 
