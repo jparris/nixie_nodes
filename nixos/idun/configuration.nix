@@ -56,7 +56,7 @@
     man-pages
     mr
     pass
-        #posix_man_pages
+    #posix_man_pages
     vim
     pavucontrol
     orca-slicer
@@ -73,11 +73,11 @@
   #  ];
   #};
 
-    #services.xremap.config.modmap = [
-    #{
-    #  name = "Global";
-    #  remap = {"CapsLock" = "Alt_L";}; # globally remap CapsLock to Alt
-    #}
+  #services.xremap.config.modmap = [
+  #{
+  #  name = "Global";
+  #  remap = {"CapsLock" = "Alt_L";}; # globally remap CapsLock to Alt
+  #}
   #];
 
   programs.gnupg.agent = {

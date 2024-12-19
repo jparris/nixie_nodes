@@ -14,6 +14,5 @@
     };
     wantedBy = ["default.target"];
   };
-
   systemd.services.esphome.enable = true;
 }

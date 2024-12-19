@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  home-manager-flake,
   ...
 }: {
   imports = [
@@ -21,8 +22,10 @@
 
     ## Smart Home
     ../../modules/containers/home-assistant.nix
+    ../../modules/containers/zwave-js-ui.nix
     ./services/esphome.nix
     #./services/zigbee2mqtt.nix
+    home-manager-flake.nixosModules.home-manager
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -59,19 +62,30 @@
   # sound.enable = true;
   # hardware.pulseaudio.enable = true;
 
+  environment.shells = [pkgs.zsh];
+
+  home-manager = {
+    extraSpecialArgs = config._module.specialArgs;
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.parrisj = {
+      imports = [
+        ../../home-manager/home.nix
+      ];
+    };
+  };
+
   users.users.parrisj = {
     isNormalUser = true;
     extraGroups = ["transmission" "wheel"];
-    packages = with pkgs; [
-      tree
-    ];
+    shell = "${pkgs.zsh}/bin/zsh";
   };
 
   environment.systemPackages = with pkgs; [
     alejandra # Nix Code Formater
     calibre
     deploy-rs
-    ffmpeg
+    ffmpeg-full
     figlet
     git
     htop
@@ -106,6 +120,10 @@
 
   networking.firewall.allowedTCPPorts = [3000];
 
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
   services.openssh = {
     enable = true;
     settings.Macs = ["hmac-sha2-512-etm@openssh.com" "hmac-sha2-256-etm@openssh.com" "umac-128-etm@openssh.com" "hmac-sha2-512"];

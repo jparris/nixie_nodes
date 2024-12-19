@@ -11,4 +11,5 @@ inputs: let
     };
 in {
   "idun" = mkNixosConf "x64_64-linux" "unstable" [./idun/configuration.nix];
+  "utgard" = mkNixosConf "x64_64-linux" "unstable" [inputs.agenix.nixosModules.default ./utgard/configuration.nix];
 }

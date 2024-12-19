@@ -26,4 +26,5 @@
       };
     };
   };
+  users.users.zigbee2mqtt.extraGroups = ["dialout"];
 }

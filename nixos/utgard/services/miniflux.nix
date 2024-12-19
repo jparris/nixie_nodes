@@ -22,6 +22,7 @@
     config = {
       LISTEN_ADDR = "0.0.0.0:7076";
       FETCH_YOUTUBE_WATCH_TIME = "1";
+      BASE_URL = "http://192.168.1.235:7076/";
       #BASE_URL = "https://rss.securityishard.club/";
     };
   };

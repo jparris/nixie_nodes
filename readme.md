@@ -33,12 +33,17 @@ This repo is inspired by [Paul Grandperrin's](https://github.com/PaulGrandperrin
 ## Naming Scheme
 I've been using [Norse Mythology](https://namingschemes.com/Norse_Mythology) as a naming scheme for more decades ago than I'd like to admit.
 
-## [DDN12278M](darwin/ddn12287m.nix) (Work laptop which I didn't get to name)
+## [DDN12278M](darwin/ddn12287m.nix)
+* Name: Work laptop which I didn't get to name
 * 2023 14in MacBook Pro 
 * Apple M2 Pro
 * 16 GB & 1 TB
 
-## [utgard](nixos/utgard) - Home of the Jötunn a.k.a. Frost Giants
+## [idun](nixos/idun)
+
+
+## [utgard](nixos/utgard)
+* Name: Home of the Jötunn a.k.a. Frost Giants
 * My first custom PC build.
 * Parts:
   - StreamCom DA2 V2 Case
