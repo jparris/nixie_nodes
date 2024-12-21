@@ -4,6 +4,7 @@
   inputs = {
     # General Flakes
     agenix.url = "github:ryantm/agenix";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # NixOs Flakes
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -22,7 +23,8 @@
     # Darwin Flakes & Urls
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
-    darwin-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable"; # darwin-unstable for now (https://github.com/NixOS/nixpkgs/issues/107466)
+    # darwin-unstable for now (https://github.com/NixOS/nixpkgs/issues/107466)
+    darwin-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-bundle = {

@@ -10,6 +10,6 @@ inputs: let
       system = arch;
     };
 in {
-  "idun" = mkNixosConf "x64_64-linux" "unstable" [./idun/configuration.nix];
+  "idun" = mkNixosConf "x64_64-linux" "unstable" [inputs.nixos-hardware.nixosModules.framework-13-7040-amd ./idun/configuration.nix];
   "utgard" = mkNixosConf "x64_64-linux" "unstable" [inputs.agenix.nixosModules.default ./utgard/configuration.nix];
 }

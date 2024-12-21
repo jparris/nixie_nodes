@@ -40,7 +40,7 @@ I've been using [Norse Mythology](https://namingschemes.com/Norse_Mythology) as 
 * 16 GB & 1 TB
 
 ## [idun](nixos/idun)
-
+* Name: Norse goddess of eternal youth - because this is a framework laptop.
 
 ## [utgard](nixos/utgard)
 * Name: Home of the Jötunn a.k.a. Frost Giants

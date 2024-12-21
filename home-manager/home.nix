@@ -29,7 +29,7 @@
       pkgs.ripgrep
       pkgs.imagemagick
       pkgs.poppler_utils
-      pkgs.home-manager
+            #pkgs.home-manager
       # LSP
       pkgs.nixd
       pkgs.marksman
@@ -57,6 +57,7 @@
       pkgs.vhs
       pkgs.wget
       pkgs.zoxide
+     pkgs.sudo
     ];
 
     file = {
@@ -111,6 +112,7 @@
       };
     };
   };
+  programs.home-manager.enable = true;
   programs = {
     direnv = {
       enable = true;
