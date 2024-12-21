@@ -34,8 +34,6 @@
     # Misc
     home-manager
     nixd
-    cmake
-    SDL2.dev
     # Tiling Window Manager
     #jankyborders
     #kanata

@@ -9,55 +9,53 @@
     # The home.packages option allows you to install Nix packages into your
     # environment.
     # packages = with pkgs; [
-    packages = [
-      pkgs.alejandra
-      pkgs.bat
-      pkgs.buf
-      pkgs.cargo-insta
-      pkgs.cargo-machete
-      pkgs.cargo-watch
-      pkgs.libiconv
-      pkgs.fzf
-      pkgs.pipx
+    packages = with pkgs; [
+      alejandra
+      bat
+      buf
+      cargo-insta
+      cargo-machete
+      cargo-watch
+      libiconv
+      fzf
+      pipx
       # neovim Telescope Media Files
-      pkgs.chafa
-      pkgs.epub-thumbnailer
-      pkgs.codespell
-      pkgs.ffmpegthumbnailer
+      chafa
+      epub-thumbnailer
+      codespell
+      ffmpegthumbnailer
       #pkgs.fontpreview -- not avalible on macOs
-      pkgs.fd
-      pkgs.ripgrep
-      pkgs.imagemagick
-      pkgs.poppler_utils
-            #pkgs.home-manager
+      fd
+      ripgrep
+      imagemagick
+      poppler_utils
+      #pkgs.home-manager
       # LSP
-      pkgs.nixd
-      pkgs.marksman
-      pkgs.rust-analyzer
-      pkgs.lua-language-server
-      pkgs.tree-sitter
-
-      pkgs.coreutils-full
-      pkgs.eclint
-      pkgs.entr
-      pkgs.exiftool
-      pkgs.git
-      pkgs.git-lfs
-      pkgs.git-machete
-      pkgs.gnused
-      pkgs.jq
-      pkgs.neovim
-      pkgs.nmap
-      pkgs.sqlite.dev
-      pkgs.openssl.dev
-      pkgs.pkg-config
-      pkgs.python3
-      pkgs.starship
-      pkgs.stylua
-      pkgs.vhs
-      pkgs.wget
-      pkgs.zoxide
-     pkgs.sudo
+      nixd
+      marksman
+      rust-analyzer
+      lua-language-server
+      tree-sitter
+      nix-output-monitor
+      coreutils-full
+      entr
+      exiftool
+      git
+      git-lfs
+      git-machete
+      gnused
+      jq
+      neovim
+      nmap
+      sqlite.dev
+      openssl.dev
+      pkg-config
+      python3
+      starship
+      stylua
+      vhs
+      wget
+      zoxide
     ];
 
     file = {

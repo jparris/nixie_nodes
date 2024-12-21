@@ -75,9 +75,11 @@
     zsh.enable = true;
   };
 
-  security.sudo.enable =  true;
+  security.sudo.enable = true;
 
   services.displayManager.defaultSession = "none+i3";
+
+  services.fwupd.enable = true;
 
   services.openssh.enable = true;
 
