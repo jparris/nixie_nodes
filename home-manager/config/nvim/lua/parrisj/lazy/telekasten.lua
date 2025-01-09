@@ -8,7 +8,7 @@ return { -- telekasten
         require("telekasten").setup({
             vim.keymap.set("n", "<leader>zw", "<cmd>Telekasten goto_thisweek<CR>"),
 
-            home = vim.fn.expand("~/notes/ddn/pages"),
+            home = vim.fn.expand("~/notes/ddn/"),
             dailies = vim.fn.expand("~/notes/ddn/journal"),
             weeklies = vim.fn.expand("~/notes/ddn/journal"),
 
@@ -22,7 +22,7 @@ return { -- telekasten
 
             vaults = {
                 personal = {
-                    home = vim.fn.expand("~/notes/personal/pages"),
+                    home = vim.fn.expand("~/notes/personal/"),
                     dailies = vim.fn.expand("~/notes/personal/journal"),
                     weeklies = vim.fn.expand("~/notes/personal/journal"),
                 },
