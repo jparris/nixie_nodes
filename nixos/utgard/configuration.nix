@@ -18,7 +18,9 @@
     ./services/calibre-web.nix
     ./services/miniflux.nix
     ./services/plex.nix
+    ./services/soft-serve.nix
     ./services/transmission.nix
+    ./services/caddy.nix
 
     ## Smart Home
     ../../modules/containers/home-assistant.nix
@@ -31,6 +33,15 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelModules = ["i2c-dev"];
+
+  services.vaultwarden.enable = true;
+  # Bus 003 Device 013: ID 35d6:2510 Bridgesil USB2.1 Hub
+  #  services.udev.extraRules = ''
+  #    ACTION=="add", SUBSYSTEM=="usb", ENV{ID_VENDOR_ID}=="1a40", ENV{ID_MODEL_ID}=="0101", RUN+="/usr/bin/ddcutil --sn ABCDEFGHI setvcp 60 0x0f"
+  #  '';
+
+  boot.binfmt.emulatedSystems = ["riscv32-linux"];
   boot.supportedFilesystems = ["hfsplus" "zfs"];
   boot.zfs.forceImportRoot = false;
   services.zfs.autoScrub.enable = true;
@@ -39,9 +50,10 @@
   networking.hostId = "DEADFA10";
   networking.hostName = "utgard";
   networking.networkmanager.enable = true;
-
+  networking.firewall.checkReversePath = false;
   time.timeZone = "America/Denver";
-
+  services.tailscale.enable = true;
+  services.resolved.enable = true;
   security.sudo.wheelNeedsPassword = false;
   nix.settings.trusted-users = ["root" "parrisj"];
 
@@ -103,6 +115,7 @@
     unzip
     wget
     zoxide
+    ddcutil
   ];
   # agenix.packages.${system}.default
   nix.settings.experimental-features = ["nix-command" "flakes"];
