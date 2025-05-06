@@ -52,12 +52,18 @@ in {
           protocols tls1.3
       }
     '';
-    #virtualHosts."transmission.int.securityishard.club".extraConfig = ''
-    #    reverse_proxy http://localhost:9091
-    #
-    #    tls ${certloc}/cert.pem ${certloc}/key.pem {
-    #        protocols tls1.3
-    #    }
-    #'';
+    virtualHosts."vaultwarden.int.securityishard.club".extraConfig = ''
+      reverse_proxy http://localhost:8222
+
+      tls ${certloc}/cert.pem ${certloc}/key.pem {
+          protocols tls1.3
+      }
+    '';
+    virtualHosts."transmission.int.securityishard.club".extraConfig = ''
+        reverse_proxy http://localhost:9091 
+        tls ${certloc}/cert.pem ${certloc}/key.pem {
+            protocols tls1.3
+        }
+    '';
   };
 }

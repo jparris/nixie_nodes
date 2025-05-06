@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   home-manager-flake,
@@ -35,7 +36,16 @@
 
   boot.kernelModules = ["i2c-dev"];
 
-  services.vaultwarden.enable = true;
+      age.secrets.vaultwarden.file = ../../secrets/vaultwarden.age;
+services.vaultwarden = {
+        enable = true;
+    config = {
+       ROCKET_ADDRESS = "0.0.0.0";
+        ROCKET_PORT = 8222;
+    };
+    environmentFile = config.age.secrets.vaultwarden.path;
+    };
+
   # Bus 003 Device 013: ID 35d6:2510 Bridgesil USB2.1 Hub
   #  services.udev.extraRules = ''
   #    ACTION=="add", SUBSYSTEM=="usb", ENV{ID_VENDOR_ID}=="1a40", ENV{ID_MODEL_ID}=="0101", RUN+="/usr/bin/ddcutil --sn ABCDEFGHI setvcp 60 0x0f"
@@ -116,7 +126,10 @@
     wget
     zoxide
     ddcutil
-  ];
+    inputs.agenix.packages.${system}.default
+    openssl
+    libargon2
+];
   # agenix.packages.${system}.default
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -131,7 +144,7 @@
   # List services that you want to enable:
   services.avahi.enable = true;
 
-  networking.firewall.allowedTCPPorts = [3000];
+  networking.firewall.allowedTCPPorts = [3000 8222];
 
   services.jellyfin = {
     enable = true;

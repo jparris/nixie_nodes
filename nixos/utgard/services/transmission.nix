@@ -23,7 +23,8 @@
       incomplete-dir = "/appdata/transmission/downloading";
       incomplete-dir-enabled = true;
       rpc-bind-address = "0.0.0.0";
-      rpc-whitelist = "127.0.0.1,192.168.*.*";
+      rpc-whitelist-enabled = false;
+      rpc-host-whitelist-enabled = false;
     };
   };
   systemd.services.transmission.serviceConfig.BindPaths = ["/appdata/transmission/incoming"];

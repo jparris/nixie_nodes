@@ -7,4 +7,5 @@ in {
   "miniflux.age".publicKeys = utgard;
   "nextcloud.age".publicKeys = utgard;
   "transmission.age".publicKeys = utgard;
+  "vaultwarden.age".publicKeys = utgard;
 }
