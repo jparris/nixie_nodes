@@ -17,6 +17,13 @@ in {
           protocols tls1.3
       }
     '';
+    virtualHosts."calibre.int.securityishard.club".extraConfig = ''
+      reverse_proxy http://localhost:3112
+
+      tls ${certloc}/cert.pem ${certloc}/key.pem {
+          protocols tls1.3
+      }
+    '';
     virtualHosts."esphome.int.securityishard.club".extraConfig = ''
       reverse_proxy http://localhost:6052
 
@@ -52,18 +59,24 @@ in {
           protocols tls1.3
       }
     '';
-    virtualHosts."vaultwarden.int.securityishard.club".extraConfig = ''
-      reverse_proxy http://localhost:8222
-
-      tls ${certloc}/cert.pem ${certloc}/key.pem {
-          protocols tls1.3
-      }
+    virtualHosts."syncthing.int.securityishard.club".extraConfig = ''
+        reverse_proxy http://localhost:8384 
+        tls ${certloc}/cert.pem ${certloc}/key.pem {
+            protocols tls1.3
+        }
     '';
     virtualHosts."transmission.int.securityishard.club".extraConfig = ''
         reverse_proxy http://localhost:9091 
         tls ${certloc}/cert.pem ${certloc}/key.pem {
             protocols tls1.3
         }
+    '';
+    virtualHosts."vaultwarden.int.securityishard.club".extraConfig = ''
+      reverse_proxy http://localhost:8222
+
+      tls ${certloc}/cert.pem ${certloc}/key.pem {
+          protocols tls1.3
+      }
     '';
   };
 }
