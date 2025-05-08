@@ -45,13 +45,13 @@ in {
           protocols tls1.3
       }
     '';
-    #    virtualHosts."hass.int.securityishard.club".extraConfig = ''
-    #reverse_proxy http://localhost:8123
+    virtualHosts."hass.int.securityishard.club".extraConfig = ''
+      reverse_proxy http://localhost:8123 
 
-    #tls ${certloc}/cert.pem ${certloc}/key.pem {
-    #    protocols tls1.3
-    #}
-    #'';
+      tls ${certloc}/cert.pem ${certloc}/key.pem {
+          protocols tls1.3
+      }
+      #'';
     virtualHosts."jellyfin.int.securityishard.club".extraConfig = ''
       reverse_proxy http://localhost:8096
 
@@ -60,16 +60,16 @@ in {
       }
     '';
     virtualHosts."syncthing.int.securityishard.club".extraConfig = ''
-        reverse_proxy http://localhost:8384 
-        tls ${certloc}/cert.pem ${certloc}/key.pem {
-            protocols tls1.3
-        }
+      reverse_proxy http://localhost:8384
+      tls ${certloc}/cert.pem ${certloc}/key.pem {
+          protocols tls1.3
+      }
     '';
     virtualHosts."transmission.int.securityishard.club".extraConfig = ''
-        reverse_proxy http://localhost:9091 
-        tls ${certloc}/cert.pem ${certloc}/key.pem {
-            protocols tls1.3
-        }
+      reverse_proxy http://localhost:9091
+      tls ${certloc}/cert.pem ${certloc}/key.pem {
+          protocols tls1.3
+      }
     '';
     virtualHosts."vaultwarden.int.securityishard.club".extraConfig = ''
       reverse_proxy http://localhost:8222

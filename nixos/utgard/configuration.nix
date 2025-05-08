@@ -36,15 +36,15 @@
 
   boot.kernelModules = ["i2c-dev"];
 
-      age.secrets.vaultwarden.file = ../../secrets/vaultwarden.age;
-services.vaultwarden = {
-        enable = true;
+  age.secrets.vaultwarden.file = ../../secrets/vaultwarden.age;
+  services.vaultwarden = {
+    enable = true;
     config = {
-       ROCKET_ADDRESS = "0.0.0.0";
-        ROCKET_PORT = 8222;
+      ROCKET_ADDRESS = "0.0.0.0";
+      ROCKET_PORT = 8222;
     };
     environmentFile = config.age.secrets.vaultwarden.path;
-    };
+  };
 
   # Bus 003 Device 013: ID 35d6:2510 Bridgesil USB2.1 Hub
   #  services.udev.extraRules = ''
@@ -129,7 +129,7 @@ services.vaultwarden = {
     inputs.agenix.packages.${system}.default
     openssl
     libargon2
-];
+  ];
   # agenix.packages.${system}.default
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
