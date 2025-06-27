@@ -12,4 +12,5 @@ inputs: let
 in {
   "idun" = mkNixosConf "x64_64-linux" "unstable" [inputs.nixos-hardware.nixosModules.framework-13-7040-amd ./idun/configuration.nix];
   "utgard" = mkNixosConf "x64_64-linux" "unstable" [inputs.agenix.nixosModules.default ./utgard/configuration.nix];
+  "yggdrasil" = mkNixosConf "x64_64-linux" "unstable" [inputs.agenix.nixosModules.default ./yggdrasil/configuration.nix];
 }

@@ -19,6 +19,9 @@ This repo is inspired by [Paul Grandperrin's](https://github.com/PaulGrandperrin
     * `nix-shell -p home-mananger`
 * `home-manager switch --flake .#<name>`
 
+## Kexec
+* https://blog.korfuri.fr/posts/2022/08/nixos-on-an-oracle-free-tier-ampere-machine/
+
 ## Macos / Nix-Darwin
 * [Determinate Systems Installer](https://github.com/DeterminateSystems/nix-installer).
 * Install nix-darwin `nix run nix-darwin -- switch --flake <path/to/mac_config>`.
@@ -57,3 +60,8 @@ I've been using [Norse Mythology](https://namingschemes.com/Norse_Mythology) as 
   - 512 GB Team Group SSD Boot Drive
   - 2 x 14TB Western Digital HC530
   - 2 x Sabrent 1TB SSD for Cache
+
+## [yggdrasil](nixos/yggdrasil)
+* Name: Giant ash tree that shelters all the worlds
+* Comment: Free Oracle Arm VPS that runs headscale
+* 6 GB Ram, 50 GB, 1 CPU

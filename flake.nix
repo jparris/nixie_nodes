@@ -41,6 +41,11 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "darwin-unstable";
     };
+
+    ssh-keys = {
+      url = "https://github.com/jparris.keys";
+      flake = false;
+    };
   };
 
   outputs = inputs: {
