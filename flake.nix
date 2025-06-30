@@ -7,11 +7,11 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # NixOs Flakes
-    nixos-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager-stable = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
@@ -22,7 +22,7 @@
 
     # Darwin Flakes & Urls
     nix-darwin.url = "github:LnL7/nix-darwin/master";
-    darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+    darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
     # darwin-unstable for now (https://github.com/NixOS/nixpkgs/issues/107466)
     darwin-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
@@ -33,7 +33,7 @@
     };
 
     darwin-home-manager-stable = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "darwin-stable";
     };
 
