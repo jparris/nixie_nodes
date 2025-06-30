@@ -1,38 +1,52 @@
-{ inputs, config, lib, pkgs, ... }:
-let
-  domain = "headscale.securityishard.club";
-in
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  domain = "headscale.securityishard.club";
+in {
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  age.secrets = {
+    acme.file = ../../secrets/acme.age;
+    cloudflare_ddns.file = ../../secrets/cloudflare_ddns.age;
+  };
 
-  networking.hostName = "yggdrasil";
- 
-  # Certs
-  age.secrets.acme.file = ../../secrets/acme.age;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+
+  environment.systemPackages = with pkgs; [alejandra git neovim];
+
+  networking = {
+    hostName = "yggdrasil";
+    firewall.allowedTCPPorts = [443];
+  };
+
+  # Cert
   security.acme = {
-     acceptTerms = true;
-     certs."${domain}" = {
-       group = "acme";
-       email = "parrisj@gmail.com";
-       dnsProvider = "cloudflare";
-       credentialsFile = config.age.secrets.acme.path;
-     };
+    acceptTerms = true;
+    certs."${domain}" = {
+      group = "acme";
+      email = "parrisj@gmail.com";
+      dnsProvider = "cloudflare";
+      credentialsFile = config.age.secrets.acme.path;
+    };
   };
 
   # DynDns just in case Oracle Changes Our IP
-  age.secrets.cloudflare_ddns.file = ../../secrets/cloudflare_ddns.age;
   services.cloudflare-dyndns = {
     apiTokenFile = config.age.secrets.cloudflare_ddns.path;
     domains = [domain];
     enable = true;
   };
 
+  # Headscale Coordination Server
   services.headscale = {
     enable = true;
     group = "acme";
@@ -55,67 +69,55 @@ in
   };
 
   services.nginx = {
-      enable = true;
-      group = "acme";
-      };
+    enable = true;
+    group = "acme";
 
-  services.nginx.virtualHosts."${domain}" = {
-    forceSSL = true;
-    useACMEHost = domain;
-    locations = {
-      "/headscale." = {
-        extraConfig = ''
-          grpc_pass grpc://${config.services.headscale.settings.grpc_listen_addr};
-        '';
-        priority = 1;
+    virtualHosts."${domain}" = {
+      forceSSL = true;
+      useACMEHost = domain;
+      locations = {
+        "/headscale." = {
+          extraConfig = ''
+            grpc_pass grpc://${config.services.headscale.settings.grpc_listen_addr};
+          '';
+          priority = 1;
+        };
+        "/" = {
+          proxyPass = "http://127.0.0.1:${toString config.services.headscale.port}";
+          extraConfig = ''
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+            proxy_set_header Host $server_name;
+            proxy_redirect http:// https://;
+            proxy_buffering off;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
+          '';
+          priority = 99;
+        };
       };
-      "/metrics" = {
-        proxyPass = "http://127.0.0.1:${toString config.services.headscale.port}";
-        extraConfig = ''
-          allow 10.0.0.0/8;
-          allow 100.64.0.0/16;
-          deny all;
-        '';
-        priority = 2;
-      };
-      "/" = {
-        proxyPass = "http://127.0.0.1:${toString config.services.headscale.port}";
-        extraConfig = ''
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_set_header Host $server_name;
-        proxy_redirect http:// https://;
-        proxy_buffering off;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
-        '';
-        priority = 99;
-      };
+      extraConfig = ''
+        access_log /var/log/nginx/${domain}.access.log;
+      '';
     };
-    extraConfig = ''
-      access_log /var/log/nginx/${domain}.access.log;
-    '';
   };
 
-  networking.firewall.allowedTCPPorts = [443];
-   
   services.openssh = {
     enable = true;
     settings = {
-    	PermitRootLogin = "no";
-	PasswordAuthentication = false;
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
     };
   };
 
   system.stateVersion = "25.11";
 
   users.users.parrisj = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" ];
-     openssh.authorizedKeys.keyFiles = [ inputs.ssh-keys.outPath ];
-   };
+    isNormalUser = true;
+    extraGroups = ["wheel"];
+    openssh.authorizedKeys.keyFiles = [inputs.ssh-keys.outPath];
+  };
 }
-
