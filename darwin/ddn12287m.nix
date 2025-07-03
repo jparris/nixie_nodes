@@ -34,12 +34,16 @@
     # Misc
     home-manager
     nixd
+    nh
+    zsh
     # Tiling Window Manager
     #jankyborders
     #kanata
     #skhd
     #yabai
   ];
+
+  nix.enable = false;
 
   environment.shells = [pkgs.zsh];
 
@@ -89,21 +93,12 @@
 
   nix.settings.experimental-features = "nix-command flakes";
 
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 2d";
-    interval = {
-      Hour = 5;
-      Minute = 0;
-    };
-  };
-
   # This sets up /etc/zshrc to load nix-darwin
   programs = {
     zsh.enable = true;
   };
 
-  services.nix-daemon.enable = true;
+  system.primaryUser = "jparris";
 
   #                  _
   #  _ __   ___  ___| |_ __ _ _ __ ___  ___
@@ -150,7 +145,7 @@
     StandardOutPath = "/tmp/postgres.log";
   };
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   #                         ___  ____        _       __             _ _
   #  _ __ ___   __ _  ___ / _ \/ ___|    __| | ___ / _| __ _ _   _| | |_ ___

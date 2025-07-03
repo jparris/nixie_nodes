@@ -12,5 +12,5 @@ inputs: let
       modules = [module];
     };
 in {
-  "ddn" = mkDarwinConf "aarch64-darwin" "unstable" ./ddn12287m.nix;
+  "DDN12287M" = mkDarwinConf "aarch64-darwin" "unstable" ./ddn12287m.nix;
 }
