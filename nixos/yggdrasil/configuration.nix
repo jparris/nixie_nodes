@@ -57,6 +57,88 @@ in {
         magic_dns = true;
         base_domain = "int.securityishard.club";
         override_local_dns = false;
+        extra_records = [
+          {
+            name = "audiobookshelf.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "calibre.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "dash.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "esphome.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "fava.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "git.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "immich.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "jellyfin.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "hass.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "miniflux.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "photostructure.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "syncthing.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "transmission.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "vaultwarden.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "zigbee.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+          {
+            name = "zwave.int.securityishard.club";
+            type = "A";
+            value = "100.64.0.2";
+          }
+        ];
       };
       grpc_listen_addr = "127.0.0.1:50443";
       grpc_allow_insecure = true;
