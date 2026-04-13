@@ -1,0 +1,21 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[git]
+push-new-bookmarks = true
+
+[aliases]
+nb = ["bookmark", "create", "-r @-"] # "new bookmark"
+pull = ["git", "fetch"]
+push = ["git", "push", "--allow-new"]
+nu = ["new", "-r", "git_head()"]
+tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
+
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+
+[template-aliases]
+'format_short_change_id(id)' = 'id.shortest()'
+
+[user]
+name = "Jon Parris"
+email = "jparris@ddn.com"

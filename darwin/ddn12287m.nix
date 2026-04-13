@@ -113,7 +113,7 @@
     text = ''
       if [ ! -d "/var/lib/postgresql/" ]; then
         echo "creating PostgreSQL data directory..."
-        sudo mkdir -m 750 -p /var/lib/postgresql/15
+        sudo mkdir -m 750 -p /var/lib/postgresql/17
         sudo chown -R jparris:DATADIRECT\\Domain\ Users /var/lib/postgresql/
       fi
     '';
@@ -121,7 +121,7 @@
 
   services.postgresql = {
     enable = true;
-    initdbArgs = ["-U jparris" "--pgdata=/var/lib/postgresql/15" "--auth=trust" "--no-locale" "--encoding=UTF8"];
+    initdbArgs = ["-U jparris" "--pgdata=/var/lib/postgresql/17" "--auth=trust" "--no-locale" "--encoding=UTF8"];
     package = pkgs.postgresql;
     authentication = pkgs.lib.mkOverride 10 ''
       #type database  DBuser  auth-method
