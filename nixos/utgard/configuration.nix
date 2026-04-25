@@ -10,7 +10,7 @@
 
     # Self Hosted Services
     ## Etc
-    ../../modules/nixos/acme.nix
+    ../../modules/nixos/acme_old.nix
     ./services/fava.nix
     ./services/syncthing.nix
 
@@ -20,7 +20,8 @@
     ./services/miniflux.nix
     ./services/plex.nix
     ./services/soft-serve.nix
-    ./services/transmission.nix
+    #    ./services/transmission.nix
+    ./services/qbittorrent.nix
     ./services/caddy.nix
 
     ## Smart Home
@@ -28,7 +29,7 @@
     ../../modules/containers/zwave-js-ui.nix
     ./services/esphome.nix
     #./services/zigbee2mqtt.nix
-    home-manager-flake.nixosModules.home-manager
+    #home-manager-flake.nixosModules.home-manager
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -62,8 +63,11 @@
   networking.networkmanager.enable = true;
   networking.firewall.checkReversePath = false;
   time.timeZone = "America/Denver";
-  services.tailscale.enable = true;
-  services.resolved.enable = true;
+  #services.tailscale.enable = true;
+  #services.resolved = {
+  #    enable = true;
+  #    settings.Resolve.DNS = [1.1.1.1];
+  #};
   security.sudo.wheelNeedsPassword = false;
   nix.settings.trusted-users = ["root" "parrisj"];
 
@@ -79,23 +83,29 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-  services.transmission.enable = true;
+  #  services.transmission.enable = true;
   # Enable sound.
   # sound.enable = true;
   # hardware.pulseaudio.enable = true;
 
   environment.shells = [pkgs.zsh];
 
-  home-manager = {
-    extraSpecialArgs = config._module.specialArgs;
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.parrisj = {
-      imports = [
-        ../../home-manager/home.nix
-      ];
+    services.silverbullet = {
+        enable = true;
+        openFirewall = true;
+        listenPort = 3333;
+        listenAddress = "0.0.0.0";
     };
-  };
+  #home-manager = {
+  #extraSpecialArgs = config._module.specialArgs;
+  #useGlobalPkgs = true;
+  #useUserPackages = true;
+  #users.parrisj = {
+  #  imports = [
+  #    ../../home-manager/home.nix
+  #  ];
+  #};
+  #};
 
   users.users.parrisj = {
     isNormalUser = true;

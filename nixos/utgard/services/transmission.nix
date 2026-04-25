@@ -9,6 +9,7 @@
   networking.firewall.allowedTCPPorts = [9091];
   services.transmission = {
     enable = true;
+    package = pkgs.transmission_4;
     credentialsFile = config.age.secrets.transmission.path;
     home = "/appdata/transmission";
     settings = {

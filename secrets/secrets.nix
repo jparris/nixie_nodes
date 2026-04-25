@@ -10,6 +10,8 @@ in {
   "cloudflare_ddns.age".publicKeys = yggdrasil;
   "miniflux.age".publicKeys = utgard;
   "nextcloud.age".publicKeys = utgard;
+  "porkbun.age".publicKeys = utgard ++ yggdrasil;
+  "qui.age".publicKeys = utgard;
   "transmission.age".publicKeys = utgard;
   "vaultwarden.age".publicKeys = utgard;
 }

@@ -10,6 +10,7 @@
     ports = ["8123:8123"];
     extraOptions = [
       "--device=/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_C13013F4-if01-port0:/dev/ttyUSB1"
+      "--network=host"
     ];
     volumes = [
       "/opt/home-assistant:/config/"
