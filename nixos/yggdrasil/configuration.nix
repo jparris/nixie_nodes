@@ -7,7 +7,8 @@
 }: let
   certGroup = "acme";
   dnsProvider = "cloudflare";
-  domain = "securityishard.club";
+  domain = "securityishard.fyi";
+  sub_domain = "ext";
   email = "parrisj@gmail.com";
 in {
   imports = [
@@ -21,12 +22,6 @@ in {
     efi.canTouchEfiVariables = true;
   };
 
-  cloudflare-dyndns = {
-    enable = true;
-    domain = domain;
-    secret = ../../secrets/cloudflare_ddns.age;
-  };
-
   environment.systemPackages = with pkgs; [alejandra git neovim];
 
   networking = {
@@ -34,25 +29,62 @@ in {
     firewall.allowedTCPPorts = [443];
   };
 
-  acme = {
-    enable = true;
-    group = certGroup;
-    email = "parrisj@gmail.com";
-    dnsProvider = dnsProvider;
-    secret = ../../secrets/acme.age;
-  };
+  age.secrets.porkbun_api.file = ../../secrets/porkbun_api.age;
+  age.secrets.porkbun_secret_api.file = ../../secrets/porkbun_secret_api.age;
 
-  headscale = {
+  services.oink = {
     enable = true;
-    domain = "headscale.${domain}";
-    group = certGroup;
+    apiKeyFile = config.age.secrets.porkbun_api.path;
+    secretApiKeyFile = config.age.secrets.porkbun_secret_api.path;
+    domains = [
+      {
+        domain = domain;
+        subdomain = sub_domain;
+      }
+    ];
   };
+  #  acme = {
+  #    enable = true;
+  #    group = certGroup;
+  #    email = "parrisj@gmail.com";
+  #    dnsProvider = dnsProvider;
+  #    secret = ../../secrets/acme.age;
+  #  };
 
-  kanidm = {
-    enable = true;
-    domain = "auth.${domain}";
-    group = certGroup;
-  };
+  #  headscale = {
+  #    enable = true;
+  #    domain = "headscale.${domain}";
+  #    group = certGroup;
+  #  };
+
+  #  kanidm = {
+  #    enable = true;
+  #    domain = "auth.${domain}";
+  #    group = certGroup;
+  #  };
+
+  #  services.kanidm.provision = {
+  #    enable = true;
+  #    autoRemove = true;
+  #
+  #    adminPasswordFile = config.sops.secrets.kanidm.path;
+  #    idmAdminPasswordFile = config.sops.secrets.kanidm.path;
+  #
+  #    groups = {
+  #      "admins" = {};
+  #      "media" = {};
+  #      "users" = {};
+  #    };
+  #
+  #    persons = {
+  #      parrisj = {
+  #        displayName = "parrisj";
+  #        legalName = "Jon Parris";
+  #        mailAddresses = ["parrisj@gmail.com"];
+  #        groups = ["admins" "users"];
+  #      };
+  #    };
+  #  };
 
   services.openssh = {
     enable = true;
