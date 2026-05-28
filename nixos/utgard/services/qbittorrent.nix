@@ -4,7 +4,7 @@
   age,
   ...
 }: {
-    age.secrets.qui.file = ../../../secrets/qui.age;
+  age.secrets.qui.file = ../../../secrets/qui.age;
 
   services = {
     qbittorrent = {
@@ -28,9 +28,9 @@
       enable = true;
       openFirewall = true;
       secretFile = config.age.secrets.qui.path;
-            settings = {
-                host = "0.0.0.0";
-        };
+      settings = {
+        host = "0.0.0.0";
+      };
     };
   };
 }

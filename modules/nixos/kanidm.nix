@@ -15,7 +15,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-
     networking.firewall.allowedTCPPorts = [636];
 
     services = {
@@ -25,16 +24,16 @@ in {
           uri = "https://${cfg.domain}";
         };
 
-	package = pkgs.kanidm_1_8;
+        package = pkgs.kanidm_1_8;
         enableServer = true;
         serverSettings = {
-	  version = "2";
-	  # 11114 k = 11, a = 1, n = 14
+          version = "2";
+          # 11114 k = 11, a = 1, n = 14
           bindaddress = "[::1]:11114";
           ldapbindaddress = "[::]:636";
           domain = "${cfg.domain}";
           origin = "https://${cfg.domain}";
-	  http_client_address_info.x-forward-for = ["127.0.0.1" "127.0.0.0/8"];
+          http_client_address_info.x-forward-for = ["127.0.0.1" "127.0.0.0/8"];
           tls_chain = "/var/lib/kanidm/cert.pem";
           tls_key = "/var/lib/kanidm/key.pem";
         };
@@ -48,7 +47,7 @@ in {
       virtualHosts = {
         "${cfg.domain}" = {
           forceSSL = true;
-	  useACMEHost = cfg.domain;
+          useACMEHost = cfg.domain;
 
           locations."/" = {
             proxyPass = "https://${config.services.kanidm.serverSettings.bindaddress}";

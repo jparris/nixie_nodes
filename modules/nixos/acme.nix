@@ -26,8 +26,8 @@ in {
 
       defaults = {
         dnsProvider = cfg.dnsProvider;
-      	group = cfg.group;
-      	email = cfg.email;
+        group = cfg.group;
+        email = cfg.email;
       };
     };
   };
