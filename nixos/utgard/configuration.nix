@@ -10,17 +10,13 @@
 
     # Self Hosted Services
     ## Etc
-    ../../modules/nixos/acme_old.nix
     ./services/fava.nix
     ./services/syncthing.nix
 
     ## Media Services
     ./services/audiobookshelf.nix
-    ./services/calibre-web.nix
     ./services/miniflux.nix
-    ./services/plex.nix
     ./services/soft-serve.nix
-    #    ./services/transmission.nix
     ./services/qbittorrent.nix
     ./services/caddy.nix
 
@@ -36,21 +32,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelModules = ["i2c-dev"];
-
-  age.secrets.vaultwarden.file = ../../secrets/vaultwarden.age;
-  services.vaultwarden = {
-    enable = true;
-    config = {
-      ROCKET_ADDRESS = "0.0.0.0";
-      ROCKET_PORT = 8222;
-    };
-    environmentFile = config.age.secrets.vaultwarden.path;
-  };
-
-  # Bus 003 Device 013: ID 35d6:2510 Bridgesil USB2.1 Hub
-  #  services.udev.extraRules = ''
-  #    ACTION=="add", SUBSYSTEM=="usb", ENV{ID_VENDOR_ID}=="1a40", ENV{ID_MODEL_ID}=="0101", RUN+="/usr/bin/ddcutil --sn ABCDEFGHI setvcp 60 0x0f"
-  #  '';
 
   boot.binfmt.emulatedSystems = ["riscv32-linux"];
   boot.supportedFilesystems = ["hfsplus" "zfs"];
@@ -80,22 +61,14 @@
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  #  services.transmission.enable = true;
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
   environment.shells = [pkgs.zsh];
 
-    services.silverbullet = {
-        enable = true;
-        openFirewall = true;
-        listenPort = 3333;
-        listenAddress = "0.0.0.0";
-    };
+  services.silverbullet = {
+    enable = true;
+    listenPort = 3333;
+    listenAddress = "0.0.0.0";
+  };
+
   #home-manager = {
   #extraSpecialArgs = config._module.specialArgs;
   #useGlobalPkgs = true;
@@ -140,29 +113,64 @@
     openssl
     libargon2
   ];
-  # agenix.packages.${system}.default
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # List services that you want to enable:
   services.avahi.enable = true;
 
   networking.firewall.allowedTCPPorts = [3000 8222];
 
+  age.secrets.porkbun_api.file = ../../secrets/porkbun_api.age;
+  age.secrets.porkbun_secret_api.file = ../../secrets/porkbun_secret_api.age;
+
+  security.acme.acceptTerms = true;
+  security.acme.certs."int.securityishard.fyi" = {
+    group = "acme";
+    email = "parrisj@gmail.com";
+    dnsProvider = "porkbun";
+    credentialFiles = {
+      "PORKBUN_API_KEY_FILE" = config.age.secrets.porkbun_api.path;
+      "PORKBUN_SECRET_API_KEY_FILE" = config.age.secrets.porkbun_secret_api.path;
+    };
+    webroot = null;
+    extraDomainNames = ["*.int.securityishard.fyi"];
+  };
+
   services.jellyfin = {
     enable = true;
     openFirewall = true;
   };
+
   services.openssh = {
     enable = true;
     settings.Macs = ["hmac-sha2-512-etm@openssh.com" "hmac-sha2-256-etm@openssh.com" "umac-128-etm@openssh.com" "hmac-sha2-512"];
+    hostKeys = [
+      {
+        bits = 4096;
+        path = "/etc/ssh/ssh_host_rsa_key";
+        type = "rsa";
+      }
+      {
+        path = "/etc/ssh/ssh_host_ed25519_key";
+        type = "ed25519";
+      }
+      {
+        path = "/etc/ssh/ssh_host_ecdsa-sha2-nistp256_key";
+        type = "ecdsa-sha2-nistp256";
+      }
+    ];
+  };
+
+  age.secrets.vaultwarden.file = ../../secrets/vaultwarden.age;
+
+  services.vaultwarden = {
+    enable = true;
+    config = {
+      ROCKET_ADDRESS = "0.0.0.0";
+      ROCKET_PORT = 8222;
+    };
+    environmentFile = config.age.secrets.vaultwarden.path;
   };
 
   # This value determines the NixOS release from which the default
