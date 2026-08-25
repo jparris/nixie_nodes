@@ -112,6 +112,7 @@
     inputs.agenix.packages.${system}.default
     openssl
     libargon2
+    bitwarden-cli
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];

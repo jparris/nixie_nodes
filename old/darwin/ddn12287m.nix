@@ -19,7 +19,7 @@
     docker-credential-helpers
     gh
     google-cloud-sdk
-    nodePackages.npm
+#    nodePackages.npm
     nodejs-slim
     postgresql
     protobuf

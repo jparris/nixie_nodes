@@ -16,6 +16,7 @@
       cargo-insta
       cargo-machete
       cargo-watch
+      devenv
       libiconv
       fzf
       pipx
@@ -28,7 +29,7 @@
       fd
       ripgrep
       imagemagick
-      poppler_utils
+      #poppler_utils
       #pkgs.home-manager
       # LSP
       nixd
