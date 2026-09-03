@@ -1,13 +1,5 @@
-{inputs, ...}: {
-  flake.modules.darwin.desktop = {pkgs, ...}: {
-    environment.systemPackages = with pkgs; [
-      hidden-bar
-      firefox
-      feishin
-      tailscale
-      wezterm
-    ];
-
+{...}: {
+  flake.modules.darwin.desktop = {...}: {
     system.defaults = {
       dock = {
         # Hide the dock

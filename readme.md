@@ -13,17 +13,19 @@ This repo use the dendratic pattern and indebted to [vimjoyer](https://www.vimjo
 ## Macos / Nix-Darwin
 * [Determinate Systems Installer](https://github.com/DeterminateSystems/nix-installer).
 * Install nix-darwin `sudo nix run nix-darwin -- switch --flake <path/to/flake.nix>`.
-* `darwin-rebuild switch --flake .#<name>`.
+* `sudo darwin-rebuild switch --flake <path/to/>`.
 
 # Nodes
 ## [DDN12278M](modules/hosts/DDN12278M/darwin.nix)
-* Name: Work laptop which I didn't get to name
-* 2023 14in MacBook Pro 
-* Apple M2 Pro
-* 16 GB & 1 TB
+* Name: Work laptop which I didn't get to name.
+* 2023 14in MacBook Pro.
+* Apple M2 Pro.
+* 16 GB & 1 TB.
 
 # Repo Layout
-* modules/darwin
-* modules/flake-parts
-* modules/hosts/DDN12287M
-* modules/parts.nix
+| Path                  | Comment     | 
+| --------------------- | ----------- | 
+| modules/darwin/       | Nix Darwin  | 
+| modules/flake-parts/  | Hacks       |
+| modules/home-manager/ |             |
+| modules/parts.nix     | Target Architectures & General Imports |

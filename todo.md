@@ -1,7 +1,3 @@
-# Transmission
-* [X] Service Running
-* [X] Secrets with agenix
-* [X] DNS with PiHole
-* [X] Certs with Acme
-* [ ] Subdomain with ngnix
-* [ ] Script to Copy Flies Across
+# DDN12287M
+* [ ] SpaceLauncher is broken when trying to install via brew-nix
+* [ ] Glide Browser
