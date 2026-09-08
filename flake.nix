@@ -1,16 +1,5 @@
 {
   inputs = {
-    brew-nix = {
-      url = "github:BatteredBunny/brew-nix";
-      inputs.nix-darwin.follows = "nix-darwin";
-      inputs.brew-api.follows = "brew-api";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    brew-api = {
-      url = "github:BatteredBunny/brew-api";
-      flake = false;
-    };
-
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     home-manager = {
@@ -27,6 +16,11 @@
     };
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    stylix = {
+       url = "github:nix-community/stylix";
+       inputs.nixpkgs.follows = "nixpkgs";
+     };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);

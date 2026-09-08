@@ -26,6 +26,7 @@
       ${name} = inputs.nix-darwin.lib.darwinSystem {
         modules = [
           inputs.home-manager.darwinModules.home-manager
+          inputs.stylix.darwinModules.stylix
           inputs.self.modules.darwin.${name}
           {nixpkgs.hostPlatform = lib.mkDefault system;}
         ];

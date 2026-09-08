@@ -2,6 +2,7 @@
   flake.homeModules.parrisj = {pkgs, ...}: {
     home.packages = with pkgs; [
       alejandra
+      coreutils
       devenv
       noto-fonts
       noto-fonts-color-emoji
@@ -69,6 +70,11 @@
           set bell-style none
         '';
         shellAliases.gg = "git grep";
+      };
+
+      dircolors = {
+        enable = true;
+        enableBashIntegration = true;
       };
 
       git = {
