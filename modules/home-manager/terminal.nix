@@ -1,14 +1,36 @@
-{...}: {
-  flake.homeModules.parrisj = {pkgs, ...}: {
+{inputs, ...}: {
+  flake.homeModules.parrisj = {
+    pkgs,
+    lib,
+    ...
+  }: {
+    imports = [
+      inputs.nixvim.homeModules.nixvim
+      inputs.stylix.homeModules.stylix
+    ];
+
+    stylix = {
+      enable = true;
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+      fonts = {
+        monospace = {
+          package = pkgs.maple-mono.NF-CN-unhinted;
+          name = "Maple Mono NF CN";
+        };
+        sizes = {
+          terminal = 18;
+          desktop = 18;
+        };
+      };
+    };
+
     home.packages = with pkgs; [
       alejandra
       coreutils
-      devenv
       noto-fonts
       noto-fonts-color-emoji
       nerd-fonts.fira-code
-      nixd
-      nil
+      maple-mono.NF-CN-unhinted
     ];
 
     programs = {
@@ -95,7 +117,57 @@
         enable = true;
       };
 
-      neovim = {
+      nixvim = {
+        enable = true;
+        extraPackages = with pkgs; [fd ripgrep];
+        globals = {
+          mapleader = " ";
+          maplocalleader = " ";
+          have_nerd_font = true;
+        };
+        plugins.gitgutter.enable = true;
+        plugins = {
+          lsp-lines.enable = true;
+          lsp-format.enable = true;
+        };
+        plugins.lsp = {
+          enable = true;
+          inlayHints = true;
+          servers = {
+            rust_analyzer = {
+              enable = true;
+              installRustc = false;
+              installCargo = false;
+            };
+            nil_ls.enable = true;
+          };
+        };
+        plugins.lualine = {
+          enable = true;
+          settings = {
+            component_separators = {
+              left = "";
+              right = "";
+            };
+            section_separators = {
+              left = "";
+              right = "";
+            };
+            icons_enabled = true;
+          };
+        };
+        plugins.telescope = {
+          enable = true;
+          keymaps = {
+            "<leader>f" = "";
+            "<leader>ff" = "git_files";
+            "<leader>fb" = "buffers";
+            "<leader>fg" = "live_grep";
+          };
+        };
+      };
+
+      neovide = {
         enable = true;
       };
 
@@ -127,9 +199,7 @@
         enable = true;
         extraConfig = ''
           return {
-            font = wezterm.font("FiraCode Nerd Font Mono"),
             font_size = 20.0,
-            color_scheme = "Tomorrow Night",
             hide_tab_bar_if_only_one_tab = true,
             audible_bell = "Disabled"
           }
@@ -139,6 +209,10 @@
       zoxide = {
         enable = true;
         enableBashIntegration = true;
+      };
+
+      zed-editor = {
+        enable = true;
       };
     };
 

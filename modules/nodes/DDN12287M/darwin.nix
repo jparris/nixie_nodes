@@ -6,11 +6,7 @@ in {
       desktop
     ];
 
-    stylix.enable = true;
-    stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-
     home-manager = {
-      useGlobalPkgs = true;
       users."${nym}".imports = with inputs.self.homeModules; [desktop parrisj work];
     };
 

@@ -1,5 +1,6 @@
 {...}: {
   flake.homeModules.work = {pkgs, ...}: {
+    nixpkgs.config.allowUnfree = true;
     home.packages = with pkgs;
       []
       ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin (
@@ -7,7 +8,6 @@
           claude-code
           google-cloud-sdk
           slack
-          zed
         ]
       );
   };
