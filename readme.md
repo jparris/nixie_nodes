@@ -11,9 +11,9 @@ This repo use the dendratic pattern and indebted to [vimjoyer](https://www.vimjo
 
 # Bootstrapping
 ## Macos / Nix-Darwin
-* [Determinate Systems Installer](https://github.com/DeterminateSystems/nix-installer).
-* Install nix-darwin `sudo nix run nix-darwin -- switch --flake <path/to/flake.nix>`.
-* `sudo darwin-rebuild switch --flake <path/to/>`.
+* Install nix `curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh`
+* Install nix-darwin `sudo nix run nix-darwin --extra-experimental-features nix-command --extra-experimental-features flakes  -- switch --flake ~/src/nixie_nodes`
+* Post-install rebuilds `sudo darwin-rebuild switch --flake <path/to/>`.
 
 # Nodes
 ## [DDN12278M](modules/hosts/DDN12278M/darwin.nix)

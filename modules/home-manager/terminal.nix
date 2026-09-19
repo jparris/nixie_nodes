@@ -87,9 +87,6 @@
                   cd ../;
               done;
           }
-
-          # Disable the system bell
-          set bell-style none
         '';
         shellAliases.gg = "git grep";
       };
@@ -173,6 +170,7 @@
 
       readline = {
         enable = true;
+        variables."bell-style" = "none";
         bindings = {
           "\e[A" = "history-search-backward";
           "\e[B" = "history-search-forward";
