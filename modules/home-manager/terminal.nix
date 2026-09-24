@@ -18,8 +18,8 @@
           name = "Maple Mono NF CN";
         };
         sizes = {
-          terminal = 18;
-          desktop = 18;
+          terminal = 14;
+          desktop = 14;
         };
       };
     };
@@ -94,6 +94,7 @@
       dircolors = {
         enable = true;
         enableBashIntegration = true;
+        enableZshIntegration = true;
       };
 
       git = {
@@ -116,7 +117,10 @@
 
       nixvim = {
         enable = true;
-        extraPackages = with pkgs; [fd ripgrep];
+        extraPackages = with pkgs; [
+          fd
+          ripgrep
+        ];
         globals = {
           mapleader = " ";
           maplocalleader = " ";
@@ -211,6 +215,54 @@
 
       zed-editor = {
         enable = true;
+      };
+
+      zsh = {
+        enable = true;
+        autosuggestion.enable = true;
+        syntaxHighlighting.enable = true;
+
+        #history.append = true;
+        #history = {
+        #append = true;
+        #  ignoreAllDupes = true;
+        #ignoreDupes = true;
+        #ignoreSpace = true;
+        #share = true;
+        #size = 10000;
+        #path = "${config.xdg.dataHome}/zsh/history";
+        #};
+
+        initExtra = ''
+          up(){
+              case $# in
+                  0 )
+                  DEEP=1 ;;
+                  1 )
+                  DEEP=$1 ;;
+              esac
+              for i in $(seq 1 $DEEP); do
+                  cd ../;
+              done;
+          }
+        '';
+        shellAliases = {
+          gg = "git grep";
+          ll = "ls -l";
+          vim = "nvim";
+        };
+        sessionVariables = {
+          EDITOR = "nvim";
+        };
+
+        antidote = {
+          enable = true;
+          plugins = [
+            "zsh-users/zsh-completions"
+            "zsh-users/zsh-autosuggestions"
+            "Aloxaf/fzf-tab"
+          ];
+        };
       };
     };
 
