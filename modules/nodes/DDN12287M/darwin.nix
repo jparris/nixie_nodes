@@ -10,12 +10,18 @@ in {
       users."${nym}".imports = with inputs.self.homeModules; [desktop parrisj work];
     };
 
-    # I'm using determinate nix
-    nix.enable = false;
-
-    nix.extraOptions = ''
-      warn-dirty = false
-    '';
+    nix = {
+      enable = true;
+      distributedBuilds = true;
+      linux-builder = {
+        enable = true;
+        package = pkgs.darwin.linux-builder;
+        systems = ["aarch64-linux"];
+      };
+      extraOptions = ''
+        warn-dirty = false
+      '';
+    };
 
     nixpkgs.config.allowUnfree = true;
 
@@ -27,11 +33,11 @@ in {
     };
 
     # nix-darwin doesn't change the shells so we do it here
-    system.activationScripts.postActivation.text = "dscl . create /Users/${nym} UserShell \"${pkgs.bash}/bin/bash\"";
+    system.activationScripts.postActivation.text = "dscl . create /Users/${nym} UserShell \"${pkgs.zsh}/bin/zsh\"";
 
     users.users."${nym}" = {
       home = "/Users/${nym}";
-      shell = "${pkgs.bash}/bin/bash";
+      shell = "${pkgs.bash}/bin/zsh";
     };
   };
 

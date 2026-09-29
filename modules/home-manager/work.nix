@@ -5,6 +5,7 @@
       []
       ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin (
         with pkgs; [
+          gh
           claude-code
           google-cloud-sdk
           slack

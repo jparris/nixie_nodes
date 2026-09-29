@@ -18,8 +18,8 @@
           name = "Maple Mono NF CN";
         };
         sizes = {
-          terminal = 14;
-          desktop = 14;
+          terminal = 18;
+          desktop = 18;
         };
       };
     };
@@ -96,11 +96,13 @@
         enableBashIntegration = true;
         enableZshIntegration = true;
       };
-
+      devenv = {
+        enable = true;
+      };
       git = {
         enable = true;
         lfs.enable = true;
-        ignores = [".DS_Store"];
+        ignores = [".DS_Store" ".claude"];
         settings = {
           user = {
             name = "Jon Parris";
@@ -117,10 +119,17 @@
 
       nixvim = {
         enable = true;
+        keymaps = [
+          {
+            key = "<leader>tt";
+            action = "ToggleTerm direction=float";
+          }
+        ];
         extraPackages = with pkgs; [
           fd
           ripgrep
         ];
+        extraPlugins = [pkgs.vimPlugins.vim-lastplace];
         globals = {
           mapleader = " ";
           maplocalleader = " ";
@@ -165,11 +174,21 @@
             "<leader>fb" = "buffers";
             "<leader>fg" = "live_grep";
           };
+          extensions.project.enable = true;
+        };
+        plugins.which-key = {
+          enable = true;
+        };
+        plugins.toggleterm = {
+          enable = true;
         };
       };
 
       neovide = {
         enable = true;
+        settings = {
+          chdir = "~/src";
+        };
       };
 
       readline = {
@@ -201,7 +220,6 @@
         enable = true;
         extraConfig = ''
           return {
-            font_size = 20.0,
             hide_tab_bar_if_only_one_tab = true,
             audible_bell = "Disabled"
           }
@@ -211,6 +229,7 @@
       zoxide = {
         enable = true;
         enableBashIntegration = true;
+        enableZshIntegration = true;
       };
 
       zed-editor = {
