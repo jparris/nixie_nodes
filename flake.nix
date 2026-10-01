@@ -19,6 +19,9 @@
 
     nixvim.url = "github:nix-community/nixvim";
 
+    # Todo add
+    # inputs.nix-plist-manager.url = "github:sushydev/nix-plist-manager";
+
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";

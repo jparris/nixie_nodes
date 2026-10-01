@@ -1,26 +1,7 @@
 {inputs, ...}: {
-  flake.modules.nixos.desktop = {pkgs, ...}: {
-    programs.hyprland = {
+  flake.modules.nixos.desktop-niri = {pkgs, ...}: {
+    programs.niri = {
       enable = true;
-      withUWSM = true;
-      xwayland.enable = true;
-    };
-    services.pipewire.enable = true;
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-hyprland
-        xdg-desktop-portal-gtk
-      ];
-      config.Hyprland = {
-        default = [
-          "hyprland"
-          "gtk"
-        ];
-        # Deskflow's Wayland input capture; only the hyprland backend implements it.
-        "org.freedesktop.impl.portal.InputCapture" = ["hyprland"];
-        "org.freedesktop.impl.portal.RemoteDesktop" = ["hyprland"];
-      };
     };
 
     environment.sessionVariables = {
@@ -29,11 +10,18 @@
     };
 
     environment.systemPackages = with pkgs; [
-      hyprshade
-      hyprlauncher
+      fuzzel
       playerctl
       brightnessctl
+      swaylock
+      mako
+      swayidle
+      xwayland-satellite
     ];
+
+    xdg.portal.config.niri = {
+      "org.freedesktop.impl.portal.FileChooser" = ["gtk"]; # or "kde"
+    };
 
     services.greetd = {
       enable = true;
@@ -43,12 +31,17 @@
           # session. Launching start-hyprland directly leaves
           # graphical-session.target inactive, and xdg-desktop-portal.service has
           # Requisite=graphical-session.target, so portals never start.
-          command = "${pkgs.tuigreet}/bin/tuigreet --cmd '${pkgs.uwsm}/bin/uwsm start -e -D Hyprland hyprland.desktop'";
+          command = "${pkgs.tuigreet}/bin/tuigreet --background matrix --cmd niri-session";
           user = "greeter";
         };
       };
     };
 
+    security.polkit.enable = true; # polkit
+    services.gnome.gnome-keyring.enable = true; # secret service
+    security.pam.services.swaylock = {};
+
+    programs.waybar.enable = true; # top bar
     #security.polkit.enable = true;
     #    security.rtkit.enable = true;
     #    services.gnome.gnome-keyring.enable = true;

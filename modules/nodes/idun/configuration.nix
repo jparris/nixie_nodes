@@ -1,15 +1,18 @@
-{inputs, ...}: let
+{ inputs, ... }:
+let
   nym = "parrisj";
-in {
-  flake.modules.nixos.idun = {pkgs, ...}: {
+in
+{
+  flake.modules.nixos.idun = { pkgs, ... }: {
     imports = with inputs.self.modules.nixos; [
-      desktop
+      desktop-niri
     ];
+
     home-manager = {
-      useGlobalPkgs = true;
       users."${nym}".imports = with inputs.self.homeModules; [
         desktop
         parrisj
+        personal
       ];
     };
 
@@ -18,12 +21,11 @@ in {
       warn-dirty = false
     '';
 
-    nixpkgs.config.allowUnfree = true;
     users.users."${nym}" = {
       home = "/home/${nym}";
       shell = "${pkgs.zsh}/bin/zsh";
       isNormalUser = true;
-      extraGroups = ["wheel"];
+      extraGroups = [ "wheel" ];
     };
 
     security.sudo.wheelNeedsPassword = false;
@@ -31,16 +33,15 @@ in {
     boot = {
       loader.systemd-boot.enable = true;
       loader.efi.canTouchEfiVariables = true;
-      initrd.kernelModules = ["amdgpu"];
-      supportedFilesystems = ["ntfs"];
+      initrd.kernelModules = [ "amdgpu" ];
+      supportedFilesystems = [ "ntfs" ];
     };
 
+    nixpkgs.config.allowUnfree = true;
     environment.systemPackages = with pkgs; [
       # Shell
       gnupg
-      #      git
-      #      gitAndTools.git-annex
-      #      gitAndTools.gitRemoteGcrypt
+      git-annex
       wezterm
       htop
       man-pages
@@ -53,18 +54,11 @@ in {
       fd
       claude-code
       chromium
+      bambu-studio
+      libation
     ];
 
-    #  environment.shells = [pkgs.zsh];
-
-    #  fonts.packages = with pkgs; [
-    #    noto-fonts
-    #    noto-fonts-cjk-sans
-    #    noto-fonts-emoji
-    #    nerd-fonts.fira-code
-    #  ];
-
-    hardware.pulseaudio = {
+    services.pulseaudio = {
       enable = false;
     };
 
@@ -79,34 +73,14 @@ in {
     programs = {
       browserpass.enable = true;
       firefox.enable = true;
-      #light.enable = true;
-      #    gnupg.agent.enable = true;
       zsh.enable = true;
     };
 
     security.sudo.enable = true;
 
-    #  services.displayManager.defaultSession = "none+i3";
-
     services.fwupd.enable = true;
 
     services.openssh.enable = true;
-
-    #services.xserver = {
-    #    enable = true;
-    #    videoDrivers = ["amdgpu"];
-    #    desktopManager.xterm.enable = false;
-    #    windowManager.i3 = {
-    #      enable = true;
-    #      extraPackages = with pkgs; [
-    #        networkmanagerapplet
-    #        rofi
-    #        i3lock
-    #        i3status
-    #        i3blocks
-    #      ];
-    #    };
-    #  };
 
     system.stateVersion = "26.05";
 
