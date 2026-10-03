@@ -6,6 +6,7 @@ in
   flake.modules.nixos.idun = { pkgs, ... }: {
     imports = with inputs.self.modules.nixos; [
       desktop-niri
+      printing
     ];
 
     home-manager = {
@@ -74,6 +75,11 @@ in
       browserpass.enable = true;
       firefox.enable = true;
       zsh.enable = true;
+    };
+
+    services.pcscd.enable = true;
+    programs.gnupg.agent = {
+      enable = true;
     };
 
     security.sudo.enable = true;
