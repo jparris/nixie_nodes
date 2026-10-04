@@ -102,7 +102,10 @@
       git = {
         enable = true;
         lfs.enable = true;
-        ignores = [".DS_Store" ".claude"];
+        ignores = [
+          ".DS_Store"
+          ".claude"
+        ];
         settings = {
           user = {
             name = "Jon Parris";
@@ -184,13 +187,6 @@
         };
       };
 
-      neovide = {
-        enable = true;
-        settings = {
-          chdir = "~/src";
-        };
-      };
-
       readline = {
         enable = true;
         variables."bell-style" = "none";
@@ -230,10 +226,6 @@
         enable = true;
         enableBashIntegration = true;
         enableZshIntegration = true;
-      };
-
-      zed-editor = {
-        enable = true;
       };
 
       zsh = {

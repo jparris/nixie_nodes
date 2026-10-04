@@ -1,5 +1,7 @@
 {
   inputs = {
+    agenix.url = "github:ryantm/agenix";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     home-manager = {

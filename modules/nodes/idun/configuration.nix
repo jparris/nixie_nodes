@@ -1,9 +1,7 @@
-{ inputs, ... }:
-let
+{inputs, ...}: let
   nym = "parrisj";
-in
-{
-  flake.modules.nixos.idun = { pkgs, ... }: {
+in {
+  flake.modules.nixos.idun = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
       desktop-niri
       printing
@@ -26,7 +24,7 @@ in
       home = "/home/${nym}";
       shell = "${pkgs.zsh}/bin/zsh";
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = ["wheel"];
     };
 
     security.sudo.wheelNeedsPassword = false;
@@ -34,8 +32,8 @@ in
     boot = {
       loader.systemd-boot.enable = true;
       loader.efi.canTouchEfiVariables = true;
-      initrd.kernelModules = [ "amdgpu" ];
-      supportedFilesystems = [ "ntfs" ];
+      initrd.kernelModules = ["amdgpu"];
+      supportedFilesystems = ["ntfs"];
     };
 
     nixpkgs.config.allowUnfree = true;

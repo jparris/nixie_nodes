@@ -11,5 +11,16 @@
           tailscale
         ]
       );
+    programs = {
+      neovide = {
+        enable = true;
+        settings = {
+          chdir = "~/src";
+        };
+      };
+      zed-editor = {
+        enable = true;
+      };
+    };
   };
 }

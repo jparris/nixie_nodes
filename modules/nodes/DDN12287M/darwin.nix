@@ -7,7 +7,11 @@ in {
     ];
 
     home-manager = {
-      users."${nym}".imports = with inputs.self.homeModules; [desktop parrisj work];
+      users."${nym}".imports = with inputs.self.homeModules; [
+        desktop
+        parrisj
+        work
+      ];
     };
 
     nix = {

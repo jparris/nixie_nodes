@@ -1,9 +1,5 @@
-{
-  inputs,
-  ...
-}:
-{
-  flake.modules.nixos.printing = { hardware, ... }: {
+{inputs, ...}: {
+  flake.modules.nixos.printing = {hardware, ...}: {
     hardware.printers = {
       ensureDefaultPrinter = "Brother_HL-L2305";
       ensurePrinters = [
