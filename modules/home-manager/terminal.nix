@@ -244,7 +244,7 @@
         #path = "${config.xdg.dataHome}/zsh/history";
         #};
 
-        initExtra = ''
+        initContent = ''
           up(){
               case $# in
                   0 )

@@ -4,6 +4,7 @@
       [
         feishin
         wezterm
+        (callPackage ../../pkgs/glide.nix { })
       ]
       ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin (
         with pkgs; [
