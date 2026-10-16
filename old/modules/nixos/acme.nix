@@ -3,19 +3,21 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.acme;
-in {
+in
+{
   options = {
     acme.enable = lib.mkEnableOption "enable acme module";
 
-    acme.dnsProvider = lib.mkOption {type = lib.types.str;};
+    acme.dnsProvider = lib.mkOption { type = lib.types.str; };
 
-    acme.email = lib.mkOption {type = lib.types.str;};
+    acme.email = lib.mkOption { type = lib.types.str; };
 
-    acme.group = lib.mkOption {type = lib.types.str;};
+    acme.group = lib.mkOption { type = lib.types.str; };
 
-    acme.secret = lib.mkOption {type = lib.types.path;};
+    acme.secret = lib.mkOption { type = lib.types.path; };
   };
 
   config = lib.mkIf cfg.enable {

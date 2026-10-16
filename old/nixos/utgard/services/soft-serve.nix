@@ -2,10 +2,14 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # 19156
   # s = 19, o = 15, f = 6
-  networking.firewall.allowedTCPPorts = [19156 19157];
+  networking.firewall.allowedTCPPorts = [
+    19156
+    19157
+  ];
   services.soft-serve = {
     enable = true;
     settings = {
@@ -25,7 +29,9 @@
         enable = true;
         ssh_enable = true;
       };
-      initial_admin_keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG003GWp1imJXLtTgfCjEep++65lGl8BayU7G5qUHxWb jparris@DDN12287M.local''];
+      initial_admin_keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG003GWp1imJXLtTgfCjEep++65lGl8BayU7G5qUHxWb jparris@DDN12287M.local"
+      ];
     };
   };
 }

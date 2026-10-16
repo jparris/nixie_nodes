@@ -3,12 +3,13 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.services.fava;
-in {
+in
+{
   options.services.fava = {
-    enable =
-      lib.mkEnableOption "Enable fava";
+    enable = lib.mkEnableOption "Enable fava";
 
     port = lib.mkOption {
       default = 5000;
@@ -29,7 +30,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = lib.optionals cfg.openFirewall [cfg.port];
+    networking.firewall.allowedTCPPorts = lib.optionals cfg.openFirewall [ cfg.port ];
     systemd.services.fava = {
       description = "Fava";
       enable = true;
@@ -39,7 +40,7 @@ in {
         ExecStop = "${pkgs.busybox}/bin/pkill fava";
         Restart = "always";
       };
-      wantedBy = ["default.target"];
+      wantedBy = [ "default.target" ];
     };
   };
 }

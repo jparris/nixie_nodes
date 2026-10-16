@@ -2,10 +2,12 @@
   inputs,
   self,
   ...
-}: let
+}:
+let
   username = "parrisj";
-in {
-  flake.modules.nixos."${username}" = {pkgs, ...}: {
+in
+{
+  flake.modules.nixos."${username}" = { pkgs, ... }: {
     #imports = with inputs.self.modules.nixos; [
     # developmentEnvironment
     #];

@@ -1,7 +1,8 @@
-{...}: {
-  flake.homeModules.work = {pkgs, ...}: {
+{ ... }: {
+  flake.homeModules.work = { pkgs, ... }: {
     nixpkgs.config.allowUnfree = true;
-    home.packages = with pkgs;
+    home.packages =
+      with pkgs;
       [
         gh
         claude-code
@@ -9,7 +10,8 @@
         slack
       ]
       ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin (
-        with pkgs; [
+        with pkgs;
+        [
           (callPackage ../../pkgs/spacelauncher.nix { })
         ]
       );

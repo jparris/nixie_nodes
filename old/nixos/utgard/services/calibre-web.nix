@@ -8,8 +8,9 @@
   config,
   pkgs,
   ...
-}: {
-  networking.firewall.allowedTCPPorts = [3112];
+}:
+{
+  networking.firewall.allowedTCPPorts = [ 3112 ];
   services.calibre-web = {
     enable = true;
     openFirewall = true;

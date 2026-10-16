@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   services.paperless = {
     enable = true;
     dataDir = "/mnt/the_new_annex/appdata/paperless";

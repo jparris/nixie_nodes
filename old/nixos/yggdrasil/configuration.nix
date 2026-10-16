@@ -4,13 +4,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   certGroup = "acme";
   dnsProvider = "cloudflare";
   domain = "securityishard.fyi";
   sub_domain = "ext";
   email = "parrisj@gmail.com";
-in {
+in
+{
   imports = [
     ../../modules/nixos/mod.nix
     ./hardware-configuration.nix
@@ -22,11 +24,15 @@ in {
     efi.canTouchEfiVariables = true;
   };
 
-  environment.systemPackages = with pkgs; [alejandra git neovim];
+  environment.systemPackages = with pkgs; [
+    alejandra
+    git
+    neovim
+  ];
 
   networking = {
     hostName = "yggdrasil";
-    firewall.allowedTCPPorts = [443];
+    firewall.allowedTCPPorts = [ 443 ];
   };
 
   age.secrets.porkbun_api.file = ../../secrets/porkbun_api.age;
@@ -98,7 +104,7 @@ in {
 
   users.users.parrisj = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
-    openssh.authorizedKeys.keyFiles = [inputs.ssh-keys.outPath];
+    extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keyFiles = [ inputs.ssh-keys.outPath ];
   };
 }

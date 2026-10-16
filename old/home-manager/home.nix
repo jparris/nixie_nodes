@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   home = {
     stateVersion = "24.05"; # Please read the comment before changing.
     # The home.packages option allows you to install Nix packages into your
@@ -123,7 +124,7 @@
       lfs.enable = true;
       userName = "Jon Parris";
       userEmail = "jparris@ddn.com";
-      ignores = [".DS_Store"];
+      ignores = [ ".DS_Store" ];
       extraConfig = {
         init.defaultBranch = "main";
         push.autoSetupRemote = true;

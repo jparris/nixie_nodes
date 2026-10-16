@@ -1,5 +1,5 @@
-{inputs, ...}: {
-  flake.modules.nixos.desktop-niri = {pkgs, ...}: {
+{ inputs, ... }: {
+  flake.modules.nixos.desktop-niri = { pkgs, ... }: {
     programs.niri = {
       enable = true;
     };
@@ -20,7 +20,7 @@
     ];
 
     xdg.portal.config.niri = {
-      "org.freedesktop.impl.portal.FileChooser" = ["gtk"]; # or "kde"
+      "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ]; # or "kde"
     };
 
     services.greetd = {
@@ -39,7 +39,7 @@
 
     security.polkit.enable = true; # polkit
     services.gnome.gnome-keyring.enable = true; # secret service
-    security.pam.services.swaylock = {};
+    security.pam.services.swaylock = { };
 
     programs.waybar.enable = true; # top bar
     #security.polkit.enable = true;

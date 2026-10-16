@@ -3,7 +3,8 @@
   pkgs,
   age,
   ...
-}: {
+}:
+{
   age.secrets.qui.file = ../../../secrets/qui.age;
 
   services = {

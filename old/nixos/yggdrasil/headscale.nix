@@ -3,15 +3,17 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.headscale;
-in {
+in
+{
   options = {
     headscale.enable = lib.mkEnableOption "enable headscale server";
 
-    headscale.domain = lib.mkOption {type = lib.types.str;};
+    headscale.domain = lib.mkOption { type = lib.types.str; };
 
-    headscale.group = lib.mkOption {type = lib.types.str;};
+    headscale.group = lib.mkOption { type = lib.types.str; };
   };
 
   config = lib.mkIf cfg.enable {

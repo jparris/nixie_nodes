@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   age.secrets.nextcloud = {
     file = ../../secrets/nextcloud.age;
     mode = "700";
@@ -14,7 +15,7 @@
     enable = true;
     hostName = "localhost";
     package = pkgs.nextcloud28;
-    settings.trusted_domains = ["192.168.1.*"];
+    settings.trusted_domains = [ "192.168.1.*" ];
     config.adminpassFile = config.age.secrets.nextcloud.path;
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps) contacts calendar;

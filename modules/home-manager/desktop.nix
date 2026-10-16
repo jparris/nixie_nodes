@@ -1,13 +1,15 @@
-{...}: {
-  flake.homeModules.desktop = {pkgs, ...}: {
-    home.packages = with pkgs;
+{ ... }: {
+  flake.homeModules.desktop = { pkgs, ... }: {
+    home.packages =
+      with pkgs;
       [
         feishin
         wezterm
         (callPackage ../../pkgs/glide.nix { })
       ]
       ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin (
-        with pkgs; [
+        with pkgs;
+        [
           hidden-bar
           tailscale
         ]

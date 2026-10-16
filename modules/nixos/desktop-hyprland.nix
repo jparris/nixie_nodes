@@ -1,5 +1,5 @@
-{inputs, ...}: {
-  flake.modules.nixos.desktop-hyprland = {pkgs, ...}: {
+{ inputs, ... }: {
+  flake.modules.nixos.desktop-hyprland = { pkgs, ... }: {
     programs.hyprland = {
       enable = true;
       withUWSM = true;
@@ -18,8 +18,8 @@
           "gtk"
         ];
         # Deskflow's Wayland input capture; only the hyprland backend implements it.
-        "org.freedesktop.impl.portal.InputCapture" = ["hyprland"];
-        "org.freedesktop.impl.portal.RemoteDesktop" = ["hyprland"];
+        "org.freedesktop.impl.portal.InputCapture" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.RemoteDesktop" = [ "hyprland" ];
       };
     };
 

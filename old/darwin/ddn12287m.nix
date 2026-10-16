@@ -4,7 +4,8 @@
   lib,
   home-manager-flake,
   ...
-} @ inputs: {
+}@inputs:
+{
   imports = [
     home-manager-flake.darwinModules.home-manager
   ];
@@ -45,7 +46,7 @@
 
   nix.enable = false;
 
-  environment.shells = [pkgs.zsh];
+  environment.shells = [ pkgs.zsh ];
 
   homebrew = {
     enable = true;
@@ -53,8 +54,8 @@
     global = {
       brewfile = true;
     };
-    taps = ["homebrew/bundle"];
-    brews = ["m1ddc"];
+    taps = [ "homebrew/bundle" ];
+    brews = [ "m1ddc" ];
     casks = [
       "altair-graphql-client"
       "brave-browser"
@@ -66,7 +67,7 @@
       "wezterm"
       "zed"
     ];
-    masApps = {};
+    masApps = { };
   };
 
   home-manager = {
@@ -121,7 +122,13 @@
 
   services.postgresql = {
     enable = true;
-    initdbArgs = ["-U jparris" "--pgdata=/var/lib/postgresql/17" "--auth=trust" "--no-locale" "--encoding=UTF8"];
+    initdbArgs = [
+      "-U jparris"
+      "--pgdata=/var/lib/postgresql/17"
+      "--auth=trust"
+      "--no-locale"
+      "--encoding=UTF8"
+    ];
     package = pkgs.postgresql;
     authentication = pkgs.lib.mkOverride 10 ''
       #type database  DBuser  auth-method

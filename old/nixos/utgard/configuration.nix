@@ -4,7 +4,8 @@
   pkgs,
   home-manager-flake,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
 
@@ -31,10 +32,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelModules = ["i2c-dev"];
+  boot.kernelModules = [ "i2c-dev" ];
 
-  boot.binfmt.emulatedSystems = ["riscv32-linux"];
-  boot.supportedFilesystems = ["hfsplus" "zfs"];
+  boot.binfmt.emulatedSystems = [ "riscv32-linux" ];
+  boot.supportedFilesystems = [
+    "hfsplus"
+    "zfs"
+  ];
   boot.zfs.forceImportRoot = false;
   services.zfs.autoScrub.enable = true;
 
@@ -50,7 +54,10 @@
   #    settings.Resolve.DNS = [1.1.1.1];
   #};
   security.sudo.wheelNeedsPassword = false;
-  nix.settings.trusted-users = ["root" "parrisj"];
+  nix.settings.trusted-users = [
+    "root"
+    "parrisj"
+  ];
 
   nixpkgs.config.allowUnfree = true;
   # Select internationalisation properties.
@@ -61,7 +68,7 @@
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
 
-  environment.shells = [pkgs.zsh];
+  environment.shells = [ pkgs.zsh ];
 
   services.silverbullet = {
     enable = true;
@@ -82,7 +89,10 @@
 
   users.users.parrisj = {
     isNormalUser = true;
-    extraGroups = ["transmission" "wheel"];
+    extraGroups = [
+      "transmission"
+      "wheel"
+    ];
     shell = "${pkgs.zsh}/bin/zsh";
   };
 
@@ -115,12 +125,18 @@
     bitwarden-cli
   ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # List services that you want to enable:
   services.avahi.enable = true;
 
-  networking.firewall.allowedTCPPorts = [3000 8222];
+  networking.firewall.allowedTCPPorts = [
+    3000
+    8222
+  ];
 
   age.secrets.porkbun_api.file = ../../secrets/porkbun_api.age;
   age.secrets.porkbun_secret_api.file = ../../secrets/porkbun_secret_api.age;
@@ -135,7 +151,7 @@
       "PORKBUN_SECRET_API_KEY_FILE" = config.age.secrets.porkbun_secret_api.path;
     };
     webroot = null;
-    extraDomainNames = ["*.int.securityishard.fyi"];
+    extraDomainNames = [ "*.int.securityishard.fyi" ];
   };
 
   services.jellyfin = {
@@ -145,7 +161,12 @@
 
   services.openssh = {
     enable = true;
-    settings.Macs = ["hmac-sha2-512-etm@openssh.com" "hmac-sha2-256-etm@openssh.com" "umac-128-etm@openssh.com" "hmac-sha2-512"];
+    settings.Macs = [
+      "hmac-sha2-512-etm@openssh.com"
+      "hmac-sha2-256-etm@openssh.com"
+      "umac-128-etm@openssh.com"
+      "hmac-sha2-512"
+    ];
     hostKeys = [
       {
         bits = 4096;

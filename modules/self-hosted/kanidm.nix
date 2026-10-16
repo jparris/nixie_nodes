@@ -1,6 +1,6 @@
 {
-  flake.modules.nixos.kanidm = {pkgs, ...}: {
-    networking.firewall.allowedTCPPorts = [636];
+  flake.modules.nixos.kanidm = { pkgs, ... }: {
+    networking.firewall.allowedTCPPorts = [ 636 ];
 
     services = {
       kanidm = {
@@ -48,10 +48,10 @@
           persons.parrisj = {
             displayName = "Jon Parris";
             legalName = "Jon Parris";
-            mailAddresses = ["parrisj@gmail.com"];
+            mailAddresses = [ "parrisj@gmail.com" ];
             # Any group listed here must also be declared in provision.groups,
             # including kanidm's built-in ones.
-            groups = [];
+            groups = [ ];
           };
         };
       };

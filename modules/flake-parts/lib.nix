@@ -4,12 +4,13 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   # Helper functions for creating system / home-manager configurations
 
   options.flake.lib = lib.mkOption {
     type = lib.types.attrsOf lib.types.unspecified;
-    default = {};
+    default = { };
   };
 
   config.flake.lib = {
@@ -18,7 +19,7 @@
         modules = [
           inputs.home-manager.nixosModules.home-manager
           inputs.self.modules.nixos.${name}
-          {nixpkgs.hostPlatform = lib.mkDefault system;}
+          { nixpkgs.hostPlatform = lib.mkDefault system; }
         ];
       };
     };
@@ -28,7 +29,7 @@
         modules = [
           inputs.home-manager.darwinModules.home-manager
           inputs.self.modules.darwin.${name}
-          {nixpkgs.hostPlatform = lib.mkDefault system;}
+          { nixpkgs.hostPlatform = lib.mkDefault system; }
         ];
       };
     };
@@ -38,7 +39,7 @@
         pkgs = inputs.nixpkgs.legacyPackages.${system};
         modules = [
           inputs.self.modules.homeManager.${name}
-          {nixpkgs.config.allowUnfree = true;}
+          { nixpkgs.config.allowUnfree = true; }
         ];
       };
     };

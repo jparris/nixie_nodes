@@ -6,45 +6,48 @@
   lib,
   pkgs,
   ...
-}: {
-  flake.modules.nixos.idun = {
-    config,
-    lib,
-    ...
-  }: {
-    #imports = [
-    #      (modulesPath + "/installer/scan/not-detected.nix")
-    #    ];
+}:
+{
+  flake.modules.nixos.idun =
+    {
+      config,
+      lib,
+      ...
+    }:
+    {
+      #imports = [
+      #      (modulesPath + "/installer/scan/not-detected.nix")
+      #    ];
 
-    boot.initrd.availableKernelModules = [
-      "nvme"
-      "xhci_pci"
-      "thunderbolt"
-    ];
-    boot.initrd.kernelModules = [];
-    boot.kernelModules = ["kvm-amd"];
-    boot.extraModulePackages = [];
-
-    fileSystems."/" = {
-      device = "/dev/disk/by-uuid/d7a7eac6-9b2d-4bda-9022-96b87e584380";
-      fsType = "ext4";
-    };
-
-    fileSystems."/boot" = {
-      device = "/dev/disk/by-uuid/26DA-4615";
-      fsType = "vfat";
-      options = [
-        "fmask=0077"
-        "dmask=0077"
+      boot.initrd.availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "thunderbolt"
       ];
+      boot.initrd.kernelModules = [ ];
+      boot.kernelModules = [ "kvm-amd" ];
+      boot.extraModulePackages = [ ];
+
+      fileSystems."/" = {
+        device = "/dev/disk/by-uuid/d7a7eac6-9b2d-4bda-9022-96b87e584380";
+        fsType = "ext4";
+      };
+
+      fileSystems."/boot" = {
+        device = "/dev/disk/by-uuid/26DA-4615";
+        fsType = "vfat";
+        options = [
+          "fmask=0077"
+          "dmask=0077"
+        ];
+      };
+
+      swapDevices = [
+        { device = "/dev/disk/by-uuid/c844a32a-9fa7-4587-bcd6-c12121331053"; }
+      ];
+
+      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+      hardware.enableRedistributableFirmware = lib.mkDefault true;
+      hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     };
-
-    swapDevices = [
-      {device = "/dev/disk/by-uuid/c844a32a-9fa7-4587-bcd6-c12121331053";}
-    ];
-
-    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-    hardware.enableRedistributableFirmware = lib.mkDefault true;
-    hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  };
 }

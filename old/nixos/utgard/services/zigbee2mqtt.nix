@@ -10,8 +10,9 @@
   config,
   pkgs,
   ...
-}: {
-  networking.firewall.allowedTCPPorts = [2697];
+}:
+{
+  networking.firewall.allowedTCPPorts = [ 2697 ];
   services.zigbee2mqtt = {
     enable = true;
     settings = {
@@ -26,5 +27,5 @@
       };
     };
   };
-  users.users.zigbee2mqtt.extraGroups = ["dialout"];
+  users.users.zigbee2mqtt.extraGroups = [ "dialout" ];
 }

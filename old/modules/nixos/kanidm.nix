@@ -3,19 +3,21 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.kanidm;
-in {
+in
+{
   options = {
     kanidm.enable = lib.mkEnableOption "enable kanidm module";
 
-    kanidm.domain = lib.mkOption {type = lib.types.str;};
+    kanidm.domain = lib.mkOption { type = lib.types.str; };
 
-    kanidm.group = lib.mkOption {type = lib.types.str;};
+    kanidm.group = lib.mkOption { type = lib.types.str; };
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [636];
+    networking.firewall.allowedTCPPorts = [ 636 ];
 
     services = {
       kanidm = {
@@ -33,7 +35,10 @@ in {
           ldapbindaddress = "[::]:636";
           domain = "${cfg.domain}";
           origin = "https://${cfg.domain}";
-          http_client_address_info.x-forward-for = ["127.0.0.1" "127.0.0.0/8"];
+          http_client_address_info.x-forward-for = [
+            "127.0.0.1"
+            "127.0.0.0/8"
+          ];
           tls_chain = "/var/lib/kanidm/cert.pem";
           tls_key = "/var/lib/kanidm/key.pem";
         };
@@ -63,7 +68,7 @@ in {
         chown kanidm:kanidm /var/lib/kanidm/{cert,key,chain}.pem
         chmod 400 /var/lib/kanidm/{cert,key,chain}.pem
       '';
-      reloadServices = ["kanidm.service"];
+      reloadServices = [ "kanidm.service" ];
     };
   };
 }

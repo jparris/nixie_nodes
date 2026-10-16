@@ -1,5 +1,5 @@
-{...}: {
-  flake.modules.darwin.desktop = {...}: {
+{ ... }: {
+  flake.modules.darwin.desktop = { ... }: {
     system.defaults = {
       dock = {
         # Hide the dock
