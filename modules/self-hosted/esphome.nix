@@ -12,7 +12,6 @@
         serviceConfig = {
           Type = "simple";
           ExecStart = "${lib.getExe pkgs.esphome-device-builder} /appdata/esphome/";
-          ExecStop = "${pkgs.coreutils}/bin/pkill esphome";
           Restart = "on-failure";
         };
         wantedBy = [ "default.target" ];
