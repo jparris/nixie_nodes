@@ -1,7 +1,9 @@
-{inputs, ...}: let
+{ inputs, ... }:
+let
   nym = "jparris";
-in {
-  flake.modules.darwin.DDN12287M = {pkgs, ...}: {
+in
+{
+  flake.modules.darwin.DDN12287M = { pkgs, ... }: {
     imports = with inputs.self.modules.darwin; [
       desktop
     ];
@@ -20,7 +22,7 @@ in {
       linux-builder = {
         enable = true;
         package = pkgs.darwin.linux-builder;
-        systems = ["aarch64-linux"];
+        systems = [ "aarch64-linux" ];
       };
       extraOptions = ''
         warn-dirty = false
@@ -45,7 +47,7 @@ in {
 
     users.users."${nym}" = {
       home = "/Users/${nym}";
-      shell = "${pkgs.bash}/bin/zsh";
+      shell = "${pkgs.zsh}/bin/zsh";
     };
   };
 
