@@ -10,7 +10,7 @@
           ExecStart = "${pkgs.fava}/bin/fava --host 0.0.0.0 --port 5000 /appdata/ledger/index.beancount";
           Restart = "always";
         };
-        wantedBy = [ "default.target" ];
+        wantedBy = [ "multi-user.target" ];
       };
     };
 }

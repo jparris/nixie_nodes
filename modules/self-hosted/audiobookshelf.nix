@@ -15,7 +15,7 @@
           ExecStart = "${pkgs.audiobookshelf}/bin/audiobookshelf --host 0.0.0.0 --port 12345 --config /appdata/audiobookshelf/config --metadata /appdata/audiobookshelf/metadata";
           Restart = "on-failure";
         };
-        wantedBy = [ "default.target" ];
+        wantedBy = [ "multi-user.target" ];
       };
 
       systemd.services.audiobookshelf.enable = true;

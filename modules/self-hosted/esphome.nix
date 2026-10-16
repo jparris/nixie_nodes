@@ -14,7 +14,7 @@
           ExecStart = "${lib.getExe pkgs.esphome-device-builder} /appdata/esphome/";
           Restart = "on-failure";
         };
-        wantedBy = [ "default.target" ];
+        wantedBy = [ "multi-user.target" ];
       };
       systemd.services.esphome.enable = true;
     };
