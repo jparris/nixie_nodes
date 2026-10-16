@@ -9,7 +9,6 @@
     }:
     {
       age.secrets.transmission.file = ../../secrets/transmission.age;
-      networking.firewall.allowedTCPPorts = [ 9091 ];
       services.transmission = {
         enable = true;
         package = pkgs.transmission_4;

@@ -1,7 +1,5 @@
 {
-  flake.modules.nixos.home-assistant = {lib, ...}: {
-    networking.firewall.allowedTCPPorts = [8123];
-
+  flake.modules.nixos.home-assistant = { lib, ... }: {
     virtualisation.oci-containers.containers.home-assistant = {
       image = "homeassistant/home-assistant:stable";
       extraOptions = [

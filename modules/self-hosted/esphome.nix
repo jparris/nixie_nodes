@@ -6,7 +6,6 @@
       ...
     }:
     {
-      networking.firewall.allowedTCPPorts = [ 6052 ];
       systemd.services.esphome = {
         description = "esphome";
         serviceConfig = {

@@ -7,7 +7,6 @@
       ...
     }:
     {
-      networking.firewall.allowedTCPPorts = [ 12345 ];
       systemd.services.audiobookshelf = {
         description = "audiobookshelf";
         serviceConfig = {
