@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.audiobookshelf =
+  flake.modules.nixos.fava =
     { pkgs, ... }:
     {
       systemd.services.fava = {

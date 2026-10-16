@@ -14,6 +14,7 @@ in
         audiobookshelf
         caddy
         esphome
+        fava
         home-assistant
         miniflux
         parrisj
