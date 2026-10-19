@@ -17,6 +17,15 @@ in
       ];
     };
 
+    services.udev = {
+      enable = true;
+      extraRules = ''
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="c000", GROUP="plugdev", MODE="0660"
+      '';
+    };
+
+    hardware.logitech.wireless.enable = true;
+
     nix.enable = true;
     nix.extraOptions = ''
       warn-dirty = false
@@ -57,8 +66,11 @@ in
       chromium
       bambu-studio
       libation
+      solaar
+      headscale
     ];
 
+    networking.firewall.allowedTCPPorts = [ 5091 ];
     services.pulseaudio = {
       enable = false;
     };

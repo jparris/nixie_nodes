@@ -1,5 +1,30 @@
 { inputs, ... }: {
   flake.modules.nixos.desktop-niri = { pkgs, ... }: {
+    imports = [
+      inputs.noctalia.nixosModules.default
+    ];
+
+    programs.noctalia = {
+      enable = true;
+
+      # Enables NetworkManager, Bluetooth, UPower, and a power profile service.
+      recommendedServices.enable = true;
+#
+#      settings = {
+#        theme = {
+#          mode = "dark";
+#          source = "builtin";
+#          builtin = "Catppuccin";
+#        };
+#
+#        wallpaper = {
+#          enabled = true;
+#          default.path = "/home/parris/src/nixie_nodes/wallpapers/bkg3_bkg5.png";
+#        };
+#      };
+
+    };
+
     programs.niri = {
       enable = true;
     };
@@ -41,7 +66,7 @@
     services.gnome.gnome-keyring.enable = true; # secret service
     security.pam.services.swaylock = { };
 
-    programs.waybar.enable = true; # top bar
+    #programs.waybar.enable = true; # top bar
     #security.polkit.enable = true;
     #    security.rtkit.enable = true;
     #    services.gnome.gnome-keyring.enable = true;
