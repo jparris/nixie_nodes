@@ -19,6 +19,7 @@ in
         miniflux
         parrisj
         transmission
+        tailscale
         inputs.agenix.nixosModules.default
       ];
 
@@ -41,6 +42,8 @@ in
 
       environment.systemPackages = with pkgs; [
         nixfmt
+        nixfmt-tree
+        inputs.agenix.packages.x86_64-linux.default
       ];
       programs.dconf.enable = true;
 
@@ -110,7 +113,10 @@ in
       };
 
       home-manager = {
-        users."${nym}".imports = with inputs.self.homeModules; [ parrisj ];
+        users."${nym}".imports = with inputs.self.homeModules; [
+          parrisj
+          beets
+        ];
       };
 
       system.stateVersion = "23.05";

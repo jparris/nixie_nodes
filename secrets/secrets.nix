@@ -20,6 +20,7 @@ in
   "porkbun_api.age".publicKeys = utgard ++ yggdrasil;
   "porkbun_secret_api.age".publicKeys = utgard ++ yggdrasil;
   "qui.age".publicKeys = utgard;
+  "tailscale_authkey.age".publicKeys = utgard;
   "transmission.age".publicKeys = utgard;
   "vaultwarden.age".publicKeys = utgard;
 }
