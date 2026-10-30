@@ -4,11 +4,6 @@
       enable = true;
       package =
         let
-          # extrafiles is gone from nixpkgs (unmaintained since 2020, broken since
-          # beets 2.0.0); filetote is its maintained successor. Nixpkgs marks it
-          # broken on beets >= 2.14 only because the plugin's own test suite calls
-          # beets internals that moved, so skip those tests.
-          # https://github.com/gtronset/beets-filetote/issues/402
           filetote = pkgs.python3Packages.beets-filetote.overridePythonAttrs (old: {
             doCheck = false;
             meta = old.meta // {
@@ -25,10 +20,11 @@
           }
         );
       settings = {
+        directory = "/wunderkammer/audio/music/";
         plugins = [
           "fetchart"
-          "embedart"
           "filetote"
+          "musicbrainz"
         ];
         filetote.extensions = [
           ".cue"
