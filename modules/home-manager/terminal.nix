@@ -27,7 +27,6 @@
       };
 
       home.packages = with pkgs; [
-        alejandra
         coreutils
         noto-fonts
         noto-fonts-color-emoji
@@ -101,6 +100,10 @@
         devenv = {
           enable = true;
         };
+        fzf = {
+          enable = true;
+          enableZshIntegration = true;
+        };
         git = {
           enable = true;
           lfs.enable = true;
@@ -124,6 +127,7 @@
 
         nixvim = {
           enable = true;
+          nixpkgs.useGlobalPackages = true;
           keymaps = [
             {
               key = "<leader>tt";
@@ -169,6 +173,17 @@
                 right = "";
               };
               icons_enabled = true;
+            };
+          };
+          plugins.obsidian = {
+            enable = true;
+            settings = {
+              workspaces = [
+                {
+                  name = "notes";
+                  path = "~/notes";
+                }
+              ];
             };
           };
           plugins.telescope = {
