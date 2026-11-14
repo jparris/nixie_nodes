@@ -9,19 +9,19 @@
 
       # Enables NetworkManager, Bluetooth, UPower, and a power profile service.
       recommendedServices.enable = true;
-#
-#      settings = {
-#        theme = {
-#          mode = "dark";
-#          source = "builtin";
-#          builtin = "Catppuccin";
-#        };
-#
-#        wallpaper = {
-#          enabled = true;
-#          default.path = "/home/parris/src/nixie_nodes/wallpapers/bkg3_bkg5.png";
-#        };
-#      };
+      #
+      #      settings = {
+      #        theme = {
+      #          mode = "dark";
+      #          source = "builtin";
+      #          builtin = "Catppuccin";
+      #        };
+      #
+      #        wallpaper = {
+      #          enabled = true;
+      #          default.path = "/home/parris/src/nixie_nodes/wallpapers/bkg3_bkg5.png";
+      #        };
+      #      };
 
     };
 

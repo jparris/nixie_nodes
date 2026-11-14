@@ -5,6 +5,7 @@ in
 {
   flake.modules.nixos.idun = { pkgs, ... }: {
     imports = with inputs.self.modules.nixos; [
+      base
       desktop-niri
       printing
     ];
@@ -26,11 +27,6 @@ in
 
     hardware.logitech.wireless.enable = true;
 
-    nix.enable = true;
-    nix.extraOptions = ''
-      warn-dirty = false
-    '';
-
     users.users."${nym}" = {
       home = "/home/${nym}";
       shell = "${pkgs.zsh}/bin/zsh";
@@ -38,7 +34,6 @@ in
       extraGroups = [ "wheel" ];
     };
 
-    security.sudo.wheelNeedsPassword = false;
     # Use the systemd-boot EFI boot loader.
     boot = {
       loader.systemd-boot.enable = true;
@@ -47,7 +42,6 @@ in
       supportedFilesystems = [ "ntfs" ];
     };
 
-    nixpkgs.config.allowUnfree = true;
     environment.systemPackages = with pkgs; [
       # Shell
       gnupg
@@ -60,7 +54,6 @@ in
       #posix_man_pages
       pavucontrol
       orca-slicer
-      sudo
       fd
       claude-code
       chromium
@@ -70,18 +63,12 @@ in
       headscale
     ];
 
-    networking.firewall.allowedTCPPorts = [ 5091 ];
     services.pulseaudio = {
       enable = false;
     };
 
     networking.hostName = "idun"; # Norse goddess of eternal youth - because this is a framework laptop.
     networking.networkmanager.enable = true;
-
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
 
     programs = {
       browserpass.enable = true;
@@ -94,15 +81,9 @@ in
       enable = true;
     };
 
-    security.sudo.enable = true;
-
     services.fwupd.enable = true;
 
-    services.openssh.enable = true;
-
     system.stateVersion = "26.05";
-
-    time.timeZone = "America/Denver";
   };
 
   flake.nixosConfigurations = inputs.self.lib.mkNixos "x86_64-linux" "idun";

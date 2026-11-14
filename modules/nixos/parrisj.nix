@@ -18,6 +18,7 @@ in
       extraGroups = [
         "transmission"
         "wheel"
+        "esphome"
       ];
     };
   };

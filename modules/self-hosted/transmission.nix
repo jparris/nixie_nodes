@@ -1,35 +1,52 @@
 {
-  # ## Transmission
-  # BitTorrent Client with a WebUI, WebUI port 9091 which is the default.
   flake.modules.nixos.transmission =
     {
       config,
+      lib,
       pkgs,
       ...
     }:
+    let
+      cfg = config.transmission;
+    in
     {
-      age.secrets.transmission.file = ../../secrets/transmission.age;
-      services.transmission = {
-        enable = true;
-        package = pkgs.transmission_4;
-        credentialsFile = config.age.secrets.transmission.path;
-        home = "/appdata/transmission";
-        settings = {
-          umask = 002;
-          script-torrent-done-enabled = true;
-          script-torrent-done-filename = pkgs.writers.writeBash "post-dl.sh" ''
-            set -ex
-            src="$TR_TORRENT_DIR/$TR_TORRENT_NAME"
-            cp -r "$src" /appdata/transmission/incoming
-          '';
-          download-dir = "/appdata/transmission/seeding";
-          incomplete-dir = "/appdata/transmission/downloading";
-          incomplete-dir-enabled = true;
-          rpc-bind-address = "0.0.0.0";
-          rpc-whitelist-enabled = false;
-          rpc-host-whitelist-enabled = false;
+      options = {
+        transmission.domain = lib.mkOption { type = lib.types.str; };
+
+        transmission.dir = lib.mkOption { type = lib.types.path; };
+
+        transmission.port = lib.mkOption {
+          type = lib.types.port;
+          default = 9091;
         };
+
+        transmission.secret = lib.mkOption { type = lib.types.path; };
       };
-      systemd.services.transmission.serviceConfig.BindPaths = [ "/appdata/transmission/incoming" ];
+
+      config = {
+        age.secrets.transmission.file = cfg.secret;
+        services.transmission = {
+          enable = true;
+
+          package = pkgs.transmission_4;
+          credentialsFile = config.age.secrets.transmission.path;
+          home = cfg.dir;
+          settings = {
+            umask = 002;
+            script-torrent-done-enabled = true;
+            script-torrent-done-filename = pkgs.writers.writeBash "post-dl.sh" ''
+              set -ex
+              src="$TR_TORRENT_DIR/$TR_TORRENT_NAME"
+              cp -r "$src" ${cfg.dir}/incoming
+            '';
+            download-dir = "${cfg.dir}/seeding";
+            incomplete-dir = "${cfg.dir}/downloading";
+            incomplete-dir-enabled = true;
+            rpc-port = cfg.port;
+            rpc-host-whitelist-enabled = false;
+          };
+        };
+        systemd.services.transmission.serviceConfig.BindPaths = [ "${cfg.dir}/incoming" ];
+      };
     };
 }

@@ -34,14 +34,15 @@
       };
     };
 
-    mkHomeManager = system: name: {
-      ${name} = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-        modules = [
-          inputs.self.modules.homeManager.${name}
-          { nixpkgs.config.allowUnfree = true; }
-        ];
-      };
-    };
+    # Saved against the day I need to run nix on non-nix system
+    # mkHomeManager = system: name: {
+    #   ${name} = inputs.home-manager.lib.homeManagerConfiguration {
+    #     pkgs = inputs.nixpkgs.legacyPackages.${system};
+    #     modules = [
+    #       inputs.self.modules.homeManager.${name}
+    #       { nixpkgs.config.allowUnfree = true; }
+    #     ];
+    #   };
+    # };
   };
 }

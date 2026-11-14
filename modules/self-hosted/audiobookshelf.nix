@@ -11,7 +11,7 @@
         description = "audiobookshelf";
         serviceConfig = {
           Type = "simple";
-          ExecStart = "${pkgs.audiobookshelf}/bin/audiobookshelf --host 0.0.0.0 --port 12345 --config /appdata/audiobookshelf/config --metadata /appdata/audiobookshelf/metadata";
+          ExecStart = "${pkgs.audiobookshelf}/bin/audiobookshelf --host 127.0.0.1 --port 12345 --config /appdata/audiobookshelf/config --metadata /appdata/audiobookshelf/metadata";
           Restart = "on-failure";
         };
         wantedBy = [ "multi-user.target" ];

@@ -1,6 +1,9 @@
 { inputs, ... }:
 let
   nym = "parrisj";
+  dir = "/appdata";
+  domain = "int.securityishard.fyi";
+  email = "${nym}@gmail.com";
 in
 {
   flake.modules.nixos.utgard =
@@ -11,7 +14,9 @@ in
     }:
     {
       imports = with inputs.self.modules.nixos; [
+        acme
         audiobookshelf
+        base
         caddy
         esphome
         fava
@@ -20,30 +25,36 @@ in
         parrisj
         transmission
         tailscale
-        inputs.agenix.nixosModules.default
+        vaultwarden
+        zigbee2mqtt
+        zwave-js-ui
       ];
 
-      age.secrets.porkbun_api.file = ../../../secrets/porkbun_api.age;
-      age.secrets.porkbun_secret_api.file = ../../../secrets/porkbun_secret_api.age;
+      acme = {
+        domain = domain;
+        email = email;
+        api_key = ../../../secrets/porkbun_api.age;
+        secret_key = ../../../secrets/porkbun_secret_api.age;
+      };
 
-      security.acme.acceptTerms = true;
-      security.acme.certs."int.securityishard.fyi" = {
-        group = "acme";
-        email = "parrisj@gmail.com";
-        dnsProvider = "porkbun";
-        credentialFiles = {
-          "PORKBUN_API_KEY_FILE" = config.age.secrets.porkbun_api.path;
-          "PORKBUN_SECRET_API_KEY_FILE" = config.age.secrets.porkbun_secret_api.path;
-        };
+      miniflux = {
+        domain = "miniflux.${domain}";
+        secret = ../../../secrets/miniflux.age;
+      };
 
-        webroot = null;
-        extraDomainNames = [ "*.int.securityishard.fyi" ];
+      transmission = {
+        dir = "${dir}/transmission";
+        domain = "tranmission.${domain}";
+        secret = ../../../secrets/transmission.age;
+      };
+
+      vaultwarden = {
+        domain = "https://vaultwarden.${domain}";
+        secret = ../../../secrets/vaultwarden.age;
       };
 
       environment.systemPackages = with pkgs; [
-        nixfmt
         nixfmt-tree
-        inputs.agenix.packages.x86_64-linux.default
       ];
       programs.dconf.enable = true;
 
@@ -60,41 +71,16 @@ in
       networking.hostName = "utgard";
       networking.networkmanager.enable = true;
       networking.firewall.checkReversePath = false;
-      time.timeZone = "America/Denver";
-
-      security.sudo.wheelNeedsPassword = false;
-      nix.settings.trusted-users = [
-        "root"
-        "parrisj"
-      ];
 
       services.jellyfin.enable = true;
-
-      age.secrets.vaultwarden.file = ../../../secrets/vaultwarden.age;
-
-      services.vaultwarden = {
-        enable = true;
-        config = {
-          ROCKET_ADDRESS = "0.0.0.0";
-          ROCKET_PORT = 8222;
-        };
-        environmentFile = config.age.secrets.vaultwarden.path;
-      };
-
-      nixpkgs.config.allowUnfree = true;
 
       environment.shells = [ pkgs.zsh ];
 
       services.avahi.enable = true;
 
+      # Enabled, with MAC policy, in modules.nixos.base; these host keys
+      # predate this machine's rebuild and stay with it.
       services.openssh = {
-        enable = true;
-        settings.Macs = [
-          "hmac-sha2-512-etm@openssh.com"
-          "hmac-sha2-256-etm@openssh.com"
-          "umac-128-etm@openssh.com"
-          "hmac-sha2-512"
-        ];
         hostKeys = [
           {
             bits = 4096;
@@ -115,7 +101,7 @@ in
       home-manager = {
         users."${nym}".imports = with inputs.self.homeModules; [
           parrisj
-          beets
+          # beets
         ];
       };
 
