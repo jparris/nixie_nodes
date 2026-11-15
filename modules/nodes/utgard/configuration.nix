@@ -20,6 +20,7 @@ in
         caddy
         esphome
         fava
+        juicepassproxy
         home-assistant
         miniflux
         parrisj
@@ -40,6 +41,11 @@ in
       miniflux = {
         domain = "miniflux.${domain}";
         secret = ../../../secrets/miniflux.age;
+      };
+
+      juicepassproxy = {
+        juiceboxHost = "192.168.1.168";
+        host = "192.168.1.235";
       };
 
       transmission = {
