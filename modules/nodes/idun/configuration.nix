@@ -18,13 +18,6 @@ in
       ];
     };
 
-    services.udev = {
-      enable = true;
-      extraRules = ''
-        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="c000", GROUP="plugdev", MODE="0660"
-      '';
-    };
-
     hardware.logitech.wireless.enable = true;
 
     users.users."${nym}" = {
