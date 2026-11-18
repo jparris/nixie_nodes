@@ -34,6 +34,11 @@
     # Todo add
     # inputs.nix-plist-manager.url = "github:sushydev/nix-plist-manager";
 
+    ssh-keys = {
+      url = "https://github.com/jparris.keys";
+      flake = false;
+    };
+
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";

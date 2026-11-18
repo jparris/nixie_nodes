@@ -363,7 +363,20 @@
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
         "noctalia": "noctalia",
+        "ssh-keys": "ssh-keys",
         "stylix": "stylix"
+      }
+    },
+    "ssh-keys": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-1GiuVRYR+QNRhp8iZ9lwXyTmzA6pdvk3N7mKCrlehwA=",
+        "type": "file",
+        "url": "https://github.com/jparris.keys"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/jparris.keys"
       }
     },
     "stylix": {
