@@ -24,7 +24,10 @@ in
       home = "/home/${nym}";
       shell = "${pkgs.zsh}/bin/zsh";
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = [
+        "wheel"
+        "dialout"
+      ];
     };
 
     # Use the systemd-boot EFI boot loader.
